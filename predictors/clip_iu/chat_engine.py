@@ -179,18 +179,23 @@ class SocialREMChat(object):
 
         return assistant_response, cot_response
     
-    def generate_opening(self):
+    def generate_opening(self, user_message=''):
         self.observation_prompt = self.system_observations + self.caption_str + self.system_observations_obj + self.obj_str
         system_content = self.system_task + self.system_strategies + self.observation_prompt
 
-        if args.lang == 'zh':
-            trigger = "請根據照片內容，用親切的方式開啟對話，提出第一個能引導User回憶的問題。（最多兩句）"
+        if user_message:
+            first_turn = user_message
+            self.context = [{'User': user_message}]
         else:
-            trigger = "Based on the photo content, warmly open the conversation and ask the first question to help the User recall their memories. (at most 2 sentences)"
+            if args.lang == 'zh':
+                first_turn = "請根據照片內容，用親切的方式開啟對話，提出第一個能引導User回憶的問題。（最多兩句）"
+            else:
+                first_turn = "Based on the photo content, warmly open the conversation and ask the first question to help the User recall their memories. (at most 2 sentences)"
+            self.context = []
 
         messages = [
             {'role': 'system', 'content': system_content},
-            {'role': 'user', 'content': trigger},
+            {'role': 'user', 'content': first_turn},
         ]
         client = openai.OpenAI(api_key=args.openai_key)
         response = client.chat.completions.create(
@@ -199,7 +204,7 @@ class SocialREMChat(object):
             **self.generate_kwargs
         )
         opening = response.choices[0].message.content.strip()
-        self.context = [{'Assistant': opening}]
+        self.context.append({'Assistant': opening})
         return opening
 
     def chatting(self, context):
@@ -230,7 +235,7 @@ def post_method():
 
         # New image: reset context and generate GPT opening based on image content.
         if data.get('reset'):
-            opening = _socialREMChat.generate_opening()
+            opening = _socialREMChat.generate_opening(user_message=data.get('user_message', ''))
             return json.dumps({"return_message": opening, "last": False})
 
         if 'user_message' in data:
