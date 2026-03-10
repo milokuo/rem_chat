@@ -1,0 +1,9156 @@
+[
+  {
+    "id": 0,
+    "category": "event",
+    "label": "general_event",
+    "question": "这里看起来好有趣, 还会想再去吗?",
+    "similar": []
+  },
+  {
+    "id": 1,
+    "category": "event",
+    "label": "general_event",
+    "question": "你会想再去这个地方吗?",
+    "similar": []
+  },
+  {
+    "id": 2,
+    "category": "event",
+    "label": "general_event",
+    "question": "有在这附近吃到什么好吃的吗?",
+    "similar": [
+      630
+    ]
+  },
+  {
+    "id": 3,
+    "category": "event",
+    "label": "general_event",
+    "question": "这张照片是什么时候的事情呢？",
+    "similar": [
+      566,
+      722,
+      884,
+      890,
+      926
+    ]
+  },
+  {
+    "id": 4,
+    "category": "event",
+    "label": "general_event",
+    "question": "看到这张照片时你想到哪些事情?",
+    "similar": [
+      840,
+      869,
+      883,
+      919,
+      927
+    ]
+  },
+  {
+    "id": 5,
+    "category": "event",
+    "label": "general_event",
+    "question": "有在这里看到什么漂亮的风景吗?",
+    "similar": [
+      115
+    ]
+  },
+  {
+    "id": 6,
+    "category": "event",
+    "label": "general_event",
+    "question": "有什么让你特别难忘的事吗?",
+    "similar": [
+      944
+    ]
+  },
+  {
+    "id": 7,
+    "category": "event",
+    "label": "general_event",
+    "question": "这个地方好玩吗?",
+    "similar": [
+      835
+    ]
+  },
+  {
+    "id": 8,
+    "category": "event",
+    "label": "graduation",
+    "question": "你是哪间学校毕业的啊?",
+    "similar": [
+      12,
+      14
+    ]
+  },
+  {
+    "id": 9,
+    "category": "event",
+    "label": "graduation",
+    "question": "你们有跟老师吃饭吗?去吃什么?",
+    "similar": []
+  },
+  {
+    "id": 10,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业典礼有哭吗?",
+    "similar": [
+      11
+    ]
+  },
+  {
+    "id": 11,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业的时候有哭吗?",
+    "similar": [
+      10,
+      332
+    ]
+  },
+  {
+    "id": 12,
+    "category": "event",
+    "label": "graduation",
+    "question": "你的学校在哪里啊?",
+    "similar": [
+      8,
+      14,
+      729
+    ]
+  },
+  {
+    "id": 13,
+    "category": "event",
+    "label": "graduation",
+    "question": "你是念什么的?",
+    "similar": []
+  },
+  {
+    "id": 14,
+    "category": "event",
+    "label": "graduation",
+    "question": "你在这间学校学什么啊?",
+    "similar": [
+      8,
+      12
+    ]
+  },
+  {
+    "id": 15,
+    "category": "event",
+    "label": "graduation",
+    "question": "你们班有几个人啊?",
+    "similar": [
+      703,
+      823
+    ]
+  },
+  {
+    "id": 16,
+    "category": "event",
+    "label": "graduation",
+    "question": "你家人有来吗?",
+    "similar": [
+      17,
+      834
+    ]
+  },
+  {
+    "id": 17,
+    "category": "event",
+    "label": "graduation",
+    "question": "你的家人或朋友有来吗?",
+    "similar": [
+      16
+    ]
+  },
+  {
+    "id": 18,
+    "category": "event",
+    "label": "graduation",
+    "question": "有谁来你的毕业典礼啊?",
+    "similar": [
+      19,
+      22,
+      23,
+      27,
+      53,
+      65
+    ]
+  },
+  {
+    "id": 19,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业典礼好玩吗?",
+    "similar": [
+      18,
+      27
+    ]
+  },
+  {
+    "id": 20,
+    "category": "event",
+    "label": "graduation",
+    "question": "在这场毕业典礼中有没有发生什么特别的?",
+    "similar": []
+  },
+  {
+    "id": 21,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业之后还有跟同学联络吗?",
+    "similar": [
+      28,
+      34,
+      61,
+      731
+    ]
+  },
+  {
+    "id": 22,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业典礼中做了什么事情呢?",
+    "similar": [
+      18,
+      29,
+      37,
+      40,
+      41,
+      48
+    ]
+  },
+  {
+    "id": 23,
+    "category": "event",
+    "label": "graduation",
+    "question": "你毕业典礼上有收到礼物吗?",
+    "similar": [
+      18,
+      27
+    ]
+  },
+  {
+    "id": 24,
+    "category": "event",
+    "label": "graduation",
+    "question": "你还想再当学生吗?",
+    "similar": [
+      25
+    ]
+  },
+  {
+    "id": 25,
+    "category": "event",
+    "label": "graduation",
+    "question": "你想念学生时期吗?",
+    "similar": [
+      24
+    ]
+  },
+  {
+    "id": 26,
+    "category": "event",
+    "label": "graduation",
+    "question": "你喜欢去学校吗?",
+    "similar": [
+      38,
+      62
+    ]
+  },
+  {
+    "id": 27,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业典礼有上台吗?",
+    "similar": [
+      18,
+      19,
+      23,
+      65
+    ]
+  },
+  {
+    "id": 28,
+    "category": "event",
+    "label": "graduation",
+    "question": "你还有联络那时候的同学吗?",
+    "similar": [
+      21,
+      51,
+      61,
+      846,
+      952
+    ]
+  },
+  {
+    "id": 29,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业前你觉得一定要做的事情是什么?",
+    "similar": [
+      22,
+      40,
+      41
+    ]
+  },
+  {
+    "id": 30,
+    "category": "event",
+    "label": "graduation",
+    "question": "你会不会觉得自己当学生的时候傻傻的?",
+    "similar": []
+  },
+  {
+    "id": 31,
+    "category": "event",
+    "label": "graduation",
+    "question": "你还留着毕业典礼时穿得衣服吗",
+    "similar": []
+  },
+  {
+    "id": 32,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业典礼时有遇到名人吗？",
+    "similar": []
+  },
+  {
+    "id": 33,
+    "category": "event",
+    "label": "graduation",
+    "question": "你毕业典礼有全部参加完吗？",
+    "similar": []
+  },
+  {
+    "id": 34,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业后还有再回学校吗?",
+    "similar": [
+      21,
+      731
+    ]
+  },
+  {
+    "id": 35,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业当天有得奖吗?",
+    "similar": []
+  },
+  {
+    "id": 36,
+    "category": "event",
+    "label": "graduation",
+    "question": "你毕业的时候开心吗?",
+    "similar": [
+      38,
+      53
+    ]
+  },
+  {
+    "id": 37,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业典礼有什么活动吗?",
+    "similar": [
+      22,
+      48
+    ]
+  },
+  {
+    "id": 38,
+    "category": "event",
+    "label": "graduation",
+    "question": "你在学校过得开心吗?",
+    "similar": [
+      26,
+      36,
+      62
+    ]
+  },
+  {
+    "id": 39,
+    "category": "event",
+    "label": "graduation",
+    "question": "你知道第一名的同学现在在哪里吗?",
+    "similar": []
+  },
+  {
+    "id": 40,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业典礼结束之后去做了什么事情呢?",
+    "similar": [
+      22,
+      29,
+      41
+    ]
+  },
+  {
+    "id": 41,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业之后做的第一件事情是什么呢?",
+    "similar": [
+      22,
+      29,
+      40
+    ]
+  },
+  {
+    "id": 42,
+    "category": "event",
+    "label": "graduation",
+    "question": "照片中你旁边的人是谁?",
+    "similar": [
+      183,
+      879,
+      900
+    ]
+  },
+  {
+    "id": 43,
+    "category": "event",
+    "label": "graduation",
+    "question": "那时候有什么话来不及对同学说的吗？",
+    "similar": []
+  },
+  {
+    "id": 44,
+    "category": "event",
+    "label": "graduation",
+    "question": "还记得台上的人演讲说了些什么吗?",
+    "similar": []
+  },
+  {
+    "id": 45,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业那天有发生什么讨厌的事情吗？",
+    "similar": []
+  },
+  {
+    "id": 46,
+    "category": "event",
+    "label": "graduation",
+    "question": "那时候有男朋友或女朋友吗?",
+    "similar": []
+  },
+  {
+    "id": 47,
+    "category": "event",
+    "label": "graduation",
+    "question": "你们班上有情侣吗?",
+    "similar": [
+      724
+    ]
+  },
+  {
+    "id": 48,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业典礼当天有什么活动吗?",
+    "similar": [
+      22,
+      37
+    ]
+  },
+  {
+    "id": 49,
+    "category": "event",
+    "label": "graduation",
+    "question": "跟你最好的同学在照片里面吗?",
+    "similar": [
+      57
+    ]
+  },
+  {
+    "id": 50,
+    "category": "event",
+    "label": "graduation",
+    "question": "学生时的你最在意什么事情?",
+    "similar": [
+      872,
+      955,
+      956
+    ]
+  },
+  {
+    "id": 51,
+    "category": "event",
+    "label": "graduation",
+    "question": "现在还跟哪些同学有联络?",
+    "similar": [
+      28,
+      61
+    ]
+  },
+  {
+    "id": 52,
+    "category": "event",
+    "label": "graduation",
+    "question": "学生时期发生了很多很棒的事情吗？",
+    "similar": []
+  },
+  {
+    "id": 53,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业的时候你有最想说谢谢的人吗?",
+    "similar": [
+      18,
+      36
+    ]
+  },
+  {
+    "id": 54,
+    "category": "event",
+    "label": "graduation",
+    "question": "你们班以前最多朋友的人是谁?",
+    "similar": [
+      848
+    ]
+  },
+  {
+    "id": 55,
+    "category": "event",
+    "label": "graduation",
+    "question": "你还记得哪位老师?",
+    "similar": [
+      947
+    ]
+  },
+  {
+    "id": 56,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业典礼那天的晚上你有跟你的朋友去吃大餐吗?",
+    "similar": []
+  },
+  {
+    "id": 57,
+    "category": "event",
+    "label": "graduation",
+    "question": "你那时候最好的朋友有在照片里吗?",
+    "similar": [
+      49
+    ]
+  },
+  {
+    "id": 58,
+    "category": "event",
+    "label": "graduation",
+    "question": "学校的功课很多吗？",
+    "similar": []
+  },
+  {
+    "id": 59,
+    "category": "event",
+    "label": "graduation",
+    "question": "在学校里有发生过什么浪漫的事情吗？",
+    "similar": []
+  },
+  {
+    "id": 60,
+    "category": "event",
+    "label": "graduation",
+    "question": "有没有拍很多照片?",
+    "similar": [
+      200
+    ]
+  },
+  {
+    "id": 61,
+    "category": "event",
+    "label": "graduation",
+    "question": "现在还有跟老师联络吗?",
+    "similar": [
+      21,
+      28,
+      51
+    ]
+  },
+  {
+    "id": 62,
+    "category": "event",
+    "label": "graduation",
+    "question": "你有曾经不想去学校过吗?",
+    "similar": [
+      26,
+      38
+    ]
+  },
+  {
+    "id": 63,
+    "category": "event",
+    "label": "graduation",
+    "question": "你们班同学的感情好吗?",
+    "similar": []
+  },
+  {
+    "id": 64,
+    "category": "event",
+    "label": "graduation",
+    "question": "你有把衣服脱了或是课本烧了之类的疯狂举动吗?",
+    "similar": []
+  },
+  {
+    "id": 65,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业典礼有主持人吗？",
+    "similar": [
+      18,
+      27
+    ]
+  },
+  {
+    "id": 66,
+    "category": "event",
+    "label": "graduation",
+    "question": "有跟朋友一起拍漂亮的照片吗?",
+    "similar": [
+      186
+    ]
+  },
+  {
+    "id": 67,
+    "category": "event",
+    "label": "graduation",
+    "question": "毕业的时候有跟老师拍照吗?",
+    "similar": []
+  },
+  {
+    "id": 68,
+    "category": "event",
+    "label": "graduation",
+    "question": "你们有毕业歌吗?",
+    "similar": []
+  },
+  {
+    "id": 69,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "爬山的时候有看到漂亮的风景吗?",
+    "similar": [
+      74,
+      92,
+      109,
+      622
+    ]
+  },
+  {
+    "id": 70,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "这座山有多高？你们爬了多久？",
+    "similar": [
+      74,
+      76,
+      87,
+      126
+    ]
+  },
+  {
+    "id": 71,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你们有多少人一起去爬山?",
+    "similar": [
+      77,
+      78,
+      93,
+      94,
+      128,
+      620,
+      627
+    ]
+  },
+  {
+    "id": 72,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "山上会很冷吗?",
+    "similar": [
+      229
+    ]
+  },
+  {
+    "id": 73,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "这次爬山好玩吗?",
+    "similar": [
+      74,
+      87,
+      92,
+      109,
+      128,
+      618,
+      622,
+      623,
+      625
+    ]
+  },
+  {
+    "id": 74,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "这座山很好爬吗?",
+    "similar": [
+      69,
+      70,
+      73,
+      87,
+      88,
+      92,
+      109,
+      111,
+      128,
+      618,
+      622,
+      623,
+      625
+    ]
+  },
+  {
+    "id": 75,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "为什么会想去爬山?",
+    "similar": [
+      92,
+      102,
+      107,
+      117,
+      622
+    ]
+  },
+  {
+    "id": 76,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你爬过最高的山是哪一座山?",
+    "similar": [
+      70,
+      78,
+      81,
+      88,
+      93,
+      101,
+      126,
+      128
+    ]
+  },
+  {
+    "id": 77,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你跟谁一起去爬山?你们一起约好的吗？",
+    "similar": [
+      71,
+      78,
+      128,
+      620
+    ]
+  },
+  {
+    "id": 78,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你和谁一起去爬山呢?是谁选了这座山?",
+    "similar": [
+      71,
+      76,
+      77,
+      81,
+      93,
+      98,
+      126,
+      128,
+      620
+    ]
+  },
+  {
+    "id": 79,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "山上天气变化很多吗？ 那天都出太阳吗?",
+    "similar": []
+  },
+  {
+    "id": 80,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你常去爬山吗?",
+    "similar": [
+      88,
+      89,
+      91,
+      92,
+      94,
+      98,
+      105,
+      107,
+      109,
+      113,
+      119,
+      121,
+      128,
+      618,
+      622,
+      623,
+      625,
+      626
+    ]
+  },
+  {
+    "id": 81,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你比较常爬哪一种山呢?简单的山还是挑战百岳呢？",
+    "similar": [
+      76,
+      78,
+      83,
+      101,
+      126
+    ]
+  },
+  {
+    "id": 82,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你有没有买什么很好的登山装?",
+    "similar": []
+  },
+  {
+    "id": 83,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "这条爬山的路简单还是困难呢？",
+    "similar": [
+      81
+    ]
+  },
+  {
+    "id": 84,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "在山上有遇到什么动物吗?",
+    "similar": []
+  },
+  {
+    "id": 85,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "这张照片的你大概几岁呢？",
+    "similar": [
+      330,
+      802,
+      812,
+      908
+    ]
+  },
+  {
+    "id": 86,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "爬的时候很累吗？",
+    "similar": [
+      625
+    ]
+  },
+  {
+    "id": 87,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "这座山好爬吗?大概要爬多久呢?",
+    "similar": [
+      70,
+      73,
+      74,
+      88,
+      126,
+      128,
+      625
+    ]
+  },
+  {
+    "id": 88,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你有爬到山顶吗？感觉怎么样?",
+    "similar": [
+      74,
+      76,
+      80,
+      87,
+      92,
+      105,
+      107,
+      109,
+      113,
+      128,
+      618,
+      622,
+      623,
+      625
+    ]
+  },
+  {
+    "id": 89,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "除了爬山之外，你会去攀岩吗？",
+    "similar": [
+      80,
+      91,
+      92,
+      98,
+      105,
+      109,
+      113,
+      117,
+      128,
+      618,
+      622,
+      623
+    ]
+  },
+  {
+    "id": 90,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "有时候新闻会看到有人在山里面迷路，你有什么注意安全的方法吗？",
+    "similar": []
+  },
+  {
+    "id": 91,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你爬山的时候有受伤吗?",
+    "similar": [
+      80,
+      89,
+      92,
+      98,
+      105,
+      109,
+      113,
+      121,
+      128,
+      618,
+      623,
+      625
+    ]
+  },
+  {
+    "id": 92,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你喜欢去爬山吗？",
+    "similar": [
+      69,
+      73,
+      74,
+      75,
+      80,
+      88,
+      89,
+      91,
+      94,
+      98,
+      105,
+      107,
+      109,
+      112,
+      113,
+      117,
+      121,
+      128,
+      618,
+      622,
+      623,
+      625
+    ]
+  },
+  {
+    "id": 93,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你和家人一起去爬过哪些山?",
+    "similar": [
+      71,
+      76,
+      78,
+      94,
+      126,
+      128
+    ]
+  },
+  {
+    "id": 94,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你常和家人一起爬山吗?",
+    "similar": [
+      71,
+      80,
+      92,
+      93,
+      105,
+      109,
+      128,
+      618
+    ]
+  },
+  {
+    "id": 95,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "除了照片这一次，你之后还有再来爬这座山吗？",
+    "similar": [
+      113,
+      623
+    ]
+  },
+  {
+    "id": 96,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你在山上看到了什么呢？",
+    "similar": [
+      619
+    ]
+  },
+  {
+    "id": 97,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "开车要多久才会到呢?",
+    "similar": []
+  },
+  {
+    "id": 98,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你在山上会跟爬山的人打招呼吗?",
+    "similar": [
+      78,
+      80,
+      89,
+      91,
+      92,
+      105,
+      113,
+      121,
+      128,
+      623
+    ]
+  },
+  {
+    "id": 99,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "在爬山的时候，有没有什么困难或有趣的事?",
+    "similar": []
+  },
+  {
+    "id": 100,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "这条路会很累吗?需要用到手抓绳子或石头吗？",
+    "similar": []
+  },
+  {
+    "id": 101,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你认为哪座山最简单？",
+    "similar": [
+      76,
+      81,
+      126
+    ]
+  },
+  {
+    "id": 102,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "爬山时想上厕所怎么办?",
+    "similar": [
+      75,
+      117
+    ]
+  },
+  {
+    "id": 103,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "爬山的时候，有发生什么现在都忘不掉的事情吗?",
+    "similar": [
+      123
+    ]
+  },
+  {
+    "id": 104,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "有没有在山上看过日出?",
+    "similar": []
+  },
+  {
+    "id": 105,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你平常有空的时候会去爬山吗?",
+    "similar": [
+      80,
+      88,
+      89,
+      91,
+      92,
+      94,
+      98,
+      109,
+      113,
+      119,
+      121,
+      128,
+      618,
+      622,
+      623,
+      625
+    ]
+  },
+  {
+    "id": 106,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "除了台湾的山之外，你有爬过国外的山吗?",
+    "similar": [
+      626
+    ]
+  },
+  {
+    "id": 107,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你喜欢爬山吗？为什么喜欢呢？",
+    "similar": [
+      75,
+      80,
+      88,
+      92,
+      109,
+      112,
+      117,
+      618,
+      622
+    ]
+  },
+  {
+    "id": 108,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "爬这座山之前，我需要准备什么吗？",
+    "similar": []
+  },
+  {
+    "id": 109,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你觉得爬山是一件很开心的事情吗？",
+    "similar": [
+      69,
+      73,
+      74,
+      80,
+      88,
+      89,
+      91,
+      92,
+      94,
+      105,
+      107,
+      113,
+      117,
+      128,
+      618,
+      622,
+      623,
+      625
+    ]
+  },
+  {
+    "id": 110,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "爬山之前你准备的食物够吃吗？",
+    "similar": []
+  },
+  {
+    "id": 111,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "下次能带我一起去爬这座山吗?",
+    "similar": [
+      74,
+      113,
+      623
+    ]
+  },
+  {
+    "id": 112,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你喜欢那座山吗?",
+    "similar": [
+      92,
+      107,
+      618
+    ]
+  },
+  {
+    "id": 113,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你还会想再去那里爬一次山吗?",
+    "similar": [
+      80,
+      88,
+      89,
+      91,
+      92,
+      95,
+      98,
+      105,
+      109,
+      111,
+      121,
+      128,
+      618,
+      622,
+      623,
+      625
+    ]
+  },
+  {
+    "id": 114,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你会想要爬完世界各地的高山吗?",
+    "similar": []
+  },
+  {
+    "id": 115,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "风景漂亮吗?",
+    "similar": [
+      5
+    ]
+  },
+  {
+    "id": 116,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "那天天气好吗?",
+    "similar": [
+      145,
+      177,
+      830
+    ]
+  },
+  {
+    "id": 117,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你为什么会想去爬山呢？你觉得爬山可以学到什么东西吗？",
+    "similar": [
+      75,
+      89,
+      92,
+      102,
+      107,
+      109,
+      128
+    ]
+  },
+  {
+    "id": 118,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "我想问一个神秘的问题，你相信山神的存在吗?",
+    "similar": []
+  },
+  {
+    "id": 119,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你这次爬山前有练习吗?",
+    "similar": [
+      80,
+      105,
+      623
+    ]
+  },
+  {
+    "id": 120,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "有在山上住一晚吗？",
+    "similar": []
+  },
+  {
+    "id": 121,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你去爬山的时候有把自己的垃圾带走吗?",
+    "similar": [
+      80,
+      91,
+      92,
+      98,
+      105,
+      113,
+      618
+    ]
+  },
+  {
+    "id": 122,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "有因为爬山认识朋友吗?",
+    "similar": [
+      128,
+      627
+    ]
+  },
+  {
+    "id": 123,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你觉得你这一生都忘不掉的爬山回忆是什么呢？",
+    "similar": [
+      103
+    ]
+  },
+  {
+    "id": 124,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你知道高山症吗?",
+    "similar": []
+  },
+  {
+    "id": 125,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "有在山上跟人吵过架吗?因为什么事啊?",
+    "similar": []
+  },
+  {
+    "id": 126,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你爬过最久的山是哪里的山啊?",
+    "similar": [
+      70,
+      76,
+      78,
+      81,
+      87,
+      93,
+      101,
+      128
+    ]
+  },
+  {
+    "id": 127,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你觉得你爬过最困难的路线是哪里呢?",
+    "similar": []
+  },
+  {
+    "id": 128,
+    "category": "event",
+    "label": "mountaintrip",
+    "question": "你有最推荐朋友去爬的山吗?",
+    "similar": [
+      71,
+      73,
+      74,
+      76,
+      77,
+      78,
+      80,
+      87,
+      88,
+      89,
+      91,
+      92,
+      93,
+      94,
+      98,
+      105,
+      109,
+      113,
+      117,
+      122,
+      126,
+      618,
+      622,
+      623
+    ]
+  },
+  {
+    "id": 129,
+    "category": "event",
+    "label": "picnic",
+    "question": "你们去哪里野餐呀?",
+    "similar": [
+      130,
+      133,
+      144,
+      150,
+      155,
+      157,
+      172
+    ]
+  },
+  {
+    "id": 130,
+    "category": "event",
+    "label": "picnic",
+    "question": "你喜欢带什么食物去野餐?",
+    "similar": [
+      129,
+      138,
+      140,
+      141,
+      142,
+      151,
+      155,
+      157
+    ]
+  },
+  {
+    "id": 131,
+    "category": "event",
+    "label": "picnic",
+    "question": "还记得当时吃了什么吗?",
+    "similar": []
+  },
+  {
+    "id": 132,
+    "category": "event",
+    "label": "picnic",
+    "question": "你都是跟朋友还是家人一起去野餐呢?",
+    "similar": [
+      157,
+      829
+    ]
+  },
+  {
+    "id": 133,
+    "category": "event",
+    "label": "picnic",
+    "question": "你很常出去野餐吗?",
+    "similar": [
+      129,
+      134,
+      142,
+      147,
+      149,
+      150,
+      162,
+      163,
+      170
+    ]
+  },
+  {
+    "id": 134,
+    "category": "event",
+    "label": "picnic",
+    "question": "那天野餐的人多吗?",
+    "similar": [
+      133,
+      170
+    ]
+  },
+  {
+    "id": 135,
+    "category": "event",
+    "label": "picnic",
+    "question": "如果你常常去野餐的话，大概多久一次?",
+    "similar": []
+  },
+  {
+    "id": 136,
+    "category": "event",
+    "label": "picnic",
+    "question": "这些食物会不会需要准备很久啊?",
+    "similar": []
+  },
+  {
+    "id": 137,
+    "category": "event",
+    "label": "picnic",
+    "question": "很多好料也!是自己做的吗?",
+    "similar": []
+  },
+  {
+    "id": 138,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐的时候需要带什么东西吗?",
+    "similar": [
+      130,
+      141,
+      148,
+      151
+    ]
+  },
+  {
+    "id": 139,
+    "category": "event",
+    "label": "picnic",
+    "question": "你准备了什么食物?",
+    "similar": [
+      140,
+      141
+    ]
+  },
+  {
+    "id": 140,
+    "category": "event",
+    "label": "picnic",
+    "question": "你带什么食物去吃?",
+    "similar": [
+      130,
+      139,
+      141,
+      142,
+      151
+    ]
+  },
+  {
+    "id": 141,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐准备了哪些食物?",
+    "similar": [
+      130,
+      138,
+      139,
+      140,
+      151,
+      155
+    ]
+  },
+  {
+    "id": 142,
+    "category": "event",
+    "label": "picnic",
+    "question": "你通常会自己带食物去野餐吗?通常都带了些什么?",
+    "similar": [
+      130,
+      133,
+      140,
+      151
+    ]
+  },
+  {
+    "id": 143,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐那天还有做些什么活动吗?",
+    "similar": []
+  },
+  {
+    "id": 144,
+    "category": "event",
+    "label": "picnic",
+    "question": "如果你最近有去野餐的话，去了哪里呢",
+    "similar": [
+      129
+    ]
+  },
+  {
+    "id": 145,
+    "category": "event",
+    "label": "picnic",
+    "question": "你野餐那天天气好吗?有没有下雨?",
+    "similar": [
+      116
+    ]
+  },
+  {
+    "id": 146,
+    "category": "event",
+    "label": "picnic",
+    "question": "你有被虫咬吗?",
+    "similar": []
+  },
+  {
+    "id": 147,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐那天你有做你的拿手料理吗?",
+    "similar": [
+      133
+    ]
+  },
+  {
+    "id": 148,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐时需要注意什么吗?",
+    "similar": [
+      138
+    ]
+  },
+  {
+    "id": 149,
+    "category": "event",
+    "label": "picnic",
+    "question": "你后来还有去同样的地方野餐吗?",
+    "similar": [
+      133,
+      170
+    ]
+  },
+  {
+    "id": 150,
+    "category": "event",
+    "label": "picnic",
+    "question": "为什么你想去野餐呢？",
+    "similar": [
+      129,
+      133,
+      155
+    ]
+  },
+  {
+    "id": 151,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐的时候喜欢带哪些吃的呢?",
+    "similar": [
+      130,
+      138,
+      140,
+      141,
+      142,
+      155,
+      157
+    ]
+  },
+  {
+    "id": 152,
+    "category": "event",
+    "label": "picnic",
+    "question": "去野餐的时候会用很多层的便当盒吗？我觉得那个超帅的！",
+    "similar": []
+  },
+  {
+    "id": 153,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐的时候会遇到很多蚊子吗？有什么好办法吗？",
+    "similar": []
+  },
+  {
+    "id": 154,
+    "category": "event",
+    "label": "picnic",
+    "question": "你们有用野餐垫吗？在哪里买的呢？",
+    "similar": [
+      168
+    ]
+  },
+  {
+    "id": 155,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐的时候你们会做什么呢?",
+    "similar": [
+      129,
+      130,
+      141,
+      150,
+      151,
+      157
+    ]
+  },
+  {
+    "id": 156,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐的时候食物会不会被小动物抢走呀？",
+    "similar": []
+  },
+  {
+    "id": 157,
+    "category": "event",
+    "label": "picnic",
+    "question": "你喜欢和什么样的朋友去野餐?",
+    "similar": [
+      129,
+      130,
+      132,
+      151,
+      155,
+      172
+    ]
+  },
+  {
+    "id": 158,
+    "category": "event",
+    "label": "picnic",
+    "question": "有没有带好喝的酒呀?",
+    "similar": []
+  },
+  {
+    "id": 159,
+    "category": "event",
+    "label": "picnic",
+    "question": "当天的食材是如何准备的呢?",
+    "similar": []
+  },
+  {
+    "id": 160,
+    "category": "event",
+    "label": "picnic",
+    "question": "太阳很大吗？有很舒服的太阳吗？",
+    "similar": []
+  },
+  {
+    "id": 161,
+    "category": "event",
+    "label": "picnic",
+    "question": "你们有带宠物一起去野餐吗?",
+    "similar": []
+  },
+  {
+    "id": 162,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐好玩吗?",
+    "similar": [
+      133
+    ]
+  },
+  {
+    "id": 163,
+    "category": "event",
+    "label": "picnic",
+    "question": "你住的地方附近有很多地方可以野餐吗?",
+    "similar": [
+      133
+    ]
+  },
+  {
+    "id": 164,
+    "category": "event",
+    "label": "picnic",
+    "question": "那天准备的东西都是谁带的?",
+    "similar": []
+  },
+  {
+    "id": 165,
+    "category": "event",
+    "label": "picnic",
+    "question": "当天有表演活动吗?",
+    "similar": []
+  },
+  {
+    "id": 166,
+    "category": "event",
+    "label": "picnic",
+    "question": "这张照片好棒!怎么拍的?",
+    "similar": [
+      906
+    ]
+  },
+  {
+    "id": 167,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐感觉很放松也，有没有下次呀",
+    "similar": []
+  },
+  {
+    "id": 168,
+    "category": "event",
+    "label": "picnic",
+    "question": "你野餐时会用到的东西都是去哪里买的阿?",
+    "similar": [
+      154
+    ]
+  },
+  {
+    "id": 169,
+    "category": "event",
+    "label": "picnic",
+    "question": "野餐的时候你会带飞盘去玩吗?",
+    "similar": []
+  },
+  {
+    "id": 170,
+    "category": "event",
+    "label": "picnic",
+    "question": "那天还有其他人去野餐吗？",
+    "similar": [
+      133,
+      134,
+      149
+    ]
+  },
+  {
+    "id": 171,
+    "category": "event",
+    "label": "picnic",
+    "question": "你们有人会带乐器一起去野餐吗？吉他之类的",
+    "similar": []
+  },
+  {
+    "id": 172,
+    "category": "event",
+    "label": "picnic",
+    "question": "你最想念和谁一起去野餐呢?",
+    "similar": [
+      129,
+      157
+    ]
+  },
+  {
+    "id": 173,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "这是哪里的海?",
+    "similar": [
+      582,
+      660
+    ]
+  },
+  {
+    "id": 174,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "那里有沙滩吗？沙子怎么样?",
+    "similar": [
+      216
+    ]
+  },
+  {
+    "id": 175,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "那边的海水干净吗?",
+    "similar": []
+  },
+  {
+    "id": 176,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你有做水上摩托车之类的水上活动吗?",
+    "similar": [
+      554
+    ]
+  },
+  {
+    "id": 177,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "那天是怎么样的天气?会不会很热啊?",
+    "similar": [
+      116,
+      830
+    ]
+  },
+  {
+    "id": 178,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你跟谁一起去的?",
+    "similar": [
+      291,
+      680
+    ]
+  },
+  {
+    "id": 179,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "有看到鱼在旁边游吗?",
+    "similar": [
+      204,
+      645
+    ]
+  },
+  {
+    "id": 180,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "那边游客会很多吗?",
+    "similar": []
+  },
+  {
+    "id": 181,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "在你去过的海边里, 你最喜欢哪一个?",
+    "similar": [
+      367,
+      617
+    ]
+  },
+  {
+    "id": 182,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "还想再去一次这个海边吗?",
+    "similar": [
+      208
+    ]
+  },
+  {
+    "id": 183,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "在你旁边的人是谁?",
+    "similar": [
+      42
+    ]
+  },
+  {
+    "id": 184,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你有去过国外的海边吗？你喜欢哪边的海",
+    "similar": [
+      192,
+      205,
+      553
+    ]
+  },
+  {
+    "id": 185,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你有去潜水吗?",
+    "similar": []
+  },
+  {
+    "id": 186,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "照片里是和朋友一起出去玩吗?",
+    "similar": [
+      66
+    ]
+  },
+  {
+    "id": 187,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "怎么会来这个地方度假呢?",
+    "similar": []
+  },
+  {
+    "id": 188,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "有人在躺着晒太阳，在晒日光浴吗?",
+    "similar": []
+  },
+  {
+    "id": 189,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "是什么季节去的啊?",
+    "similar": []
+  },
+  {
+    "id": 190,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你有去冲浪吗?",
+    "similar": [
+      211
+    ]
+  },
+  {
+    "id": 191,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你喜欢看宽广的海吗?",
+    "similar": []
+  },
+  {
+    "id": 192,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你喜欢去海边玩吗?",
+    "similar": [
+      184,
+      194,
+      201,
+      205,
+      553,
+      556
+    ]
+  },
+  {
+    "id": 193,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你们那时候是住在海边的饭店吗?房间可以看到海边的风景吗？",
+    "similar": []
+  },
+  {
+    "id": 194,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "为什么要去海边玩? 还有想要去其他地方玩吗?",
+    "similar": [
+      192
+    ]
+  },
+  {
+    "id": 195,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你们怎么去海边的呢？自己开车吗？",
+    "similar": []
+  },
+  {
+    "id": 196,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你和你的爱人一起去那里度假吗?",
+    "similar": [
+      959
+    ]
+  },
+  {
+    "id": 197,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "回来以后鞋子裤子有一堆沙子吗?",
+    "similar": []
+  },
+  {
+    "id": 198,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你比较喜欢海还是山呢?",
+    "similar": [
+      203,
+      553
+    ]
+  },
+  {
+    "id": 199,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你有没有看到很漂亮的辣妹呢?",
+    "similar": []
+  },
+  {
+    "id": 200,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "有没有拍很多照片?",
+    "similar": [
+      60
+    ]
+  },
+  {
+    "id": 201,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你觉得这里的海边好玩吗?你会推荐给朋友吗？",
+    "similar": [
+      192
+    ]
+  },
+  {
+    "id": 202,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "去那个海边玩一次要多久?",
+    "similar": [
+      208
+    ]
+  },
+  {
+    "id": 203,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "海跟山你比较想去哪一个?",
+    "similar": [
+      198
+    ]
+  },
+  {
+    "id": 204,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "有没有看到鲨鱼?",
+    "similar": [
+      179,
+      645
+    ]
+  },
+  {
+    "id": 205,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "海边是你度假的首选吗?",
+    "similar": [
+      184,
+      192
+    ]
+  },
+  {
+    "id": 206,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "这个海边可以浮潜吗?",
+    "similar": []
+  },
+  {
+    "id": 207,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你会游泳吗?",
+    "similar": []
+  },
+  {
+    "id": 208,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "什么时候会想去海边?",
+    "similar": [
+      182,
+      202
+    ]
+  },
+  {
+    "id": 209,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你有去过其他类似的地方吗?",
+    "similar": [
+      880
+    ]
+  },
+  {
+    "id": 210,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "在海里游泳会不会很咸呀?",
+    "similar": []
+  },
+  {
+    "id": 211,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "如果你有冲浪的话，冲浪应该蛮累的齁?",
+    "similar": [
+      190
+    ]
+  },
+  {
+    "id": 212,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "去海边玩有没有晒伤?",
+    "similar": []
+  },
+  {
+    "id": 213,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你是下午去的吗？你有在那边待一整个下午吗?",
+    "similar": []
+  },
+  {
+    "id": 214,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你还会想再去一次吗?",
+    "similar": []
+  },
+  {
+    "id": 215,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "到海边之后最想做的事情是什么?玩沙?打排球?还是跳进海里?",
+    "similar": []
+  },
+  {
+    "id": 216,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "有没有被沙子埋起来?",
+    "similar": [
+      174
+    ]
+  },
+  {
+    "id": 217,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你有当过海边的志工吗?",
+    "similar": []
+  },
+  {
+    "id": 218,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "看海, 听海带给你的感觉是什么?",
+    "similar": [
+      555
+    ]
+  },
+  {
+    "id": 219,
+    "category": "event",
+    "label": "sea_holiday",
+    "question": "你是因为什么特别的活动去的吗?",
+    "similar": []
+  },
+  {
+    "id": 220,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你是不是出国去玩阿?",
+    "similar": [
+      783
+    ]
+  },
+  {
+    "id": 221,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你喜欢滑雪吗?",
+    "similar": [
+      225,
+      227,
+      230,
+      242,
+      243,
+      245,
+      247,
+      249,
+      250,
+      251,
+      252,
+      256,
+      262,
+      267,
+      271,
+      272,
+      273,
+      274,
+      278,
+      648,
+      651
+    ]
+  },
+  {
+    "id": 222,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪，很困难吗?学起来怎么样",
+    "similar": [
+      225,
+      244,
+      251,
+      261
+    ]
+  },
+  {
+    "id": 223,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "去那边滑雪会不会花很多钱啊?",
+    "similar": [
+      225,
+      254,
+      255
+    ]
+  },
+  {
+    "id": 224,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "除了滑雪还有什么好玩的活动吗?",
+    "similar": []
+  },
+  {
+    "id": 225,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪好不好学啊?",
+    "similar": [
+      221,
+      222,
+      223,
+      227,
+      230,
+      232,
+      239,
+      243,
+      244,
+      245,
+      250,
+      251,
+      252,
+      255,
+      256,
+      266,
+      267,
+      274,
+      648
+    ]
+  },
+  {
+    "id": 226,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "这是哪个滑雪场?",
+    "similar": [
+      242,
+      250,
+      252,
+      271,
+      648
+    ]
+  },
+  {
+    "id": 227,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你可以教我滑雪吗?",
+    "similar": [
+      221,
+      225,
+      230,
+      232,
+      242,
+      245,
+      250,
+      251,
+      252,
+      256,
+      267,
+      273,
+      274,
+      278,
+      648
+    ]
+  },
+  {
+    "id": 228,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "那时候很冷吧?温度很低吗？",
+    "similar": []
+  },
+  {
+    "id": 229,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "会不会很冷呀?",
+    "similar": [
+      72
+    ]
+  },
+  {
+    "id": 230,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "有教练教你滑雪吗?",
+    "similar": [
+      221,
+      225,
+      227,
+      232,
+      245,
+      250,
+      256,
+      262,
+      267,
+      273,
+      278,
+      648
+    ]
+  },
+  {
+    "id": 231,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你会推荐这个地方绍别人来玩吗?",
+    "similar": []
+  },
+  {
+    "id": 232,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你是怎么学滑雪的阿?",
+    "similar": [
+      225,
+      227,
+      230,
+      245,
+      247,
+      249,
+      250,
+      267,
+      274
+    ]
+  },
+  {
+    "id": 233,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "学会滑雪花了多久时间?会摔倒吗？",
+    "similar": [
+      245,
+      260,
+      266
+    ]
+  },
+  {
+    "id": 234,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "那个滑雪场有分简单或困难的场地吗?",
+    "similar": []
+  },
+  {
+    "id": 235,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你是去哪边玩呀?那时候的旅行怎么样?",
+    "similar": [
+      832
+    ]
+  },
+  {
+    "id": 236,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你有摔倒吗?",
+    "similar": []
+  },
+  {
+    "id": 237,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你有没有跌个四脚朝天?",
+    "similar": []
+  },
+  {
+    "id": 238,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "有没有跌到屁股坐在地上?",
+    "similar": []
+  },
+  {
+    "id": 239,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪刚开始会不会觉得很可怕?",
+    "similar": [
+      225,
+      243,
+      244,
+      251,
+      254,
+      255,
+      256,
+      260
+    ]
+  },
+  {
+    "id": 240,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "那里有雪地里暖暖的咖啡屋吗?",
+    "similar": []
+  },
+  {
+    "id": 241,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪有分不同程度的装备吗?",
+    "similar": [
+      273,
+      276
+    ]
+  },
+  {
+    "id": 242,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "这是你第一次滑雪吗?",
+    "similar": [
+      221,
+      226,
+      227,
+      250,
+      252,
+      256,
+      271,
+      278,
+      648,
+      650
+    ]
+  },
+  {
+    "id": 243,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪有很刺激吗?",
+    "similar": [
+      221,
+      225,
+      239,
+      251,
+      255,
+      272,
+      648
+    ]
+  },
+  {
+    "id": 244,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "第一次学滑雪的时候有摔的很惨吗?",
+    "similar": [
+      222,
+      225,
+      239,
+      251,
+      260
+    ]
+  },
+  {
+    "id": 245,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你什么时候学会滑雪的?",
+    "similar": [
+      221,
+      225,
+      227,
+      230,
+      232,
+      233,
+      247,
+      249,
+      250,
+      251,
+      252,
+      256,
+      266,
+      267,
+      271,
+      274,
+      278
+    ]
+  },
+  {
+    "id": 246,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪去那边可以搭缆车上山吗?缆车是什么样子?",
+    "similar": [
+      248
+    ]
+  },
+  {
+    "id": 247,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你的滑雪板是什么样子的呢?",
+    "similar": [
+      221,
+      232,
+      245,
+      250,
+      252,
+      256,
+      267,
+      271,
+      278
+    ]
+  },
+  {
+    "id": 248,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你是搭缆车到山顶再滑下来的吗?",
+    "similar": [
+      246
+    ]
+  },
+  {
+    "id": 249,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你和谁一起去滑雪呀?",
+    "similar": [
+      221,
+      232,
+      245,
+      250,
+      252,
+      256,
+      262,
+      263,
+      271,
+      274,
+      278
+    ]
+  },
+  {
+    "id": 250,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "是谁教你滑雪?",
+    "similar": [
+      221,
+      225,
+      226,
+      227,
+      230,
+      232,
+      242,
+      245,
+      247,
+      249,
+      252,
+      256,
+      262,
+      267,
+      268,
+      271,
+      273,
+      274,
+      278,
+      648
+    ]
+  },
+  {
+    "id": 251,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "当时滑雪滑得累吗?",
+    "similar": [
+      221,
+      222,
+      225,
+      227,
+      239,
+      243,
+      244,
+      245,
+      252,
+      255,
+      256,
+      260,
+      274,
+      278,
+      648
+    ]
+  },
+  {
+    "id": 252,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你经常滑雪吗?一般都是去哪滑?",
+    "similar": [
+      221,
+      225,
+      226,
+      227,
+      242,
+      245,
+      247,
+      249,
+      250,
+      251,
+      256,
+      261,
+      267,
+      268,
+      271,
+      274,
+      278,
+      648
+    ]
+  },
+  {
+    "id": 253,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "有顺便过年或过圣诞节吗?",
+    "similar": []
+  },
+  {
+    "id": 254,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "不会滑雪的人也可以去玩吗?",
+    "similar": [
+      223,
+      239,
+      255,
+      256,
+      648
+    ]
+  },
+  {
+    "id": 255,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪会不会很危险?",
+    "similar": [
+      223,
+      225,
+      239,
+      243,
+      251,
+      254,
+      256,
+      260,
+      648
+    ]
+  },
+  {
+    "id": 256,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你会滑雪吗?我听说滑雪不简单耶!",
+    "similar": [
+      221,
+      225,
+      227,
+      230,
+      239,
+      242,
+      245,
+      247,
+      249,
+      250,
+      251,
+      252,
+      254,
+      255,
+      267,
+      271,
+      272,
+      273,
+      274,
+      275,
+      278,
+      648
+    ]
+  },
+  {
+    "id": 257,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "雪橇和雪板都试过吗?",
+    "similar": []
+  },
+  {
+    "id": 258,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪要准备什么样的设备?",
+    "similar": []
+  },
+  {
+    "id": 259,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "这件滑雪外套很漂亮，哪里买的?",
+    "similar": []
+  },
+  {
+    "id": 260,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪时摔倒会很痛吗?",
+    "similar": [
+      233,
+      239,
+      244,
+      251,
+      255
+    ]
+  },
+  {
+    "id": 261,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你滑雪都滑什么样的路线?初级?中级?还是高难度?",
+    "similar": [
+      222,
+      252
+    ]
+  },
+  {
+    "id": 262,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "有教练陪你们一起滑雪吗?",
+    "similar": [
+      221,
+      230,
+      249,
+      250
+    ]
+  },
+  {
+    "id": 263,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "是朋友找你去的吗？去滑雪是谁想出来的点子呀?",
+    "similar": [
+      249
+    ]
+  },
+  {
+    "id": 264,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪有趣的地方在哪里?",
+    "similar": []
+  },
+  {
+    "id": 265,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "去山上滑雪前需要很多训练吗?",
+    "similar": [
+      266
+    ]
+  },
+  {
+    "id": 266,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪需要练习多久呀?",
+    "similar": [
+      225,
+      233,
+      245,
+      265,
+      267
+    ]
+  },
+  {
+    "id": 267,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你学滑雪学多快呀?",
+    "similar": [
+      221,
+      225,
+      227,
+      230,
+      232,
+      245,
+      247,
+      250,
+      252,
+      256,
+      266,
+      271,
+      274,
+      278
+    ]
+  },
+  {
+    "id": 268,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你常常在这里滑雪吗?是哪里的山?",
+    "similar": [
+      250,
+      252,
+      271,
+      278
+    ]
+  },
+  {
+    "id": 269,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "搭缆车会不会晃得很厉害?",
+    "similar": []
+  },
+  {
+    "id": 270,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "一大片的雪是不是很美丽阿?",
+    "similar": []
+  },
+  {
+    "id": 271,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你是第几次去这边滑雪?",
+    "similar": [
+      221,
+      226,
+      242,
+      245,
+      247,
+      249,
+      250,
+      252,
+      256,
+      267,
+      268,
+      274,
+      278,
+      648
+    ]
+  },
+  {
+    "id": 272,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你喜欢滑雪这项运动?感觉超级刺激好玩的耶!",
+    "similar": [
+      221,
+      243,
+      256
+    ]
+  },
+  {
+    "id": 273,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你有自己买滑雪装备吗?",
+    "similar": [
+      221,
+      227,
+      230,
+      241,
+      250,
+      256,
+      277
+    ]
+  },
+  {
+    "id": 274,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "为什么你想去滑雪呀?",
+    "similar": [
+      221,
+      225,
+      227,
+      232,
+      245,
+      249,
+      250,
+      251,
+      252,
+      256,
+      267,
+      271,
+      278,
+      648
+    ]
+  },
+  {
+    "id": 275,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你有没有看过现场的滑雪比赛?",
+    "similar": [
+      256,
+      278
+    ]
+  },
+  {
+    "id": 276,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪是不是身上要穿很多东西呢?",
+    "similar": [
+      241
+    ]
+  },
+  {
+    "id": 277,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "滑雪装备好多的样子喔!你们是自己准备还是跟他们租借的呢?",
+    "similar": [
+      273
+    ]
+  },
+  {
+    "id": 278,
+    "category": "event",
+    "label": "ski_holiday",
+    "question": "你那天滑雪滑了几趟?",
+    "similar": [
+      221,
+      227,
+      230,
+      242,
+      245,
+      247,
+      249,
+      250,
+      251,
+      252,
+      256,
+      267,
+      268,
+      271,
+      274,
+      275,
+      648
+    ]
+  },
+  {
+    "id": 279,
+    "category": "event",
+    "label": "wedding",
+    "question": "这场婚礼在哪里举办呀?",
+    "similar": [
+      323
+    ]
+  },
+  {
+    "id": 280,
+    "category": "event",
+    "label": "wedding",
+    "question": "你觉得那天喜宴的食物好吃吗?",
+    "similar": [
+      630
+    ]
+  },
+  {
+    "id": 281,
+    "category": "event",
+    "label": "wedding",
+    "question": "你那天有喝醉吗?",
+    "similar": [
+      324
+    ]
+  },
+  {
+    "id": 282,
+    "category": "event",
+    "label": "wedding",
+    "question": "新郎和新娘是你的谁啊?",
+    "similar": [
+      289,
+      296,
+      305,
+      322,
+      341
+    ]
+  },
+  {
+    "id": 283,
+    "category": "event",
+    "label": "wedding",
+    "question": "婚礼那天的甜点是什么?",
+    "similar": []
+  },
+  {
+    "id": 284,
+    "category": "event",
+    "label": "wedding",
+    "question": "那天跟你同桌的你认识吗?有谁啊?",
+    "similar": []
+  },
+  {
+    "id": 285,
+    "category": "event",
+    "label": "wedding",
+    "question": "你有去接新娘的捧花吗?",
+    "similar": [
+      286,
+      312
+    ]
+  },
+  {
+    "id": 286,
+    "category": "event",
+    "label": "wedding",
+    "question": "有很多人上去接新娘的捧花吗?",
+    "similar": [
+      285,
+      312
+    ]
+  },
+  {
+    "id": 287,
+    "category": "event",
+    "label": "wedding",
+    "question": "你觉得红包包多少钱比较好?",
+    "similar": []
+  },
+  {
+    "id": 288,
+    "category": "event",
+    "label": "wedding",
+    "question": "当天婚礼最感人的桥段是什么?",
+    "similar": [
+      325
+    ]
+  },
+  {
+    "id": 289,
+    "category": "event",
+    "label": "wedding",
+    "question": "你知道新郎和新娘是怎么认识的吗?",
+    "similar": [
+      282,
+      296,
+      305
+    ]
+  },
+  {
+    "id": 290,
+    "category": "event",
+    "label": "wedding",
+    "question": "新郎怎么求婚的?",
+    "similar": [
+      296
+    ]
+  },
+  {
+    "id": 291,
+    "category": "event",
+    "label": "wedding",
+    "question": "你那天和谁一起去啊?",
+    "similar": [
+      178,
+      680
+    ]
+  },
+  {
+    "id": 292,
+    "category": "event",
+    "label": "wedding",
+    "question": "这是用什么相机拍的?我觉得拍得很好看",
+    "similar": [
+      906
+    ]
+  },
+  {
+    "id": 293,
+    "category": "event",
+    "label": "wedding",
+    "question": "记得那天婚礼上有什么有趣的事情或表演吗?",
+    "similar": []
+  },
+  {
+    "id": 294,
+    "category": "event",
+    "label": "wedding",
+    "question": "婚礼当天有没有名人来参加?",
+    "similar": []
+  },
+  {
+    "id": 295,
+    "category": "event",
+    "label": "wedding",
+    "question": "那天你的心情如何?",
+    "similar": []
+  },
+  {
+    "id": 296,
+    "category": "event",
+    "label": "wedding",
+    "question": "新郎和新娘现在过得如何呀?",
+    "similar": [
+      282,
+      289,
+      290,
+      305,
+      306
+    ]
+  },
+  {
+    "id": 297,
+    "category": "event",
+    "label": "wedding",
+    "question": "婚宴的时候有没有玩什么游戏呢？",
+    "similar": [
+      328
+    ]
+  },
+  {
+    "id": 298,
+    "category": "event",
+    "label": "wedding",
+    "question": "通常婚礼的流程是新郎新娘自己决定的吗?",
+    "similar": [
+      329
+    ]
+  },
+  {
+    "id": 299,
+    "category": "event",
+    "label": "wedding",
+    "question": "你那时候几岁啊?是第一次参加朋友的婚礼吗?",
+    "similar": []
+  },
+  {
+    "id": 300,
+    "category": "event",
+    "label": "wedding",
+    "question": "婚礼当天你穿什么样的衣服呢?",
+    "similar": [
+      333
+    ]
+  },
+  {
+    "id": 301,
+    "category": "event",
+    "label": "wedding",
+    "question": "有遇到谁让你感到惊讶的吗?",
+    "similar": []
+  },
+  {
+    "id": 302,
+    "category": "event",
+    "label": "wedding",
+    "question": "那天你有很感动吗?",
+    "similar": []
+  },
+  {
+    "id": 303,
+    "category": "event",
+    "label": "wedding",
+    "question": "新郎有没有被灌很多酒呀?",
+    "similar": []
+  },
+  {
+    "id": 304,
+    "category": "event",
+    "label": "wedding",
+    "question": "宴会当天印象最深刻的菜色是什么呢?",
+    "similar": []
+  },
+  {
+    "id": 305,
+    "category": "event",
+    "label": "wedding",
+    "question": "新郎和新娘是怎么认识的?",
+    "similar": [
+      282,
+      289,
+      296
+    ]
+  },
+  {
+    "id": 306,
+    "category": "event",
+    "label": "wedding",
+    "question": "新郎新娘在一起多久结婚的啊?",
+    "similar": [
+      296,
+      335
+    ]
+  },
+  {
+    "id": 307,
+    "category": "event",
+    "label": "wedding",
+    "question": "你知道是哪一家婚礼摄影公司帮忙拍摄的呢?",
+    "similar": [
+      336
+    ]
+  },
+  {
+    "id": 308,
+    "category": "event",
+    "label": "wedding",
+    "question": "婚礼有设定主题吗?",
+    "similar": [
+      338
+    ]
+  },
+  {
+    "id": 309,
+    "category": "event",
+    "label": "wedding",
+    "question": "你有帮忙准备婚礼吗?",
+    "similar": [
+      339
+    ]
+  },
+  {
+    "id": 310,
+    "category": "event",
+    "label": "wedding",
+    "question": "那天谁后来抽到捧花?",
+    "similar": [
+      340
+    ]
+  },
+  {
+    "id": 311,
+    "category": "event",
+    "label": "wedding",
+    "question": "你习惯在婚礼送什么当礼物呢?",
+    "similar": [
+      319
+    ]
+  },
+  {
+    "id": 312,
+    "category": "event",
+    "label": "wedding",
+    "question": "新娘那天有丢捧花吗?",
+    "similar": [
+      285,
+      286
+    ]
+  },
+  {
+    "id": 313,
+    "category": "event",
+    "label": "wedding",
+    "question": "这对新人现在过得如何呀?",
+    "similar": []
+  },
+  {
+    "id": 314,
+    "category": "event",
+    "label": "wedding",
+    "question": "当天的音乐好不好听呀?",
+    "similar": []
+  },
+  {
+    "id": 315,
+    "category": "event",
+    "label": "wedding",
+    "question": "当天的宾客有多少人呢?",
+    "similar": []
+  },
+  {
+    "id": 316,
+    "category": "event",
+    "label": "wedding",
+    "question": "婚礼当天来了多少人?",
+    "similar": []
+  },
+  {
+    "id": 317,
+    "category": "event",
+    "label": "wedding",
+    "question": "那天有很多人来吗?",
+    "similar": [
+      677
+    ]
+  },
+  {
+    "id": 318,
+    "category": "event",
+    "label": "wedding",
+    "question": "你梦想中的婚礼是怎么样的?",
+    "similar": [
+      319
+    ]
+  },
+  {
+    "id": 319,
+    "category": "event",
+    "label": "wedding",
+    "question": "你理想中的婚礼是什么?",
+    "similar": [
+      311,
+      318
+    ]
+  },
+  {
+    "id": 320,
+    "category": "event",
+    "label": "wedding",
+    "question": "新郎新娘的父母婚礼致词有说什么有趣或感人的事吗?",
+    "similar": []
+  },
+  {
+    "id": 321,
+    "category": "event",
+    "label": "wedding",
+    "question": "你喜欢那天的婚礼吗?",
+    "similar": []
+  },
+  {
+    "id": 322,
+    "category": "event",
+    "label": "wedding",
+    "question": "伴娘伴郎是谁?",
+    "similar": [
+      282,
+      341
+    ]
+  },
+  {
+    "id": 323,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "婚礼是在哪里举行的啊?",
+    "similar": [
+      279
+    ]
+  },
+  {
+    "id": 324,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "你那天有喝醉吗?",
+    "similar": [
+      281
+    ]
+  },
+  {
+    "id": 325,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "婚礼最感人的桥段是什么?",
+    "similar": [
+      288
+    ]
+  },
+  {
+    "id": 326,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "你有偷偷设计什么感人或惊喜的桥段吗?",
+    "similar": []
+  },
+  {
+    "id": 327,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "那天你的心情如何?会很紧张吗？",
+    "similar": []
+  },
+  {
+    "id": 328,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "婚宴的时候有玩什么游戏吗?或是有没有安排与观众互动的特别游戏?",
+    "similar": [
+      297
+    ]
+  },
+  {
+    "id": 329,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "婚礼的流程是你们自己筹划的还是有长辈指点呢?",
+    "similar": [
+      298
+    ]
+  },
+  {
+    "id": 330,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "你那时候几岁啊?",
+    "similar": [
+      85
+    ]
+  },
+  {
+    "id": 331,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "有什么来宾的出现让你感到惊讶的吗?",
+    "similar": []
+  },
+  {
+    "id": 332,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "那天你有哭吗?",
+    "similar": [
+      11
+    ]
+  },
+  {
+    "id": 333,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "婚礼当天你是穿什么样的礼服呢?",
+    "similar": [
+      300
+    ]
+  },
+  {
+    "id": 334,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "你是怎么认识另一伴的?",
+    "similar": []
+  },
+  {
+    "id": 335,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "你和另一伴在一起多久结婚的呢?",
+    "similar": [
+      306,
+      508
+    ]
+  },
+  {
+    "id": 336,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "是哪一家婚礼摄影公司帮忙拍摄的呢?",
+    "similar": [
+      307
+    ]
+  },
+  {
+    "id": 337,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "你们有拍婚纱照吗?",
+    "similar": []
+  },
+  {
+    "id": 338,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "婚礼有设定主题吗?",
+    "similar": [
+      308
+    ]
+  },
+  {
+    "id": 339,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "这场婚礼准备了很久吗?",
+    "similar": [
+      309
+    ]
+  },
+  {
+    "id": 340,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "那天谁抽到捧花?",
+    "similar": [
+      310
+    ]
+  },
+  {
+    "id": 341,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "你请谁当伴郎跟伴娘呢?",
+    "similar": [
+      282,
+      322
+    ]
+  },
+  {
+    "id": 342,
+    "category": "event",
+    "label": "wedding_own",
+    "question": "当初谁向谁求婚的呢?",
+    "similar": []
+  },
+  {
+    "id": 343,
+    "category": "event",
+    "label": "exhibition",
+    "question": "这个展览的主题是什么?",
+    "similar": []
+  },
+  {
+    "id": 344,
+    "category": "event",
+    "label": "exhibition",
+    "question": "你那时候印象最深刻的作品是什么?",
+    "similar": [
+      401,
+      713
+    ]
+  },
+  {
+    "id": 345,
+    "category": "event",
+    "label": "exhibition",
+    "question": "这是国内的展还是国外的展?",
+    "similar": []
+  },
+  {
+    "id": 346,
+    "category": "event",
+    "label": "exhibition",
+    "question": "你是怎么知道有这个展览的?",
+    "similar": []
+  },
+  {
+    "id": 347,
+    "category": "event",
+    "label": "exhibition",
+    "question": "你平常就有定期看展览的习惯吗?",
+    "similar": []
+  },
+  {
+    "id": 348,
+    "category": "event",
+    "label": "exhibition",
+    "question": "你比较喜欢一两个人去看展览，还是一群人一起去?",
+    "similar": []
+  },
+  {
+    "id": 349,
+    "category": "event",
+    "label": "exhibition",
+    "question": "你有去过哪些让你很震撼，还会想再去一次的展览吗?",
+    "similar": []
+  },
+  {
+    "id": 350,
+    "category": "event",
+    "label": "exhibition",
+    "question": "这个展览有人负责导览吗?",
+    "similar": []
+  },
+  {
+    "id": 351,
+    "category": "event",
+    "label": "exhibition",
+    "question": "你自己或身边朋友有办过展览吗？像是摄影展, 绘画展, 或是设计展这些?",
+    "similar": []
+  },
+  {
+    "id": 352,
+    "category": "event",
+    "label": "exhibition",
+    "question": "你有因为看展览，认识什么朋友吗?",
+    "similar": []
+  },
+  {
+    "id": 353,
+    "category": "event",
+    "label": "exhibition",
+    "question": "你最讨厌别人看展览的时候做出什么行为?",
+    "similar": []
+  },
+  {
+    "id": 354,
+    "category": "event",
+    "label": "baseball",
+    "question": "你记得这场是哪一队打哪一队吗?",
+    "similar": [
+      355,
+      658
+    ]
+  },
+  {
+    "id": 355,
+    "category": "event",
+    "label": "baseball",
+    "question": "你记得最后是哪一队赢吗?",
+    "similar": [
+      354,
+      365,
+      661
+    ]
+  },
+  {
+    "id": 356,
+    "category": "event",
+    "label": "baseball",
+    "question": "你有支持的球队吗?",
+    "similar": []
+  },
+  {
+    "id": 357,
+    "category": "event",
+    "label": "baseball",
+    "question": "你是一个棒球迷吗?",
+    "similar": [
+      358,
+      362
+    ]
+  },
+  {
+    "id": 358,
+    "category": "event",
+    "label": "baseball",
+    "question": "你有喜欢的棒球选手吗?",
+    "similar": [
+      357,
+      362
+    ]
+  },
+  {
+    "id": 359,
+    "category": "event",
+    "label": "baseball",
+    "question": "你喜欢看哪个国家或联盟的棒球比赛呢？ 你有在看日本或是美国的吗?",
+    "similar": []
+  },
+  {
+    "id": 360,
+    "category": "event",
+    "label": "baseball",
+    "question": "你常常去现场看球吗?",
+    "similar": [
+      370,
+      664
+    ]
+  },
+  {
+    "id": 361,
+    "category": "event",
+    "label": "baseball",
+    "question": "去看比赛的时候你会看拉拉队吗?",
+    "similar": []
+  },
+  {
+    "id": 362,
+    "category": "event",
+    "label": "baseball",
+    "question": "你是从小就开始看棒球吗?",
+    "similar": [
+      357,
+      358
+    ]
+  },
+  {
+    "id": 363,
+    "category": "event",
+    "label": "baseball",
+    "question": "你家人也喜欢看球吗?",
+    "similar": [
+      376
+    ]
+  },
+  {
+    "id": 364,
+    "category": "event",
+    "label": "baseball",
+    "question": "你有因为支持的队伍不同而跟朋友吵过架吗?",
+    "similar": [
+      377
+    ]
+  },
+  {
+    "id": 365,
+    "category": "event",
+    "label": "tennis",
+    "question": "你记得这场最后是谁赢吗?",
+    "similar": [
+      355,
+      661
+    ]
+  },
+  {
+    "id": 366,
+    "category": "event",
+    "label": "tennis",
+    "question": "你从什么时候开始看网球的啊?",
+    "similar": [
+      370,
+      378
+    ]
+  },
+  {
+    "id": 367,
+    "category": "event",
+    "label": "tennis",
+    "question": "你最喜欢哪一个选手?",
+    "similar": [
+      181
+    ]
+  },
+  {
+    "id": 368,
+    "category": "event",
+    "label": "tennis",
+    "question": "你看过哪些四大公开赛的现场?",
+    "similar": []
+  },
+  {
+    "id": 369,
+    "category": "event",
+    "label": "tennis",
+    "question": "除了大满贯, 你平常会关注大师赛吗?",
+    "similar": []
+  },
+  {
+    "id": 370,
+    "category": "event",
+    "label": "tennis",
+    "question": "你平常会打网球吗?",
+    "similar": [
+      360,
+      366,
+      378
+    ]
+  },
+  {
+    "id": 371,
+    "category": "event",
+    "label": "tennis",
+    "question": "你比较喜欢什么场地的比赛?红土, 草地, 还是硬地呢?",
+    "similar": []
+  },
+  {
+    "id": 372,
+    "category": "event",
+    "label": "tennis",
+    "question": "你有特别崇拜的网球明星吗?",
+    "similar": []
+  },
+  {
+    "id": 373,
+    "category": "event",
+    "label": "tennis",
+    "question": "你会熬夜看国外的网球比赛吗?",
+    "similar": []
+  },
+  {
+    "id": 374,
+    "category": "event",
+    "label": "tennis",
+    "question": "你开始看球的时候谁是那时候的球王啊?是费德勒吗?",
+    "similar": []
+  },
+  {
+    "id": 375,
+    "category": "event",
+    "label": "tennis",
+    "question": "很多人都说好喜欢费德勒优雅的打球方式, 你呢?你喜欢哪一种抽球风格?",
+    "similar": []
+  },
+  {
+    "id": 376,
+    "category": "event",
+    "label": "tennis",
+    "question": "你家人也喜欢看球吗?",
+    "similar": [
+      363
+    ]
+  },
+  {
+    "id": 377,
+    "category": "event",
+    "label": "tennis",
+    "question": "你有因为支持的选手不同而跟别人吵起来吗?",
+    "similar": [
+      364
+    ]
+  },
+  {
+    "id": 378,
+    "category": "event",
+    "label": "tennis",
+    "question": "是什么原因让你开始看网球啊?",
+    "similar": [
+      366,
+      370
+    ]
+  },
+  {
+    "id": 379,
+    "category": "event",
+    "label": "birthday",
+    "question": "你喜欢吃什么口味的蛋糕?",
+    "similar": []
+  },
+  {
+    "id": 380,
+    "category": "event",
+    "label": "birthday",
+    "question": "旁边一起庆祝的人有谁啊?",
+    "similar": []
+  },
+  {
+    "id": 381,
+    "category": "event",
+    "label": "birthday",
+    "question": "你会写卡片祝别人生日快乐吗?",
+    "similar": []
+  },
+  {
+    "id": 382,
+    "category": "event",
+    "label": "birthday",
+    "question": "你收过最喜欢的生日礼物是什么?",
+    "similar": []
+  },
+  {
+    "id": 383,
+    "category": "event",
+    "label": "birthday",
+    "question": "你有花很多时间送别人礼物过吗？",
+    "similar": []
+  },
+  {
+    "id": 384,
+    "category": "event",
+    "label": "birthday",
+    "question": "你有什么难忘的庆生经验吗?",
+    "similar": []
+  },
+  {
+    "id": 385,
+    "category": "event",
+    "label": "birthday",
+    "question": "你喜欢生日惊喜吗？",
+    "similar": [
+      386
+    ]
+  },
+  {
+    "id": 386,
+    "category": "event",
+    "label": "birthday",
+    "question": "你生日的时候会许愿吗?",
+    "similar": [
+      385
+    ]
+  },
+  {
+    "id": 387,
+    "category": "event",
+    "label": "birthday",
+    "question": "哪一年的生日让你很难忘?为什么啊?",
+    "similar": []
+  },
+  {
+    "id": 388,
+    "category": "event",
+    "label": "birthday",
+    "question": "你生日的时候会去餐厅吃饭庆祝吗?",
+    "similar": []
+  },
+  {
+    "id": 389,
+    "category": "event",
+    "label": "concert",
+    "question": "你去过很多场演唱会吗?",
+    "similar": [
+      390,
+      391
+    ]
+  },
+  {
+    "id": 390,
+    "category": "event",
+    "label": "concert",
+    "question": "你还去过哪些演唱会呢?",
+    "similar": [
+      389,
+      393
+    ]
+  },
+  {
+    "id": 391,
+    "category": "event",
+    "label": "concert",
+    "question": "这场演唱会你坐在什么位子啊?最前面的摇滚区吗?",
+    "similar": [
+      389
+    ]
+  },
+  {
+    "id": 392,
+    "category": "event",
+    "label": "concert",
+    "question": "那时候演唱会从几点到几点结束啊?",
+    "similar": []
+  },
+  {
+    "id": 393,
+    "category": "event",
+    "label": "concert",
+    "question": "你最喜欢的一场演唱会是谁的啊?为什么呢?",
+    "similar": [
+      390
+    ]
+  },
+  {
+    "id": 394,
+    "category": "event",
+    "label": "concert",
+    "question": "有什么让你印象深刻的舞台特效吗?",
+    "similar": []
+  },
+  {
+    "id": 395,
+    "category": "event",
+    "label": "concert",
+    "question": "你平常都听什么类型的音乐呢?",
+    "similar": [
+      521
+    ]
+  },
+  {
+    "id": 396,
+    "category": "event",
+    "label": "concert",
+    "question": "你除了听演唱会, 平常会买唱片吗?",
+    "similar": []
+  },
+  {
+    "id": 397,
+    "category": "event",
+    "label": "concert",
+    "question": "你自己也喜欢唱这类型的歌吗?",
+    "similar": [
+      520,
+      522,
+      523,
+      527
+    ]
+  },
+  {
+    "id": 398,
+    "category": "event",
+    "label": "concert",
+    "question": "你年轻时候最红的歌手或乐团是谁啊?",
+    "similar": []
+  },
+  {
+    "id": 399,
+    "category": "event",
+    "label": "theater",
+    "question": "最后的结局是喜剧还是悲剧啊?",
+    "similar": []
+  },
+  {
+    "id": 400,
+    "category": "event",
+    "label": "theater",
+    "question": "这是什么类型的电影啊?",
+    "similar": [
+      408,
+      412
+    ]
+  },
+  {
+    "id": 401,
+    "category": "event",
+    "label": "theater",
+    "question": "看完之后你对什么片段印象最深刻?",
+    "similar": [
+      344
+    ]
+  },
+  {
+    "id": 402,
+    "category": "event",
+    "label": "theater",
+    "question": "你看的时候有吃点心吗?",
+    "similar": []
+  },
+  {
+    "id": 403,
+    "category": "event",
+    "label": "theater",
+    "question": "你看电影的时候喜欢吃爆米花吗？",
+    "similar": []
+  },
+  {
+    "id": 404,
+    "category": "event",
+    "label": "theater",
+    "question": "看的时候旁边会有人一直讲话吗?我最讨厌这样的人了!",
+    "similar": []
+  },
+  {
+    "id": 405,
+    "category": "event",
+    "label": "theater",
+    "question": "为什么会来这家电影院?",
+    "similar": []
+  },
+  {
+    "id": 406,
+    "category": "event",
+    "label": "theater",
+    "question": "这家电影院看电影的效果好吗?",
+    "similar": []
+  },
+  {
+    "id": 407,
+    "category": "event",
+    "label": "theater",
+    "question": "你平常常看电影吗?",
+    "similar": [
+      409,
+      410
+    ]
+  },
+  {
+    "id": 408,
+    "category": "event",
+    "label": "theater",
+    "question": "你最喜欢什么类型的电影?",
+    "similar": [
+      400,
+      412,
+      443,
+      521
+    ]
+  },
+  {
+    "id": 409,
+    "category": "event",
+    "label": "theater",
+    "question": "你会自己一个人去看电影吗?",
+    "similar": [
+      407,
+      410
+    ]
+  },
+  {
+    "id": 410,
+    "category": "event",
+    "label": "theater",
+    "question": "你有在半夜看过电影吗?",
+    "similar": [
+      407,
+      409
+    ]
+  },
+  {
+    "id": 411,
+    "category": "event",
+    "label": "theater",
+    "question": "你在看电影的时候发生过什么很好笑的事情吗？",
+    "similar": [
+      912
+    ]
+  },
+  {
+    "id": 412,
+    "category": "event",
+    "label": "theater",
+    "question": "有什么电影是你觉得一定非来电影院看不可的吗?",
+    "similar": [
+      400,
+      408
+    ]
+  },
+  {
+    "id": 413,
+    "category": "event",
+    "label": "theater",
+    "question": "平常会跟家人一起看电影吗?",
+    "similar": [
+      824
+    ]
+  },
+  {
+    "id": 414,
+    "category": "event",
+    "label": "theater",
+    "question": "有喜欢的电影明星吗?",
+    "similar": []
+  },
+  {
+    "id": 415,
+    "category": "event",
+    "label": "puppet_show",
+    "question": "是看哪一个团体或老师演出的布袋戏啊？",
+    "similar": []
+  },
+  {
+    "id": 416,
+    "category": "event",
+    "label": "puppet_show",
+    "question": "你最喜欢这部戏中的什么角色呢?你最喜欢这个角色的什么特质呢?",
+    "similar": [
+      453,
+      454
+    ]
+  },
+  {
+    "id": 417,
+    "category": "event",
+    "label": "puppet_show",
+    "question": "你比较喜欢传统布袋还是电视布袋戏呢?",
+    "similar": []
+  },
+  {
+    "id": 418,
+    "category": "event",
+    "label": "puppet_show",
+    "question": "你有看过电影版的布袋戏吗?",
+    "similar": [
+      422
+    ]
+  },
+  {
+    "id": 419,
+    "category": "event",
+    "label": "puppet_show",
+    "question": "可以告诉我你最喜欢哪一出布袋戏吗？",
+    "similar": [
+      421,
+      422
+    ]
+  },
+  {
+    "id": 420,
+    "category": "event",
+    "label": "puppet_show",
+    "question": "你是因为什么原因开始看布袋戏的啊？",
+    "similar": [
+      422
+    ]
+  },
+  {
+    "id": 421,
+    "category": "event",
+    "label": "puppet_show",
+    "question": "你最喜欢的布袋戏桥段是什么啊?",
+    "similar": [
+      419,
+      422
+    ]
+  },
+  {
+    "id": 422,
+    "category": "event",
+    "label": "puppet_show",
+    "question": "你觉得布袋戏最好看的部分是什么?",
+    "similar": [
+      418,
+      419,
+      420,
+      421
+    ]
+  },
+  {
+    "id": 423,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "你看报纸会戴眼镜吗?",
+    "similar": []
+  },
+  {
+    "id": 424,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "你对于这份报纸有什么印象吗?",
+    "similar": []
+  },
+  {
+    "id": 425,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "平常喜欢看哪一家报纸?",
+    "similar": [
+      434
+    ]
+  },
+  {
+    "id": 426,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "你特别关注哪一部分的新闻呢?",
+    "similar": [
+      427,
+      431
+    ]
+  },
+  {
+    "id": 427,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "最近有什么新闻让你印象深刻呢?",
+    "similar": [
+      426,
+      431
+    ]
+  },
+  {
+    "id": 428,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "有对哪位作家印象深刻吗?",
+    "similar": [
+      436
+    ]
+  },
+  {
+    "id": 429,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "你觉得哪位记者的报导值得信任?",
+    "similar": []
+  },
+  {
+    "id": 430,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "你觉得现在的报章新闻内容如和?",
+    "similar": []
+  },
+  {
+    "id": 431,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "你比较喜欢看哪一类的新闻啊?",
+    "similar": [
+      426,
+      427
+    ]
+  },
+  {
+    "id": 432,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "你觉得每天关注新闻对你是有帮助的吗?",
+    "similar": []
+  },
+  {
+    "id": 433,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "你有看报纸的习惯吗?",
+    "similar": []
+  },
+  {
+    "id": 434,
+    "category": "event",
+    "label": "read_newspaper",
+    "question": "你喜欢看纸本的报纸还是手机平板的新闻?",
+    "similar": [
+      425
+    ]
+  },
+  {
+    "id": 435,
+    "category": "event",
+    "label": "read_book",
+    "question": "你会看哪一种类的书?",
+    "similar": [
+      443,
+      444
+    ]
+  },
+  {
+    "id": 436,
+    "category": "event",
+    "label": "read_book",
+    "question": "你有特别喜欢的作家吗？",
+    "similar": [
+      428
+    ]
+  },
+  {
+    "id": 437,
+    "category": "event",
+    "label": "read_book",
+    "question": "你觉得这部小说的主人公有什么值得学习的特质？",
+    "similar": []
+  },
+  {
+    "id": 438,
+    "category": "event",
+    "label": "read_book",
+    "question": "你会经常去图书馆看书吗？",
+    "similar": [
+      439,
+      445
+    ]
+  },
+  {
+    "id": 439,
+    "category": "event",
+    "label": "read_book",
+    "question": "你最喜欢到哪个图书馆借书呢？",
+    "similar": [
+      438,
+      445
+    ]
+  },
+  {
+    "id": 440,
+    "category": "event",
+    "label": "read_book",
+    "question": "你有没有网购书籍的经验呢？",
+    "similar": []
+  },
+  {
+    "id": 441,
+    "category": "event",
+    "label": "read_book",
+    "question": "你对这本书最有印象的部分是哪里呢？",
+    "similar": []
+  },
+  {
+    "id": 442,
+    "category": "event",
+    "label": "read_book",
+    "question": "你平时都花多少时间阅读啊?",
+    "similar": []
+  },
+  {
+    "id": 443,
+    "category": "event",
+    "label": "read_book",
+    "question": "你最不喜欢看哪一种类型的书?",
+    "similar": [
+      408,
+      435
+    ]
+  },
+  {
+    "id": 444,
+    "category": "event",
+    "label": "read_book",
+    "question": "你能推荐我一本书吗?",
+    "similar": [
+      435
+    ]
+  },
+  {
+    "id": 445,
+    "category": "event",
+    "label": "read_book",
+    "question": "你喜欢去图书馆看书还是在家自己看呢?",
+    "similar": [
+      438,
+      439
+    ]
+  },
+  {
+    "id": 446,
+    "category": "event",
+    "label": "read_book",
+    "question": "你会接受电子书吗?",
+    "similar": []
+  },
+  {
+    "id": 447,
+    "category": "event",
+    "label": "read_book",
+    "question": "你过一 段时间后会再重新看同一本书吗?",
+    "similar": []
+  },
+  {
+    "id": 448,
+    "category": "event",
+    "label": "read_book",
+    "question": "你觉得阅读能带给你什么?",
+    "similar": []
+  },
+  {
+    "id": 449,
+    "category": "event",
+    "label": "song_show",
+    "question": "里面有你喜欢的角色吗？",
+    "similar": [
+      892
+    ]
+  },
+  {
+    "id": 450,
+    "category": "event",
+    "label": "song_show",
+    "question": "这场戏是在演什么呢？",
+    "similar": [
+      452,
+      453
+    ]
+  },
+  {
+    "id": 451,
+    "category": "event",
+    "label": "song_show",
+    "question": "在这之前，你曾经看过什么歌仔戏吗?你最喜欢哪一部戏呢?可以跟我分享吗?",
+    "similar": [
+      453,
+      454,
+      455,
+      456,
+      457
+    ]
+  },
+  {
+    "id": 452,
+    "category": "event",
+    "label": "song_show",
+    "question": "你知道这部戏的主角是谁演的吗?",
+    "similar": [
+      450,
+      453
+    ]
+  },
+  {
+    "id": 453,
+    "category": "event",
+    "label": "song_show",
+    "question": "你觉得这场戏谁演的最好呢?",
+    "similar": [
+      416,
+      450,
+      451,
+      452,
+      454,
+      455,
+      456
+    ]
+  },
+  {
+    "id": 454,
+    "category": "event",
+    "label": "song_show",
+    "question": "你最喜欢的歌仔戏演员是谁呢?",
+    "similar": [
+      416,
+      451,
+      453,
+      456,
+      457
+    ]
+  },
+  {
+    "id": 455,
+    "category": "event",
+    "label": "song_show",
+    "question": "你对这场戏最有印象的部分是哪里呢?",
+    "similar": [
+      451,
+      453
+    ]
+  },
+  {
+    "id": 456,
+    "category": "event",
+    "label": "song_show",
+    "question": "你最喜欢哪场歌仔戏呢？",
+    "similar": [
+      451,
+      453,
+      454,
+      457,
+      523
+    ]
+  },
+  {
+    "id": 457,
+    "category": "event",
+    "label": "song_show",
+    "question": "你从什么时候开始喜欢看歌仔戏的？",
+    "similar": [
+      451,
+      454,
+      456
+    ]
+  },
+  {
+    "id": 458,
+    "category": "event",
+    "label": "play_chess",
+    "question": "你有什么喜欢的战术吗？",
+    "similar": []
+  },
+  {
+    "id": 459,
+    "category": "event",
+    "label": "play_chess",
+    "question": "你的棋艺如何？",
+    "similar": [
+      462,
+      465
+    ]
+  },
+  {
+    "id": 460,
+    "category": "event",
+    "label": "play_chess",
+    "question": "你最喜欢在一天中的什么时候下象棋呢?",
+    "similar": [
+      461,
+      465,
+      468
+    ]
+  },
+  {
+    "id": 461,
+    "category": "event",
+    "label": "play_chess",
+    "question": "什么时候下象棋你的胜率会最高呢?为什么?",
+    "similar": [
+      460,
+      465,
+      468
+    ]
+  },
+  {
+    "id": 462,
+    "category": "event",
+    "label": "play_chess",
+    "question": "你喜欢下象棋吗?",
+    "similar": [
+      459,
+      465,
+      466,
+      467,
+      468
+    ]
+  },
+  {
+    "id": 463,
+    "category": "event",
+    "label": "play_chess",
+    "question": "你比较喜欢下大盘还是暗棋呢?",
+    "similar": [
+      465
+    ]
+  },
+  {
+    "id": 464,
+    "category": "event",
+    "label": "play_chess",
+    "question": "你是自己学的吗，还是有人教你的呢?",
+    "similar": []
+  },
+  {
+    "id": 465,
+    "category": "event",
+    "label": "play_chess",
+    "question": "你有下过哪一盘棋让你印象深刻的吗?",
+    "similar": [
+      459,
+      460,
+      461,
+      462,
+      463,
+      466,
+      467,
+      468
+    ]
+  },
+  {
+    "id": 466,
+    "category": "event",
+    "label": "play_chess",
+    "question": "下象棋是件让你着迷的事情吗?",
+    "similar": [
+      462,
+      465,
+      467,
+      468
+    ]
+  },
+  {
+    "id": 467,
+    "category": "event",
+    "label": "play_chess",
+    "question": "你觉得下象棋有让你思绪更清楚吗?",
+    "similar": [
+      462,
+      465,
+      466,
+      468
+    ]
+  },
+  {
+    "id": 468,
+    "category": "event",
+    "label": "play_chess",
+    "question": "你觉得下象棋最重要的是什么?",
+    "similar": [
+      460,
+      461,
+      462,
+      465,
+      466,
+      467
+    ]
+  },
+  {
+    "id": 469,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "你喜欢打太极拳吗？",
+    "similar": [
+      471,
+      473
+    ]
+  },
+  {
+    "id": 470,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "打太极拳有带给你什么正面的影响吗？",
+    "similar": []
+  },
+  {
+    "id": 471,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "你都在什么时候打太极拳呢?",
+    "similar": [
+      469,
+      472,
+      478
+    ]
+  },
+  {
+    "id": 472,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "你是从什么时候开始学太极拳的呢?",
+    "similar": [
+      471,
+      493
+    ]
+  },
+  {
+    "id": 473,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "打太极拳是你平日的休闲娱乐吗?",
+    "similar": [
+      469
+    ]
+  },
+  {
+    "id": 474,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "你最喜欢太极拳的什么招式呢?",
+    "similar": []
+  },
+  {
+    "id": 475,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "可以把你最喜欢的招式演给我看吗?",
+    "similar": []
+  },
+  {
+    "id": 476,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "打太极拳需要注意哪些地方呢?",
+    "similar": [
+      478
+    ]
+  },
+  {
+    "id": 477,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "一开始是怎么接触到这种运动的呢?",
+    "similar": []
+  },
+  {
+    "id": 478,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "你觉得打太极拳好玩的地方在哪里？",
+    "similar": [
+      471,
+      476
+    ]
+  },
+  {
+    "id": 479,
+    "category": "event",
+    "label": "tai_chi",
+    "question": "太极拳对身体有什么益处吗？",
+    "similar": []
+  },
+  {
+    "id": 480,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": "你喜欢插花吗?你每天都会插花吗?",
+    "similar": []
+  },
+  {
+    "id": 481,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": "你最喜欢哪种花呢?",
+    "similar": [
+      571,
+      573,
+      575
+    ]
+  },
+  {
+    "id": 482,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": "你插花的步骤是什么呢?",
+    "similar": []
+  },
+  {
+    "id": 483,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": "可以跟我分享插花的技巧或需要注意的步骤吗?",
+    "similar": []
+  },
+  {
+    "id": 484,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": "插好的花可以维持多久不凋零呢?",
+    "similar": []
+  },
+  {
+    "id": 485,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": "你是从什么时候开始学插花的呢?",
+    "similar": []
+  },
+  {
+    "id": 486,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": " 你是哪一种流派的?为什么会喜欢这种流派呢?",
+    "similar": []
+  },
+  {
+    "id": 487,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": "你觉得插花最有趣的地方是什么呢?",
+    "similar": []
+  },
+  {
+    "id": 488,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": "一开始学的时候你觉得最难的地方是什么呢?",
+    "similar": []
+  },
+  {
+    "id": 489,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": "在插花的时候你最喜欢怎么配置",
+    "similar": []
+  },
+  {
+    "id": 490,
+    "category": "event",
+    "label": "flower_arrangement",
+    "question": "插花时该注意些什么吗",
+    "similar": []
+  },
+  {
+    "id": 491,
+    "category": "event",
+    "label": "square_dance",
+    "question": "你跳舞的时候都会搭配什么音乐呢?",
+    "similar": [
+      495
+    ]
+  },
+  {
+    "id": 492,
+    "category": "event",
+    "label": "square_dance",
+    "question": "你有固定的舞伴吗?",
+    "similar": []
+  },
+  {
+    "id": 493,
+    "category": "event",
+    "label": "square_dance",
+    "question": "你是什么时候开始学跳广场舞的呢?",
+    "similar": [
+      472,
+      496,
+      499
+    ]
+  },
+  {
+    "id": 494,
+    "category": "event",
+    "label": "square_dance",
+    "question": "这是你主要的兴趣吗?你平常还有什么休闲娱乐吗?",
+    "similar": []
+  },
+  {
+    "id": 495,
+    "category": "event",
+    "label": "square_dance",
+    "question": "你最喜欢什么舞步呢?",
+    "similar": [
+      491
+    ]
+  },
+  {
+    "id": 496,
+    "category": "event",
+    "label": "square_dance",
+    "question": "是什么原因让你开始跳舞的呢?",
+    "similar": [
+      493,
+      499
+    ]
+  },
+  {
+    "id": 497,
+    "category": "event",
+    "label": "square_dance",
+    "question": "你会定期去跳舞吗?",
+    "similar": []
+  },
+  {
+    "id": 498,
+    "category": "event",
+    "label": "square_dance",
+    "question": "跳广场舞通常都跳多久？",
+    "similar": []
+  },
+  {
+    "id": 499,
+    "category": "event",
+    "label": "square_dance",
+    "question": "是什么样的机会让你开始接触广场舞的呢？",
+    "similar": [
+      493,
+      496
+    ]
+  },
+  {
+    "id": 500,
+    "category": "event",
+    "label": "dating",
+    "question": "你是和同性还是和异性约会?",
+    "similar": []
+  },
+  {
+    "id": 501,
+    "category": "event",
+    "label": "dating",
+    "question": "你第一次约会是什么时候呢?",
+    "similar": [
+      508,
+      788
+    ]
+  },
+  {
+    "id": 502,
+    "category": "event",
+    "label": "dating",
+    "question": "你最近一次约会的对象是你的现任伴侣吗?",
+    "similar": [
+      506,
+      508,
+      512
+    ]
+  },
+  {
+    "id": 503,
+    "category": "event",
+    "label": "dating",
+    "question": "你约会的时候会让对方付钱吗?",
+    "similar": [
+      515,
+      517
+    ]
+  },
+  {
+    "id": 504,
+    "category": "event",
+    "label": "dating",
+    "question": "你喜欢在哪里约会呢?",
+    "similar": [
+      505,
+      507,
+      511,
+      516,
+      518
+    ]
+  },
+  {
+    "id": 505,
+    "category": "event",
+    "label": "dating",
+    "question": "你喜欢约会吗?",
+    "similar": [
+      504,
+      517
+    ]
+  },
+  {
+    "id": 506,
+    "category": "event",
+    "label": "dating",
+    "question": "你有尝试过在一段时间内和不同的对象约会吗?",
+    "similar": [
+      502
+    ]
+  },
+  {
+    "id": 507,
+    "category": "event",
+    "label": "dating",
+    "question": "你喜欢在约会时干些什么呢?",
+    "similar": [
+      504,
+      510,
+      511,
+      516,
+      792
+    ]
+  },
+  {
+    "id": 508,
+    "category": "event",
+    "label": "dating",
+    "question": "你们多久约会一次呢?",
+    "similar": [
+      335,
+      501,
+      502,
+      518,
+      838,
+      854
+    ]
+  },
+  {
+    "id": 509,
+    "category": "event",
+    "label": "dating",
+    "question": "你觉得约会的重点在于吃饭还是出游呢？",
+    "similar": []
+  },
+  {
+    "id": 510,
+    "category": "event",
+    "label": "dating",
+    "question": "你觉得浪漫的约会应具备什么呢?",
+    "similar": [
+      507,
+      511,
+      516,
+      790,
+      792
+    ]
+  },
+  {
+    "id": 511,
+    "category": "event",
+    "label": "dating",
+    "question": "你印象最深刻的约会是什么?在哪里呢?",
+    "similar": [
+      504,
+      507,
+      510,
+      516,
+      792
+    ]
+  },
+  {
+    "id": 512,
+    "category": "event",
+    "label": "dating",
+    "question": "你有没有约会很尴尬的经历?",
+    "similar": [
+      502,
+      514,
+      518
+    ]
+  },
+  {
+    "id": 513,
+    "category": "event",
+    "label": "dating",
+    "question": "你约过很多人吗?",
+    "similar": [
+      517
+    ]
+  },
+  {
+    "id": 514,
+    "category": "event",
+    "label": "dating",
+    "question": "你有约会失败的经验吗?",
+    "similar": [
+      512,
+      517
+    ]
+  },
+  {
+    "id": 515,
+    "category": "event",
+    "label": "dating",
+    "question": "你觉得要怎么样才能约到对方?",
+    "similar": [
+      503,
+      516
+    ]
+  },
+  {
+    "id": 516,
+    "category": "event",
+    "label": "dating",
+    "question": "你觉得约会的意义是啥?",
+    "similar": [
+      504,
+      507,
+      510,
+      511,
+      515
+    ]
+  },
+  {
+    "id": 517,
+    "category": "event",
+    "label": "dating",
+    "question": "你约会都花很多钱吗?",
+    "similar": [
+      503,
+      505,
+      513,
+      514,
+      518
+    ]
+  },
+  {
+    "id": 518,
+    "category": "event",
+    "label": "dating",
+    "question": "你约会都跟几个人出去?",
+    "similar": [
+      504,
+      508,
+      512,
+      517
+    ]
+  },
+  {
+    "id": 519,
+    "category": "event",
+    "label": "dating",
+    "question": "如果你有另一半了还会跟其他人约会吗?",
+    "similar": []
+  },
+  {
+    "id": 520,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你喜欢唱歌吗?",
+    "similar": [
+      397,
+      522,
+      527,
+      528
+    ]
+  },
+  {
+    "id": 521,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你喜欢什么类型的歌曲?",
+    "similar": [
+      395,
+      408,
+      523,
+      529
+    ]
+  },
+  {
+    "id": 522,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你唱歌好听吗?",
+    "similar": [
+      397,
+      520,
+      527,
+      528
+    ]
+  },
+  {
+    "id": 523,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你最喜欢唱哪位歌手的歌?",
+    "similar": [
+      397,
+      456,
+      521,
+      529
+    ]
+  },
+  {
+    "id": 524,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你参加过歌唱比赛吗?",
+    "similar": []
+  },
+  {
+    "id": 525,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "有什么难忘的歌唱经历吗?",
+    "similar": []
+  },
+  {
+    "id": 526,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你会定期去KTV吗?",
+    "similar": []
+  },
+  {
+    "id": 527,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你喜欢唱演歌吗？",
+    "similar": [
+      397,
+      520,
+      522,
+      528
+    ]
+  },
+  {
+    "id": 528,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你常常去唱歌吗？",
+    "similar": [
+      520,
+      522,
+      527
+    ]
+  },
+  {
+    "id": 529,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你去唱歌必点的歌曲是什么?",
+    "similar": [
+      521,
+      523
+    ]
+  },
+  {
+    "id": 530,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "当有很多人在看你的时候你会唱的很害羞吗?",
+    "similar": []
+  },
+  {
+    "id": 531,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你是去唱歌还是去吃东西的?",
+    "similar": []
+  },
+  {
+    "id": 532,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你会点老歌吗?",
+    "similar": []
+  },
+  {
+    "id": 533,
+    "category": "event",
+    "label": "kara_okay",
+    "question": "你喜欢去KTV唱还是随口哼哼?",
+    "similar": []
+  },
+  {
+    "id": 534,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "你是素食主义者吗?",
+    "similar": [
+      538,
+      541
+    ]
+  },
+  {
+    "id": 535,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "你认为素食是一种好的生活方式吗?",
+    "similar": [
+      537
+    ]
+  },
+  {
+    "id": 536,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "你能忍受多长时间不吃肉?",
+    "similar": []
+  },
+  {
+    "id": 537,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "你认为做成肉味的素食还算素食吗?",
+    "similar": [
+      535
+    ]
+  },
+  {
+    "id": 538,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "你家里有谁是素食主义者吗?",
+    "similar": [
+      534,
+      539,
+      541
+    ]
+  },
+  {
+    "id": 539,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "你会因为家里有素食主义者而分桌吃饭吗?",
+    "similar": [
+      538
+    ]
+  },
+  {
+    "id": 540,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "吃荤菜里的蔬菜算不算吃素呢?",
+    "similar": []
+  },
+  {
+    "id": 541,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "你如何看待纯素食主义者?",
+    "similar": [
+      534,
+      538
+    ]
+  },
+  {
+    "id": 542,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "你是因为什么原因开始吃素呢?",
+    "similar": []
+  },
+  {
+    "id": 543,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "你有哪些喜欢的素食料理呢?",
+    "similar": []
+  },
+  {
+    "id": 544,
+    "category": "event",
+    "label": "vegetarian",
+    "question": "你只有初一十五才会吃素还是平常就都吃素呢?",
+    "similar": []
+  },
+  {
+    "id": 545,
+    "category": "place",
+    "label": "animals",
+    "question": "你喜欢动物吗?",
+    "similar": []
+  },
+  {
+    "id": 546,
+    "category": "place",
+    "label": "animals",
+    "question": "你最喜欢什么动物?",
+    "similar": []
+  },
+  {
+    "id": 547,
+    "category": "place",
+    "label": "animals",
+    "question": "你有养宠物吗?",
+    "similar": [
+      701
+    ]
+  },
+  {
+    "id": 548,
+    "category": "place",
+    "label": "animals",
+    "question": "你比较喜欢狗, 还是猫?",
+    "similar": []
+  },
+  {
+    "id": 549,
+    "category": "place",
+    "label": "animals",
+    "question": "你喜欢这张照片里面的动物吗?",
+    "similar": [
+      550
+    ]
+  },
+  {
+    "id": 550,
+    "category": "place",
+    "label": "animals",
+    "question": "你觉得这张照片里面的动物可爱吗?",
+    "similar": [
+      549
+    ]
+  },
+  {
+    "id": 551,
+    "category": "place",
+    "label": "animals",
+    "question": "为什么会拍这张照片呢?",
+    "similar": [
+      562,
+      569,
+      668,
+      672,
+      905
+    ]
+  },
+  {
+    "id": 552,
+    "category": "place",
+    "label": "animals",
+    "question": "平常会喜欢在手机或平板上看动物的影片吗?",
+    "similar": []
+  },
+  {
+    "id": 553,
+    "category": "place",
+    "label": "beach_coast",
+    "question": "你喜欢海吗?我心情不好的时候最喜欢去海边走走了",
+    "similar": [
+      184,
+      192,
+      198,
+      556
+    ]
+  },
+  {
+    "id": 554,
+    "category": "place",
+    "label": "beach_coast",
+    "question": "你有从事水上运动吗?比如说冲浪之类的?",
+    "similar": [
+      176
+    ]
+  },
+  {
+    "id": 555,
+    "category": "place",
+    "label": "beach_coast",
+    "question": "你看着大海的时候会想起什么吗?",
+    "similar": [
+      218
+    ]
+  },
+  {
+    "id": 556,
+    "category": "place",
+    "label": "beach_coast",
+    "question": "你常到海边玩吗?我好喜欢去海边听海浪的声音, 很舒服呢!",
+    "similar": [
+      192,
+      553
+    ]
+  },
+  {
+    "id": 557,
+    "category": "place",
+    "label": "beach_coast",
+    "question": "你去过最漂亮的海滩在哪里呢?",
+    "similar": []
+  },
+  {
+    "id": 558,
+    "category": "place",
+    "label": "building_indoor",
+    "question": "当时是跟谁一起在这里拍的啊?",
+    "similar": [
+      559,
+      565,
+      566
+    ]
+  },
+  {
+    "id": 559,
+    "category": "place",
+    "label": "building_indoor",
+    "question": "是什么时候在这里面拍的啊?",
+    "similar": [
+      558,
+      564,
+      565,
+      566,
+      887,
+      906,
+      926
+    ]
+  },
+  {
+    "id": 560,
+    "category": "place",
+    "label": "building_indoor",
+    "question": "谁帮你们拍这张照片啊?",
+    "similar": [
+      567
+    ]
+  },
+  {
+    "id": 561,
+    "category": "place",
+    "label": "building_indoor",
+    "question": "这是在哪个建筑物里面啊?",
+    "similar": [
+      669
+    ]
+  },
+  {
+    "id": 562,
+    "category": "place",
+    "label": "building_indoor",
+    "question": "为什么会在这里拍照呢?",
+    "similar": [
+      551,
+      569,
+      668,
+      672,
+      905
+    ]
+  },
+  {
+    "id": 563,
+    "category": "place",
+    "label": "building_indoor",
+    "question": "这里的环境舒服吗?",
+    "similar": []
+  },
+  {
+    "id": 564,
+    "category": "place",
+    "label": "building_outdoor",
+    "question": "还记得这是在哪里拍的吗?",
+    "similar": [
+      559,
+      566,
+      889,
+      906
+    ]
+  },
+  {
+    "id": 565,
+    "category": "place",
+    "label": "building_outdoor",
+    "question": "当时是跟谁在这里一起拍的呢?",
+    "similar": [
+      558,
+      559,
+      566,
+      670
+    ]
+  },
+  {
+    "id": 566,
+    "category": "place",
+    "label": "building_outdoor",
+    "question": "是什么时候在这边拍的呢?",
+    "similar": [
+      3,
+      558,
+      559,
+      564,
+      565,
+      887,
+      889,
+      906,
+      926
+    ]
+  },
+  {
+    "id": 567,
+    "category": "place",
+    "label": "building_outdoor",
+    "question": "是谁帮你们拍这张照片的呢?",
+    "similar": [
+      560,
+      879,
+      904
+    ]
+  },
+  {
+    "id": 568,
+    "category": "place",
+    "label": "building_outdoor",
+    "question": "这是在国外吗?还是在台湾?",
+    "similar": []
+  },
+  {
+    "id": 569,
+    "category": "place",
+    "label": "building_outdoor",
+    "question": "为什么会在这里拍照呢?",
+    "similar": [
+      551,
+      562,
+      668,
+      672,
+      905
+    ]
+  },
+  {
+    "id": 570,
+    "category": "place",
+    "label": "building_outdoor",
+    "question": "这栋建筑物有什么特色吗?",
+    "similar": [
+      669
+    ]
+  },
+  {
+    "id": 571,
+    "category": "place",
+    "label": "garden",
+    "question": "好多漂亮的花喔!你喜欢花吗?",
+    "similar": [
+      481,
+      573
+    ]
+  },
+  {
+    "id": 572,
+    "category": "place",
+    "label": "garden",
+    "question": "好漂亮的花喔, 你还记得是在哪里拍的吗?",
+    "similar": [
+      906
+    ]
+  },
+  {
+    "id": 573,
+    "category": "place",
+    "label": "garden",
+    "question": "你最喜欢什么花啊, 有在照片里吗?",
+    "similar": [
+      481,
+      571,
+      575
+    ]
+  },
+  {
+    "id": 574,
+    "category": "place",
+    "label": "garden",
+    "question": "我有时候也好想要有自己的花园喔! 你有种花的习惯吗?",
+    "similar": []
+  },
+  {
+    "id": 575,
+    "category": "place",
+    "label": "garden",
+    "question": "你最喜欢什么颜色的花?我觉得黄色的小花每次看都感觉很温暖",
+    "similar": [
+      481,
+      573
+    ]
+  },
+  {
+    "id": 576,
+    "category": "place",
+    "label": "garden",
+    "question": "你平常喜欢到其他地方的花园参观吗?",
+    "similar": []
+  },
+  {
+    "id": 577,
+    "category": "place",
+    "label": "garden",
+    "question": "这里有什么让你印象深刻的吗?",
+    "similar": []
+  },
+  {
+    "id": 578,
+    "category": "place",
+    "label": "general_place",
+    "question": "来这里走走有什么感想吗?",
+    "similar": []
+  },
+  {
+    "id": 579,
+    "category": "place",
+    "label": "general_place",
+    "question": "你是跟谁一起去照片中的地方玩呢?",
+    "similar": [
+      903
+    ]
+  },
+  {
+    "id": 580,
+    "category": "place",
+    "label": "general_place",
+    "question": "在这边玩得开心吗?",
+    "similar": [
+      864
+    ]
+  },
+  {
+    "id": 581,
+    "category": "place",
+    "label": "general_place",
+    "question": "这是跟家人一起去玩的吗?",
+    "similar": [
+      824
+    ]
+  },
+  {
+    "id": 582,
+    "category": "place",
+    "label": "general_place",
+    "question": "这是什么地方啊?",
+    "similar": [
+      173,
+      607,
+      610,
+      660,
+      666
+    ]
+  },
+  {
+    "id": 583,
+    "category": "place",
+    "label": "house_room",
+    "question": "这个屋子好漂亮, 为什么会来这里呢?",
+    "similar": []
+  },
+  {
+    "id": 584,
+    "category": "place",
+    "label": "house_room",
+    "question": "有谁住在这栋房子里吗?",
+    "similar": []
+  },
+  {
+    "id": 585,
+    "category": "place",
+    "label": "house_room",
+    "question": "这房子很有历史吗？是很久以前的房子吗？",
+    "similar": []
+  },
+  {
+    "id": 586,
+    "category": "place",
+    "label": "house_room",
+    "question": "这栋房子的建筑风格是你喜欢的吗?",
+    "similar": [
+      681
+    ]
+  },
+  {
+    "id": 587,
+    "category": "place",
+    "label": "house_room",
+    "question": "你喜欢什么样的房子呢?",
+    "similar": [
+      590
+    ]
+  },
+  {
+    "id": 588,
+    "category": "place",
+    "label": "house_room",
+    "question": "你最喜欢这个空间的哪一部分?",
+    "similar": []
+  },
+  {
+    "id": 589,
+    "category": "place",
+    "label": "house_room",
+    "question": "你觉得这个空间还有哪些地方可以改善的吗?",
+    "similar": []
+  },
+  {
+    "id": 590,
+    "category": "place",
+    "label": "house_room",
+    "question": "这个房子吸引你的地方是什么呢?",
+    "similar": [
+      587
+    ]
+  },
+  {
+    "id": 591,
+    "category": "place",
+    "label": "kids_park",
+    "question": "这个公园在你家附近吗?",
+    "similar": [
+      594,
+      598
+    ]
+  },
+  {
+    "id": 592,
+    "category": "place",
+    "label": "kids_park",
+    "question": "你以前有带小孩一起去公园吗?",
+    "similar": [
+      605
+    ]
+  },
+  {
+    "id": 593,
+    "category": "place",
+    "label": "kids_park",
+    "question": "你在拍这张公园照片的时候有发生什么有趣的事吗?",
+    "similar": [
+      601,
+      873
+    ]
+  },
+  {
+    "id": 594,
+    "category": "place",
+    "label": "kids_park",
+    "question": "你常常去这个公园吗?",
+    "similar": [
+      591,
+      598,
+      599,
+      600
+    ]
+  },
+  {
+    "id": 595,
+    "category": "place",
+    "label": "kids_park",
+    "question": "这间公园有什么设施呢?",
+    "similar": []
+  },
+  {
+    "id": 596,
+    "category": "place",
+    "label": "kids_park",
+    "question": "你常常去公园散步吗?早上或是傍晚呢",
+    "similar": [
+      600
+    ]
+  },
+  {
+    "id": 597,
+    "category": "place",
+    "label": "kids_park",
+    "question": "你最喜欢什么设施呢?",
+    "similar": [
+      699
+    ]
+  },
+  {
+    "id": 598,
+    "category": "place",
+    "label": "kids_park",
+    "question": "你喜欢这个公园吗?",
+    "similar": [
+      591,
+      594
+    ]
+  },
+  {
+    "id": 599,
+    "category": "place",
+    "label": "kids_park",
+    "question": "你都在公园从事运动呢?",
+    "similar": [
+      594,
+      600
+    ]
+  },
+  {
+    "id": 600,
+    "category": "place",
+    "label": "kids_park",
+    "question": "你平常都什么时候会去公园呢?",
+    "similar": [
+      594,
+      596,
+      599
+    ]
+  },
+  {
+    "id": 601,
+    "category": "place",
+    "label": "kids_park",
+    "question": "在这个公园有什么有趣的回忆呢?",
+    "similar": [
+      593
+    ]
+  },
+  {
+    "id": 602,
+    "category": "place",
+    "label": "kids_park",
+    "question": "你在公园里都会玩什么样的游戏呢？",
+    "similar": []
+  },
+  {
+    "id": 603,
+    "category": "place",
+    "label": "kids_park",
+    "question": "你曾经跟谁一起去这座公园呢?",
+    "similar": []
+  },
+  {
+    "id": 604,
+    "category": "place",
+    "label": "kids_park",
+    "question": "这座公园对你来说有什么特殊意义吗?",
+    "similar": []
+  },
+  {
+    "id": 605,
+    "category": "place",
+    "label": "kids_park",
+    "question": "公园里有小孩吗?他在做什么呢?",
+    "similar": [
+      592
+    ]
+  },
+  {
+    "id": 606,
+    "category": "place",
+    "label": "kids_park",
+    "question": "有人在遛狗吗?你喜欢什么品种的狗呢?",
+    "similar": []
+  },
+  {
+    "id": 607,
+    "category": "place",
+    "label": "mall_store",
+    "question": "这是什么店?",
+    "similar": [
+      582,
+      610,
+      666
+    ]
+  },
+  {
+    "id": 608,
+    "category": "place",
+    "label": "mall_store",
+    "question": "这是多久以前去的呢?",
+    "similar": []
+  },
+  {
+    "id": 609,
+    "category": "place",
+    "label": "mall_store",
+    "question": "你那时候买了什么呢?",
+    "similar": []
+  },
+  {
+    "id": 610,
+    "category": "place",
+    "label": "mall_store",
+    "question": "这是在哪里的店呢?",
+    "similar": [
+      582,
+      607,
+      660,
+      666
+    ]
+  },
+  {
+    "id": 611,
+    "category": "place",
+    "label": "mall_store",
+    "question": "你还记得你那时候大概花了多少吗?",
+    "similar": []
+  },
+  {
+    "id": 612,
+    "category": "place",
+    "label": "mall_store",
+    "question": "你平常喜欢逛街买东西吗?",
+    "similar": [
+      615
+    ]
+  },
+  {
+    "id": 613,
+    "category": "place",
+    "label": "mall_store",
+    "question": "你有买到什么好东西吗?",
+    "similar": []
+  },
+  {
+    "id": 614,
+    "category": "place",
+    "label": "mall_store",
+    "question": "有人帮你提东西吗?",
+    "similar": []
+  },
+  {
+    "id": 615,
+    "category": "place",
+    "label": "mall_store",
+    "question": "除了去逛街之外，你会在网路上买东西吗?",
+    "similar": [
+      612
+    ]
+  },
+  {
+    "id": 616,
+    "category": "place",
+    "label": "mall_store",
+    "question": "购物好像还蛮开心的！",
+    "similar": []
+  },
+  {
+    "id": 617,
+    "category": "place",
+    "label": "mall_store",
+    "question": "你最喜欢去什么样的店呢?",
+    "similar": [
+      181
+    ]
+  },
+  {
+    "id": 618,
+    "category": "place",
+    "label": "mountain",
+    "question": "你喜欢爬山吗?",
+    "similar": [
+      73,
+      74,
+      80,
+      88,
+      89,
+      91,
+      92,
+      94,
+      105,
+      107,
+      109,
+      112,
+      113,
+      121,
+      128,
+      622,
+      623,
+      625
+    ]
+  },
+  {
+    "id": 619,
+    "category": "place",
+    "label": "mountain",
+    "question": "你在这座山上有看到什么特别的东西吗?",
+    "similar": [
+      96
+    ]
+  },
+  {
+    "id": 620,
+    "category": "place",
+    "label": "mountain",
+    "question": "那时候是跟谁一起去爬山的呢?",
+    "similar": [
+      71,
+      77,
+      78
+    ]
+  },
+  {
+    "id": 621,
+    "category": "place",
+    "label": "mountain",
+    "question": "山上的空气新鲜吗?",
+    "similar": []
+  },
+  {
+    "id": 622,
+    "category": "place",
+    "label": "mountain",
+    "question": "现在还喜欢去爬山吗?",
+    "similar": [
+      69,
+      73,
+      74,
+      75,
+      80,
+      88,
+      89,
+      92,
+      105,
+      107,
+      109,
+      113,
+      128,
+      618,
+      623,
+      625
+    ]
+  },
+  {
+    "id": 623,
+    "category": "place",
+    "label": "mountain",
+    "question": "你还会想再去爬一次这座山吗?",
+    "similar": [
+      73,
+      74,
+      80,
+      88,
+      89,
+      91,
+      92,
+      95,
+      98,
+      105,
+      109,
+      111,
+      113,
+      119,
+      128,
+      618,
+      622,
+      625
+    ]
+  },
+  {
+    "id": 624,
+    "category": "place",
+    "label": "mountain",
+    "question": "山上有很多植物和树木吗?",
+    "similar": []
+  },
+  {
+    "id": 625,
+    "category": "place",
+    "label": "mountain",
+    "question": "你那时候爬这座山会很累吗?",
+    "similar": [
+      73,
+      74,
+      80,
+      86,
+      87,
+      88,
+      91,
+      92,
+      105,
+      109,
+      113,
+      618,
+      622,
+      623
+    ]
+  },
+  {
+    "id": 626,
+    "category": "place",
+    "label": "mountain",
+    "question": "你常常爬山吗?你有听说过台湾的百岳吗?",
+    "similar": [
+      80,
+      106
+    ]
+  },
+  {
+    "id": 627,
+    "category": "place",
+    "label": "mountain",
+    "question": "你爬山的时候有遇到很多人吗?他们都是人很好的朋友八！",
+    "similar": [
+      71,
+      122
+    ]
+  },
+  {
+    "id": 628,
+    "category": "place",
+    "label": "restaurant_table",
+    "question": "哇!在吃饭, 我看了好饿喔, 你们在吃什么啊?",
+    "similar": []
+  },
+  {
+    "id": 629,
+    "category": "place",
+    "label": "restaurant_table",
+    "question": "你那时候为什么会来这边吃?",
+    "similar": []
+  },
+  {
+    "id": 630,
+    "category": "place",
+    "label": "restaurant_table",
+    "question": "这里的食物好吃吗?",
+    "similar": [
+      2,
+      280
+    ]
+  },
+  {
+    "id": 631,
+    "category": "place",
+    "label": "restaurant_table",
+    "question": "那时候餐厅里人多吗?",
+    "similar": []
+  },
+  {
+    "id": 632,
+    "category": "place",
+    "label": "restaurant_table",
+    "question": "这间餐厅是卖什么菜的呢?",
+    "similar": [
+      636,
+      787
+    ]
+  },
+  {
+    "id": 633,
+    "category": "place",
+    "label": "restaurant_table",
+    "question": "这家餐厅好吃吗?你给多少分？",
+    "similar": [
+      635,
+      787
+    ]
+  },
+  {
+    "id": 634,
+    "category": "place",
+    "label": "restaurant_table",
+    "question": "这是吃早餐, 午餐, 还是晚餐呢?",
+    "similar": []
+  },
+  {
+    "id": 635,
+    "category": "place",
+    "label": "restaurant_table",
+    "question": "这家餐厅很贵吗?你还有印象吗?",
+    "similar": [
+      633,
+      787
+    ]
+  },
+  {
+    "id": 636,
+    "category": "place",
+    "label": "restaurant_table",
+    "question": "你最推荐这家餐厅的哪一道菜呢?",
+    "similar": [
+      632
+    ]
+  },
+  {
+    "id": 637,
+    "category": "place",
+    "label": "river_lake",
+    "question": "好美的湖泊喔, 你还记得这是在哪里吗?",
+    "similar": [
+      638,
+      640
+    ]
+  },
+  {
+    "id": 638,
+    "category": "place",
+    "label": "river_lake",
+    "question": "这个湖泊好美喔!怎么找到这个地方的啊?",
+    "similar": [
+      637,
+      640
+    ]
+  },
+  {
+    "id": 639,
+    "category": "place",
+    "label": "river_lake",
+    "question": "平静的水面让人觉得好舒服, 你也这样觉得吗?",
+    "similar": []
+  },
+  {
+    "id": 640,
+    "category": "place",
+    "label": "river_lake",
+    "question": "这个湖泊好美喔!这是在哪个季节拍的照片呢?",
+    "similar": [
+      637,
+      638
+    ]
+  },
+  {
+    "id": 641,
+    "category": "place",
+    "label": "river_lake",
+    "question": "这个地方好漂亮, 就跟做梦一样, 你还记得那天的事吗?",
+    "similar": []
+  },
+  {
+    "id": 642,
+    "category": "place",
+    "label": "river_lake",
+    "question": "这里的水面是什么颜色的呢?水清澈干净吗?",
+    "similar": []
+  },
+  {
+    "id": 643,
+    "category": "place",
+    "label": "river_lake",
+    "question": "可以把脚或手伸到水里面吗?",
+    "similar": []
+  },
+  {
+    "id": 644,
+    "category": "place",
+    "label": "river_lake",
+    "question": "水温怎么样呢?",
+    "similar": []
+  },
+  {
+    "id": 645,
+    "category": "place",
+    "label": "river_lake",
+    "question": "水里有很多鱼吗?",
+    "similar": [
+      179,
+      204
+    ]
+  },
+  {
+    "id": 646,
+    "category": "place",
+    "label": "snow",
+    "question": "哇下雪了，这里是哪里?",
+    "similar": []
+  },
+  {
+    "id": 647,
+    "category": "place",
+    "label": "snow",
+    "question": "看起来很冷耶!穿了很多衣服吧?",
+    "similar": []
+  },
+  {
+    "id": 648,
+    "category": "place",
+    "label": "snow",
+    "question": "这边可以滑雪吗?",
+    "similar": [
+      221,
+      225,
+      226,
+      227,
+      230,
+      242,
+      243,
+      250,
+      251,
+      252,
+      254,
+      255,
+      256,
+      271,
+      274,
+      278
+    ]
+  },
+  {
+    "id": 649,
+    "category": "place",
+    "label": "snow",
+    "question": "这是在别的国家吗?",
+    "similar": []
+  },
+  {
+    "id": 650,
+    "category": "place",
+    "label": "snow",
+    "question": "这是你第一次看到雪吗?",
+    "similar": [
+      242,
+      651
+    ]
+  },
+  {
+    "id": 651,
+    "category": "place",
+    "label": "snow",
+    "question": "你喜欢雪吗?",
+    "similar": [
+      221,
+      650,
+      653
+    ]
+  },
+  {
+    "id": 652,
+    "category": "place",
+    "label": "snow",
+    "question": "还记得有发生什么事吗?",
+    "similar": []
+  },
+  {
+    "id": 653,
+    "category": "place",
+    "label": "snow",
+    "question": "你有玩雪球吗?",
+    "similar": [
+      651
+    ]
+  },
+  {
+    "id": 654,
+    "category": "place",
+    "label": "snow",
+    "question": "有试着在雪地上画画吗?",
+    "similar": []
+  },
+  {
+    "id": 655,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "当时是去看什么比赛吗?",
+    "similar": [
+      659
+    ]
+  },
+  {
+    "id": 656,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "你喜欢看运动类型的比赛吗?",
+    "similar": [
+      657
+    ]
+  },
+  {
+    "id": 657,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "你喜欢运动吗?",
+    "similar": [
+      656
+    ]
+  },
+  {
+    "id": 658,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "还记得是哪队跟哪队吗?",
+    "similar": [
+      354
+    ]
+  },
+  {
+    "id": 659,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "当时是跟谁一起去看比赛的呢?",
+    "similar": [
+      655
+    ]
+  },
+  {
+    "id": 660,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "这是在哪里呢?",
+    "similar": [
+      173,
+      582,
+      610
+    ]
+  },
+  {
+    "id": 661,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "还记得这场比赛是谁赢了吗?",
+    "similar": [
+      355,
+      365
+    ]
+  },
+  {
+    "id": 662,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "这是什么时候的比赛呢?",
+    "similar": []
+  },
+  {
+    "id": 663,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "看比赛的时候应该很兴奋又激动吧?",
+    "similar": []
+  },
+  {
+    "id": 664,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "你常常去体育馆看比赛吗?",
+    "similar": [
+      360
+    ]
+  },
+  {
+    "id": 665,
+    "category": "place",
+    "label": "sport_arena",
+    "question": "当时去要买票吗?会很贵吗?",
+    "similar": []
+  },
+  {
+    "id": 666,
+    "category": "place",
+    "label": "streetview",
+    "question": "这是哪条街呢?",
+    "similar": [
+      582,
+      607,
+      610
+    ]
+  },
+  {
+    "id": 667,
+    "category": "place",
+    "label": "streetview",
+    "question": "你喜欢看街景吗?",
+    "similar": [
+      674
+    ]
+  },
+  {
+    "id": 668,
+    "category": "place",
+    "label": "streetview",
+    "question": "为什么想把这个地方拍下来呢？",
+    "similar": [
+      551,
+      562,
+      569,
+      672,
+      905
+    ]
+  },
+  {
+    "id": 669,
+    "category": "place",
+    "label": "streetview",
+    "question": "这边有什么特别的建筑物吗?",
+    "similar": [
+      561,
+      570
+    ]
+  },
+  {
+    "id": 670,
+    "category": "place",
+    "label": "streetview",
+    "question": "当时还有跟谁在一起呢?",
+    "similar": [
+      565
+    ]
+  },
+  {
+    "id": 671,
+    "category": "place",
+    "label": "streetview",
+    "question": "还会想回来这边的街道看看吗?",
+    "similar": []
+  },
+  {
+    "id": 672,
+    "category": "place",
+    "label": "streetview",
+    "question": "为什么会在这条街上拍照呢?",
+    "similar": [
+      551,
+      562,
+      569,
+      668,
+      905
+    ]
+  },
+  {
+    "id": 673,
+    "category": "place",
+    "label": "streetview",
+    "question": "当时街上人多吗?",
+    "similar": []
+  },
+  {
+    "id": 674,
+    "category": "place",
+    "label": "streetview",
+    "question": "你平常喜欢在街上拍照吗?",
+    "similar": [
+      667,
+      914
+    ]
+  },
+  {
+    "id": 675,
+    "category": "place",
+    "label": "temple",
+    "question": "你平常常去拜拜吗?",
+    "similar": []
+  },
+  {
+    "id": 676,
+    "category": "place",
+    "label": "temple",
+    "question": "你有什么宗教信仰吗?",
+    "similar": []
+  },
+  {
+    "id": 677,
+    "category": "place",
+    "label": "temple",
+    "question": "有很多人在这里吗?",
+    "similar": [
+      317
+    ]
+  },
+  {
+    "id": 678,
+    "category": "place",
+    "label": "temple",
+    "question": "那天是什么节日吗?",
+    "similar": [
+      826
+    ]
+  },
+  {
+    "id": 679,
+    "category": "place",
+    "label": "temple",
+    "question": "你还记得当时去庙里是想拜什么吗?",
+    "similar": [
+      688,
+      693
+    ]
+  },
+  {
+    "id": 680,
+    "category": "place",
+    "label": "temple",
+    "question": "你那时候是跟谁一起去拜拜的呢?",
+    "similar": [
+      178,
+      291
+    ]
+  },
+  {
+    "id": 681,
+    "category": "place",
+    "label": "temple",
+    "question": "你喜欢这座庙的建筑吗?",
+    "similar": [
+      586
+    ]
+  },
+  {
+    "id": 682,
+    "category": "place",
+    "label": "temple",
+    "question": "这间庙主要是拜谁的呢?",
+    "similar": [
+      698
+    ]
+  },
+  {
+    "id": 683,
+    "category": "place",
+    "label": "temple",
+    "question": "这间庙历史很悠久吗?",
+    "similar": []
+  },
+  {
+    "id": 684,
+    "category": "place",
+    "label": "temple",
+    "question": "你那时候去有去求签吗?",
+    "similar": []
+  },
+  {
+    "id": 685,
+    "category": "place",
+    "label": "temple",
+    "question": "这次去拜拜, 你有准备水果或是饼干吗?",
+    "similar": []
+  },
+  {
+    "id": 686,
+    "category": "place",
+    "label": "temple",
+    "question": "这座庙很大吗?",
+    "similar": []
+  },
+  {
+    "id": 687,
+    "category": "place",
+    "label": "temple",
+    "question": "你是虔诚的佛教徒吗?",
+    "similar": []
+  },
+  {
+    "id": 688,
+    "category": "place",
+    "label": "temple",
+    "question": "你会定期去寺庙礼拜吗?",
+    "similar": [
+      679,
+      690,
+      691,
+      693,
+      694,
+      746
+    ]
+  },
+  {
+    "id": 689,
+    "category": "place",
+    "label": "temple",
+    "question": "你最常去哪一个寺院?",
+    "similar": []
+  },
+  {
+    "id": 690,
+    "category": "place",
+    "label": "temple",
+    "question": "你在寺庙里做过早晚课吗?",
+    "similar": [
+      688
+    ]
+  },
+  {
+    "id": 691,
+    "category": "place",
+    "label": "temple",
+    "question": "你在寺庙里住宿过吗?",
+    "similar": [
+      688,
+      693
+    ]
+  },
+  {
+    "id": 692,
+    "category": "place",
+    "label": "temple",
+    "question": "你皈依过吗?",
+    "similar": []
+  },
+  {
+    "id": 693,
+    "category": "place",
+    "label": "temple",
+    "question": "你在寺庙里有过难忘的经历吗?",
+    "similar": [
+      679,
+      688,
+      691
+    ]
+  },
+  {
+    "id": 694,
+    "category": "place",
+    "label": "temple",
+    "question": "你多久会去一次庙",
+    "similar": [
+      688
+    ]
+  },
+  {
+    "id": 695,
+    "category": "place",
+    "label": "temple",
+    "question": "你会寺庙里的每个佛都拜吗？还是有什么固定的流程？",
+    "similar": []
+  },
+  {
+    "id": 696,
+    "category": "place",
+    "label": "temple",
+    "question": "过新年的时候你会来这里点灯吗？",
+    "similar": []
+  },
+  {
+    "id": 697,
+    "category": "place",
+    "label": "temple",
+    "question": "身为一个信徒你会怎么说服别人来这边参拜？",
+    "similar": []
+  },
+  {
+    "id": 698,
+    "category": "place",
+    "label": "temple",
+    "question": "这座寺庙祭祀的是哪一尊神明?",
+    "similar": [
+      682
+    ]
+  },
+  {
+    "id": 699,
+    "category": "place",
+    "label": "home",
+    "question": "你最喜欢在家里做什么呢?",
+    "similar": [
+      597,
+      704,
+      843,
+      872
+    ]
+  },
+  {
+    "id": 700,
+    "category": "place",
+    "label": "home",
+    "question": "你们家是住在公寓大厦里面，还是住在透天厝阿?",
+    "similar": []
+  },
+  {
+    "id": 701,
+    "category": "place",
+    "label": "home",
+    "question": "你们家有养宠物吗?",
+    "similar": [
+      547
+    ]
+  },
+  {
+    "id": 702,
+    "category": "place",
+    "label": "home",
+    "question": "当初家里的装潢风格是怎么决定的呢?",
+    "similar": []
+  },
+  {
+    "id": 703,
+    "category": "place",
+    "label": "home",
+    "question": "你们家有几个人啊?",
+    "similar": [
+      15,
+      823
+    ]
+  },
+  {
+    "id": 704,
+    "category": "place",
+    "label": "home",
+    "question": "你不开心的时候会在家里做什么呢?",
+    "similar": [
+      699
+    ]
+  },
+  {
+    "id": 705,
+    "category": "place",
+    "label": "home",
+    "question": "你通常都习惯怎么整理家里啊?",
+    "similar": []
+  },
+  {
+    "id": 706,
+    "category": "place",
+    "label": "home",
+    "question": "你们家都怎么分配谁做什么家事呢?",
+    "similar": []
+  },
+  {
+    "id": 707,
+    "category": "place",
+    "label": "home",
+    "question": "你们家会有蟑螂吗?",
+    "similar": []
+  },
+  {
+    "id": 708,
+    "category": "place",
+    "label": "home",
+    "question": "你从什么时候开始搬到这边住的呢?",
+    "similar": []
+  },
+  {
+    "id": 709,
+    "category": "place",
+    "label": "office",
+    "question": "你那时候担任的是什么职位?负责什么样的事情呢?",
+    "similar": []
+  },
+  {
+    "id": 710,
+    "category": "place",
+    "label": "office",
+    "question": "你这份工作做了多久啊?",
+    "similar": []
+  },
+  {
+    "id": 711,
+    "category": "place",
+    "label": "office",
+    "question": "那时候上班，你最讨厌的事是什么啊?",
+    "similar": []
+  },
+  {
+    "id": 712,
+    "category": "place",
+    "label": "office",
+    "question": "你上班的时候，有发现同事被欺负吗?",
+    "similar": []
+  },
+  {
+    "id": 713,
+    "category": "place",
+    "label": "office",
+    "question": "你那时候最有成就感的部份是什么?",
+    "similar": [
+      344
+    ]
+  },
+  {
+    "id": 714,
+    "category": "place",
+    "label": "office",
+    "question": "你是自己骑车或开车上班吗?每天几点起床呢?",
+    "similar": []
+  },
+  {
+    "id": 715,
+    "category": "place",
+    "label": "office",
+    "question": "你们公司的大家都穿什么样的衣服上班呢?",
+    "similar": []
+  },
+  {
+    "id": 716,
+    "category": "place",
+    "label": "office",
+    "question": "这份工作后来有升迁吗?",
+    "similar": []
+  },
+  {
+    "id": 717,
+    "category": "place",
+    "label": "office",
+    "question": "你们部门跟其他部门关系好吗?",
+    "similar": []
+  },
+  {
+    "id": 718,
+    "category": "place",
+    "label": "office",
+    "question": "这个公司的员工福利怎么样啊?",
+    "similar": []
+  },
+  {
+    "id": 719,
+    "category": "place",
+    "label": "office",
+    "question": "你喜欢你那时候的上司吗?",
+    "similar": []
+  },
+  {
+    "id": 720,
+    "category": "place",
+    "label": "office",
+    "question": "你当初是怎么进到这间公司的呢?",
+    "similar": []
+  },
+  {
+    "id": 721,
+    "category": "place",
+    "label": "office",
+    "question": "你那时候薪水怎么样，有加薪吗?",
+    "similar": []
+  },
+  {
+    "id": 722,
+    "category": "place",
+    "label": "school",
+    "question": "这是你什么时候的照片?",
+    "similar": [
+      3,
+      890,
+      900,
+      908,
+      926
+    ]
+  },
+  {
+    "id": 723,
+    "category": "place",
+    "label": "school",
+    "question": "你那时候最喜欢什么科目?能跟我说为什么吗?",
+    "similar": []
+  },
+  {
+    "id": 724,
+    "category": "place",
+    "label": "school",
+    "question": "你们之前班里有班对吗?",
+    "similar": [
+      47
+    ]
+  },
+  {
+    "id": 725,
+    "category": "place",
+    "label": "school",
+    "question": "你们班上有几个人?教室里会觉得挤吗?",
+    "similar": []
+  },
+  {
+    "id": 726,
+    "category": "place",
+    "label": "school",
+    "question": "你最喜欢哪一位老师?他都怎么教你们的?",
+    "similar": []
+  },
+  {
+    "id": 727,
+    "category": "place",
+    "label": "school",
+    "question": "在学校有考试超多或作业超多的时候吗?",
+    "similar": []
+  },
+  {
+    "id": 728,
+    "category": "place",
+    "label": "school",
+    "question": "你以前有跷课过吗?",
+    "similar": []
+  },
+  {
+    "id": 729,
+    "category": "place",
+    "label": "school",
+    "question": "学校里面你最常待在哪里?",
+    "similar": [
+      12
+    ]
+  },
+  {
+    "id": 730,
+    "category": "place",
+    "label": "school",
+    "question": "你们学校大吗？有很多栋建筑吗?",
+    "similar": []
+  },
+  {
+    "id": 731,
+    "category": "place",
+    "label": "school",
+    "question": "你毕业之后还有回学校吗？是去找谁吗?",
+    "similar": [
+      21,
+      34
+    ]
+  },
+  {
+    "id": 732,
+    "category": "place",
+    "label": "monuments",
+    "question": "这座古迹多老了呢？",
+    "similar": [
+      745
+    ]
+  },
+  {
+    "id": 733,
+    "category": "place",
+    "label": "monuments",
+    "question": "这是哪个年代建的阿？",
+    "similar": []
+  },
+  {
+    "id": 734,
+    "category": "place",
+    "label": "monuments",
+    "question": "背后有什么值得纪念的历史嘛？",
+    "similar": []
+  },
+  {
+    "id": 735,
+    "category": "place",
+    "label": "monuments",
+    "question": "可以跟我聊聊它的故事嘛？",
+    "similar": []
+  },
+  {
+    "id": 736,
+    "category": "place",
+    "label": "monuments",
+    "question": "你是什么时候去参观这座古迹的?",
+    "similar": [
+      738
+    ]
+  },
+  {
+    "id": 737,
+    "category": "place",
+    "label": "monuments",
+    "question": "你对这座古迹的第一印象是什么?",
+    "similar": []
+  },
+  {
+    "id": 738,
+    "category": "place",
+    "label": "monuments",
+    "question": "你为什么喜欢参观古迹呢?",
+    "similar": [
+      736,
+      739
+    ]
+  },
+  {
+    "id": 739,
+    "category": "place",
+    "label": "monuments",
+    "question": "古迹是你最喜欢的出游景点吗?",
+    "similar": [
+      738,
+      745
+    ]
+  },
+  {
+    "id": 740,
+    "category": "place",
+    "label": "monuments",
+    "question": "这座古迹跟你有什么渊源吗?",
+    "similar": []
+  },
+  {
+    "id": 741,
+    "category": "place",
+    "label": "monuments",
+    "question": "这座古迹跟其它古迹有什么不一样的地方吗?",
+    "similar": [
+      745
+    ]
+  },
+  {
+    "id": 742,
+    "category": "place",
+    "label": "monuments",
+    "question": "你对古迹很有研究吗?",
+    "similar": []
+  },
+  {
+    "id": 743,
+    "category": "place",
+    "label": "monuments",
+    "question": "这座古迹在你心中很特别吗?",
+    "similar": []
+  },
+  {
+    "id": 744,
+    "category": "place",
+    "label": "monuments",
+    "question": "除了这个古迹以外，你还有要去哪里玩或参观吗?",
+    "similar": []
+  },
+  {
+    "id": 745,
+    "category": "place",
+    "label": "monuments",
+    "question": "这个古迹有什么是值得一看的吗?",
+    "similar": [
+      732,
+      739,
+      741
+    ]
+  },
+  {
+    "id": 746,
+    "category": "place",
+    "label": "church",
+    "question": "你都会固定去教堂做礼拜吗?",
+    "similar": [
+      688
+    ]
+  },
+  {
+    "id": 747,
+    "category": "place",
+    "label": "church",
+    "question": "这是哪一种宗教呢?基督教还是天主教?",
+    "similar": []
+  },
+  {
+    "id": 748,
+    "category": "place",
+    "label": "church",
+    "question": "你是虔诚的信徒吗?",
+    "similar": []
+  },
+  {
+    "id": 749,
+    "category": "place",
+    "label": "church",
+    "question": "你当时是去告解的吗?你跟神父说了什么?",
+    "similar": []
+  },
+  {
+    "id": 750,
+    "category": "place",
+    "label": "church",
+    "question": "这座教堂有什么值得纪念的历史故事吗?",
+    "similar": [
+      751
+    ]
+  },
+  {
+    "id": 751,
+    "category": "place",
+    "label": "church",
+    "question": "你在这座教堂里有发生什么值得纪念的事吗?",
+    "similar": [
+      750
+    ]
+  },
+  {
+    "id": 752,
+    "category": "place",
+    "label": "church",
+    "question": "教堂的室内设计是哪一种风格的呢?",
+    "similar": []
+  },
+  {
+    "id": 753,
+    "category": "place",
+    "label": "church",
+    "question": "这座教堂在哪里呢?",
+    "similar": []
+  },
+  {
+    "id": 754,
+    "category": "place",
+    "label": "church",
+    "question": "你有听说过欧洲教堂曾经发行赎罪卷的由来吗?",
+    "similar": []
+  },
+  {
+    "id": 755,
+    "category": "place",
+    "label": "church",
+    "question": "这座教堂你常常来吗？",
+    "similar": []
+  },
+  {
+    "id": 756,
+    "category": "place",
+    "label": "church",
+    "question": "对你而言教堂有感到放松、心灵解脱吗？",
+    "similar": []
+  },
+  {
+    "id": 757,
+    "category": "place",
+    "label": "Spirit Bone Tower",
+    "question": "你是去祭拜亲人的吗?",
+    "similar": []
+  },
+  {
+    "id": 758,
+    "category": "place",
+    "label": "Spirit Bone Tower",
+    "question": "灵骨塔外的风景好吗?",
+    "similar": []
+  },
+  {
+    "id": 759,
+    "category": "place",
+    "label": "Spirit Bone Tower",
+    "question": "这里的风水好吗?",
+    "similar": []
+  },
+  {
+    "id": 760,
+    "category": "place",
+    "label": "Spirit Bone Tower",
+    "question": "这里的塔位价格昂贵吗?",
+    "similar": []
+  },
+  {
+    "id": 761,
+    "category": "place",
+    "label": "Spirit Bone Tower",
+    "question": "这个灵骨塔要多少钱？",
+    "similar": []
+  },
+  {
+    "id": 762,
+    "category": "place",
+    "label": "Spirit Bone Tower",
+    "question": "在此处沉睡的人有什么样的身份吗？",
+    "similar": []
+  },
+  {
+    "id": 763,
+    "category": "place",
+    "label": "Spirit Bone Tower",
+    "question": "你会希望自己过世之后也放在这里吗？",
+    "similar": []
+  },
+  {
+    "id": 764,
+    "category": "place",
+    "label": "station",
+    "question": "你是要去旅游还是工作呢?",
+    "similar": []
+  },
+  {
+    "id": 765,
+    "category": "place",
+    "label": "station",
+    "question": "你那个时候是要去哪个县市呢?",
+    "similar": []
+  },
+  {
+    "id": 766,
+    "category": "place",
+    "label": "station",
+    "question": "在搭车的时候有遇到什么有趣的事吗?",
+    "similar": []
+  },
+  {
+    "id": 767,
+    "category": "place",
+    "label": "station",
+    "question": "哪一次在车站的送行让你印象最深刻呢?",
+    "similar": []
+  },
+  {
+    "id": 768,
+    "category": "place",
+    "label": "station",
+    "question": "你是为了什么才来车站的呢？",
+    "similar": []
+  },
+  {
+    "id": 769,
+    "category": "place",
+    "label": "station",
+    "question": "这个车站有什么特别的地方吗?",
+    "similar": []
+  },
+  {
+    "id": 770,
+    "category": "place",
+    "label": "station",
+    "question": "以前车站不普及的时候都是搭什么交通工具啊?",
+    "similar": []
+  },
+  {
+    "id": 771,
+    "category": "place",
+    "label": "station",
+    "question": "你搭车时习惯在车上做什么事呢?",
+    "similar": []
+  },
+  {
+    "id": 772,
+    "category": "place",
+    "label": "station",
+    "question": "有没有哪次搭车经验让你印象深刻?",
+    "similar": []
+  },
+  {
+    "id": 773,
+    "category": "place",
+    "label": "station",
+    "question": "你喜欢什么样的乘客坐你旁边?",
+    "similar": []
+  },
+  {
+    "id": 774,
+    "category": "place",
+    "label": "station",
+    "question": "你有遇过怪怪的乘客吗?",
+    "similar": []
+  },
+  {
+    "id": 775,
+    "category": "place",
+    "label": "station",
+    "question": "你有在车站迷路过吗?",
+    "similar": []
+  },
+  {
+    "id": 776,
+    "category": "place",
+    "label": "airport",
+    "question": "你觉得机场的服务好吗?",
+    "similar": [
+      785
+    ]
+  },
+  {
+    "id": 777,
+    "category": "place",
+    "label": "airport",
+    "question": "你有在免税店消费的习惯吗?",
+    "similar": []
+  },
+  {
+    "id": 778,
+    "category": "place",
+    "label": "airport",
+    "question": "你是为了什么去机场呢?",
+    "similar": [
+      779
+    ]
+  },
+  {
+    "id": 779,
+    "category": "place",
+    "label": "airport",
+    "question": "你常去哪一个机场呢?",
+    "similar": [
+      778,
+      784
+    ]
+  },
+  {
+    "id": 780,
+    "category": "place",
+    "label": "airport",
+    "question": "你搭飞机时都在想什么啊?",
+    "similar": []
+  },
+  {
+    "id": 781,
+    "category": "place",
+    "label": "airport",
+    "question": "你能忍受登机口离得太远吗?",
+    "similar": []
+  },
+  {
+    "id": 782,
+    "category": "place",
+    "label": "airport",
+    "question": "当时是要去哪里呢？还是要为别人送行？",
+    "similar": []
+  },
+  {
+    "id": 783,
+    "category": "place",
+    "label": "airport",
+    "question": "你是要出国玩吗?哪一国呢?",
+    "similar": [
+      220
+    ]
+  },
+  {
+    "id": 784,
+    "category": "place",
+    "label": "airport",
+    "question": "你常常去机场吗?",
+    "similar": [
+      779,
+      785
+    ]
+  },
+  {
+    "id": 785,
+    "category": "place",
+    "label": "airport",
+    "question": "你是在机场工作吗?",
+    "similar": [
+      776,
+      784
+    ]
+  },
+  {
+    "id": 786,
+    "category": "place",
+    "label": "airport",
+    "question": "你不觉得机场人很多很挤吗?",
+    "similar": []
+  },
+  {
+    "id": 787,
+    "category": "place",
+    "label": "airport",
+    "question": "你觉得这边的餐厅怎么样呢?",
+    "similar": [
+      632,
+      633,
+      635
+    ]
+  },
+  {
+    "id": 788,
+    "category": "relationship",
+    "label": "couple",
+    "question": "这张照片看起来是在约会呢!你能分享你们第一次约会发生什么事吗?",
+    "similar": [
+      501
+    ]
+  },
+  {
+    "id": 789,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你可以和我分享他向你告白或是你向他告白的故事吗?",
+    "similar": []
+  },
+  {
+    "id": 790,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你觉得他对你做过最浪漫的事情是什么呢?",
+    "similar": [
+      510,
+      792
+    ]
+  },
+  {
+    "id": 791,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你们为什么会到这里玩呢?是什么纪念日吗?",
+    "similar": []
+  },
+  {
+    "id": 792,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你觉得这场约会你印象最深刻的事情是什么呢?",
+    "similar": [
+      507,
+      510,
+      511,
+      790
+    ]
+  },
+  {
+    "id": 793,
+    "category": "relationship",
+    "label": "couple",
+    "question": "好幸福喔, 你们交往多久啊?",
+    "similar": []
+  },
+  {
+    "id": 794,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你们当初怎么认识的啊?",
+    "similar": [
+      808,
+      851,
+      870
+    ]
+  },
+  {
+    "id": 795,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你觉得他对你好吗?",
+    "similar": [
+      814,
+      962
+    ]
+  },
+  {
+    "id": 796,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你们感情好好喔, 你们平常都怎么维持感情的啊?",
+    "similar": [
+      803
+    ]
+  },
+  {
+    "id": 797,
+    "category": "relationship",
+    "label": "couple",
+    "question": "可以和我分享你们的浪漫故事吗?",
+    "similar": [
+      809
+    ]
+  },
+  {
+    "id": 798,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你们怎么在一起的呀?",
+    "similar": [
+      882
+    ]
+  },
+  {
+    "id": 799,
+    "category": "relationship",
+    "label": "couple",
+    "question": "他对你做过什么让你感动的事吗?",
+    "similar": [
+      957
+    ]
+  },
+  {
+    "id": 800,
+    "category": "relationship",
+    "label": "couple",
+    "question": "他哪一点最吸引你?",
+    "similar": []
+  },
+  {
+    "id": 801,
+    "category": "relationship",
+    "label": "couple",
+    "question": "最初是谁向谁告白的呢?",
+    "similar": []
+  },
+  {
+    "id": 802,
+    "category": "relationship",
+    "label": "couple",
+    "question": "照片中的你们好甜蜜, 你们相差几岁?",
+    "similar": [
+      85
+    ]
+  },
+  {
+    "id": 803,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你们的感情真好, 你们是怎么认识的?",
+    "similar": [
+      796,
+      851
+    ]
+  },
+  {
+    "id": 804,
+    "category": "relationship",
+    "label": "couple",
+    "question": "看起来真幸福!是什么情况下拍照的呢?",
+    "similar": []
+  },
+  {
+    "id": 805,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你还记得他第一次送你的礼物是什么吗?",
+    "similar": []
+  },
+  {
+    "id": 806,
+    "category": "relationship",
+    "label": "couple",
+    "question": "要不要说说你对他印象最深刻的故事?",
+    "similar": []
+  },
+  {
+    "id": 807,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你们很登对耶?在一起这么久还感情好有什么诀窍吗?",
+    "similar": []
+  },
+  {
+    "id": 808,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你们是什么时候认识的?",
+    "similar": [
+      794,
+      852,
+      871,
+      950
+    ]
+  },
+  {
+    "id": 809,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你们结婚了吗?可以和我们分享你们的爱情故事吗",
+    "similar": [
+      797
+    ]
+  },
+  {
+    "id": 810,
+    "category": "relationship",
+    "label": "couple",
+    "question": "这张照片拍的当天你们还一起做了哪些活动呢?",
+    "similar": []
+  },
+  {
+    "id": 811,
+    "category": "relationship",
+    "label": "couple",
+    "question": "这是结婚前, 还是结婚后的出游?",
+    "similar": []
+  },
+  {
+    "id": 812,
+    "category": "relationship",
+    "label": "couple",
+    "question": "这是你们几岁拍的啊?",
+    "similar": [
+      85,
+      908
+    ]
+  },
+  {
+    "id": 813,
+    "category": "relationship",
+    "label": "couple",
+    "question": "可以和我分享你们最幸福的时刻吗?",
+    "similar": []
+  },
+  {
+    "id": 814,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你觉得你跟他的个性很相像吗？",
+    "similar": [
+      795
+    ]
+  },
+  {
+    "id": 815,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你们这趟出门, 有吵架吗?",
+    "similar": [
+      841
+    ]
+  },
+  {
+    "id": 816,
+    "category": "relationship",
+    "label": "couple",
+    "question": "你们如果吵架了, 都是怎么解决的呢?",
+    "similar": []
+  },
+  {
+    "id": 817,
+    "category": "relationship",
+    "label": "couple",
+    "question": "当初在一起, 家人们有反对你们吗?",
+    "similar": []
+  },
+  {
+    "id": 818,
+    "category": "relationship",
+    "label": "family",
+    "question": "这看起来是家庭聚会呢!你记得这是什么特别的节日吗?",
+    "similar": []
+  },
+  {
+    "id": 819,
+    "category": "relationship",
+    "label": "family",
+    "question": "你能和我分享你最喜欢和最不喜欢跟家人一起做的事情吗?",
+    "similar": [
+      843,
+      850
+    ]
+  },
+  {
+    "id": 820,
+    "category": "relationship",
+    "label": "family",
+    "question": "这趟旅程中, 你有和家人有什么难忘的回忆可以跟我分享吗?",
+    "similar": []
+  },
+  {
+    "id": 821,
+    "category": "relationship",
+    "label": "family",
+    "question": "这是什么时候的家庭照片?你们最近还有家庭聚会吗?",
+    "similar": []
+  },
+  {
+    "id": 822,
+    "category": "relationship",
+    "label": "family",
+    "question": "你和家人们的关系好吗?",
+    "similar": [
+      834
+    ]
+  },
+  {
+    "id": 823,
+    "category": "relationship",
+    "label": "family",
+    "question": "你家总共有几个人啊?",
+    "similar": [
+      15,
+      703
+    ]
+  },
+  {
+    "id": 824,
+    "category": "relationship",
+    "label": "family",
+    "question": "平常会和家人一起出去玩吗",
+    "similar": [
+      413,
+      581,
+      834
+    ]
+  },
+  {
+    "id": 825,
+    "category": "relationship",
+    "label": "family",
+    "question": "你们家看起来感情真好!你们平常都聊什么?",
+    "similar": [
+      858
+    ]
+  },
+  {
+    "id": 826,
+    "category": "relationship",
+    "label": "family",
+    "question": "这是在庆祝什么特殊的节日吗?",
+    "similar": [
+      678
+    ]
+  },
+  {
+    "id": 827,
+    "category": "relationship",
+    "label": "family",
+    "question": "你们常常出游吗?我想听你说你们发生的有趣的事情!",
+    "similar": []
+  },
+  {
+    "id": 828,
+    "category": "relationship",
+    "label": "family",
+    "question": "你们有家庭聚会吗?都做些什么呢？",
+    "similar": [
+      829
+    ]
+  },
+  {
+    "id": 829,
+    "category": "relationship",
+    "label": "family",
+    "question": "你们家庭聚会会一起去吃大餐吗?",
+    "similar": [
+      132,
+      828
+    ]
+  },
+  {
+    "id": 830,
+    "category": "relationship",
+    "label": "family",
+    "question": "家庭照呢!当天的天气好吗?",
+    "similar": [
+      116,
+      177
+    ]
+  },
+  {
+    "id": 831,
+    "category": "relationship",
+    "label": "family",
+    "question": "你们家人之中谁是最年长的人呢",
+    "similar": []
+  },
+  {
+    "id": 832,
+    "category": "relationship",
+    "label": "family",
+    "question": "你们家感情也太好了吧～下次要去哪里玩呢?",
+    "similar": [
+      235
+    ]
+  },
+  {
+    "id": 833,
+    "category": "relationship",
+    "label": "family",
+    "question": "你有几个兄弟姐妹?你是第几个呢?",
+    "similar": []
+  },
+  {
+    "id": 834,
+    "category": "relationship",
+    "label": "family",
+    "question": "你和家人会常常这样聚在一起吗?",
+    "similar": [
+      16,
+      822,
+      824
+    ]
+  },
+  {
+    "id": 835,
+    "category": "relationship",
+    "label": "family",
+    "question": "那次出游好玩吗?",
+    "similar": [
+      7
+    ]
+  },
+  {
+    "id": 836,
+    "category": "relationship",
+    "label": "family",
+    "question": "可以多跟我聊聊你跟你家人印象深刻的事吗?",
+    "similar": []
+  },
+  {
+    "id": 837,
+    "category": "relationship",
+    "label": "family",
+    "question": "你们家上一次出去玩是什么时候呢?",
+    "similar": []
+  },
+  {
+    "id": 838,
+    "category": "relationship",
+    "label": "family",
+    "question": "你们多久见一次面?",
+    "similar": [
+      508,
+      852,
+      854,
+      871
+    ]
+  },
+  {
+    "id": 839,
+    "category": "relationship",
+    "label": "family",
+    "question": "看到这张照片, 你会想打电话给他们吗?",
+    "similar": [
+      868
+    ]
+  },
+  {
+    "id": 840,
+    "category": "relationship",
+    "label": "family",
+    "question": "你第一眼看到这张照片, 会想到什么?",
+    "similar": [
+      4,
+      869,
+      883,
+      919,
+      927
+    ]
+  },
+  {
+    "id": 841,
+    "category": "relationship",
+    "label": "family",
+    "question": "这趟跟家人出游, 你们有吵架吗?",
+    "similar": [
+      815
+    ]
+  },
+  {
+    "id": 842,
+    "category": "relationship",
+    "label": "family",
+    "question": "你在你们家, 通常是个怎么样的存在呢?",
+    "similar": []
+  },
+  {
+    "id": 843,
+    "category": "relationship",
+    "label": "family",
+    "question": "你最喜欢跟家人一起做什么?",
+    "similar": [
+      699,
+      819,
+      872
+    ]
+  },
+  {
+    "id": 844,
+    "category": "relationship",
+    "label": "family",
+    "question": "你们家每年会固定聚一聚吗",
+    "similar": [
+      853
+    ]
+  },
+  {
+    "id": 845,
+    "category": "relationship",
+    "label": "family",
+    "question": "你们家有自己特殊的行事风格或习惯吗?",
+    "similar": []
+  },
+  {
+    "id": 846,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你和这些朋友还有联络吗?",
+    "similar": [
+      28,
+      921
+    ]
+  },
+  {
+    "id": 847,
+    "category": "relationship",
+    "label": "friends",
+    "question": "那次朋友聚会你们都聊了些什么?",
+    "similar": []
+  },
+  {
+    "id": 848,
+    "category": "relationship",
+    "label": "friends",
+    "question": "这些朋友里面你跟谁最好呢?",
+    "similar": [
+      54
+    ]
+  },
+  {
+    "id": 849,
+    "category": "relationship",
+    "label": "friends",
+    "question": "这些朋友之间最难忘的一件事情是什么?",
+    "similar": []
+  },
+  {
+    "id": 850,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你最怀念你们一起做的哪件事?可以和我分享吗?",
+    "similar": [
+      819,
+      872
+    ]
+  },
+  {
+    "id": 851,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你们看起来很好耶, 你们怎么认识的啊?",
+    "similar": [
+      794,
+      803
+    ]
+  },
+  {
+    "id": 852,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你们认识多久了?",
+    "similar": [
+      808,
+      838,
+      860,
+      871,
+      950
+    ]
+  },
+  {
+    "id": 853,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你们每年都会约出来聚吗?",
+    "similar": [
+      844
+    ]
+  },
+  {
+    "id": 854,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你们都会多久出来聚会一次?",
+    "similar": [
+      508,
+      838
+    ]
+  },
+  {
+    "id": 855,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你们看起来很要好, 你们变熟的契机是什么呀?",
+    "similar": []
+  },
+  {
+    "id": 856,
+    "category": "relationship",
+    "label": "friends",
+    "question": "这是同学会吗? ",
+    "similar": []
+  },
+  {
+    "id": 857,
+    "category": "relationship",
+    "label": "friends",
+    "question": "这些朋友最近过得还好吗?",
+    "similar": []
+  },
+  {
+    "id": 858,
+    "category": "relationship",
+    "label": "friends",
+    "question": "大家看起来都好开心, 记得你们都聊了些什么吗?",
+    "similar": [
+      825
+    ]
+  },
+  {
+    "id": 859,
+    "category": "relationship",
+    "label": "friends",
+    "question": "还记得你们怎么发起这个聚会的吗?",
+    "similar": []
+  },
+  {
+    "id": 860,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你和你的朋友们认识多久了?",
+    "similar": [
+      852,
+      871
+    ]
+  },
+  {
+    "id": 861,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你们有一起做过什么疯狂的事吗?",
+    "similar": []
+  },
+  {
+    "id": 862,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你们看起来感情真好, 最近还有再一起出去聚一聚吗?",
+    "similar": []
+  },
+  {
+    "id": 863,
+    "category": "relationship",
+    "label": "friends",
+    "question": "可以和我介绍照片中的其中一个人吗?",
+    "similar": [
+      897
+    ]
+  },
+  {
+    "id": 864,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你们很常这样出去玩吗?",
+    "similar": [
+      580
+    ]
+  },
+  {
+    "id": 865,
+    "category": "relationship",
+    "label": "friends",
+    "question": "最近有再约出去吗?",
+    "similar": []
+  },
+  {
+    "id": 866,
+    "category": "relationship",
+    "label": "friends",
+    "question": "这次聚会你们玩得开心吗",
+    "similar": []
+  },
+  {
+    "id": 867,
+    "category": "relationship",
+    "label": "friends",
+    "question": "这些是你在哪里的朋友啊?",
+    "similar": []
+  },
+  {
+    "id": 868,
+    "category": "relationship",
+    "label": "friends",
+    "question": "看到这张照片, 你会想打电话去问候他们吗?",
+    "similar": [
+      839
+    ]
+  },
+  {
+    "id": 869,
+    "category": "relationship",
+    "label": "friends",
+    "question": "你第一眼看到这张照片, 会想到什么?",
+    "similar": [
+      4,
+      840,
+      883,
+      919,
+      927
+    ]
+  },
+  {
+    "id": 870,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你们第一次见面的时候是怎么认识的啊?",
+    "similar": [
+      794
+    ]
+  },
+  {
+    "id": 871,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你们大概认识多久了呢?",
+    "similar": [
+      808,
+      838,
+      852,
+      860
+    ]
+  },
+  {
+    "id": 872,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你最怀念跟他们一起做什么事情啊?",
+    "similar": [
+      50,
+      699,
+      843,
+      850,
+      882
+    ]
+  },
+  {
+    "id": 873,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你可以多跟我说说这张照片里面有趣的事情吗?",
+    "similar": [
+      593,
+      896,
+      897
+    ]
+  },
+  {
+    "id": 874,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "会不会想念在一起的时光啊?",
+    "similar": []
+  },
+  {
+    "id": 875,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "还记得谁决定要一起合照的啊?",
+    "similar": []
+  },
+  {
+    "id": 876,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "除了照片里这些人, 还有谁跟你们在一起吗?",
+    "similar": [
+      903
+    ]
+  },
+  {
+    "id": 877,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "还会想跟这些人再聚在一起吗?",
+    "similar": []
+  },
+  {
+    "id": 878,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "这张照片的人们, 现在去了哪里?",
+    "similar": []
+  },
+  {
+    "id": 879,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "这照片里面有谁阿?",
+    "similar": [
+      42,
+      567,
+      900
+    ]
+  },
+  {
+    "id": 880,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你们除了来这里, 还有去其他地方吗?",
+    "similar": [
+      209
+    ]
+  },
+  {
+    "id": 881,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "当天有什么对话特别有印象吗?",
+    "similar": []
+  },
+  {
+    "id": 882,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你们平常在一起都做些什么事阿?",
+    "similar": [
+      798,
+      872
+    ]
+  },
+  {
+    "id": 883,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "看到这张照片时你想到哪些事情?",
+    "similar": [
+      4,
+      840,
+      869,
+      919,
+      927
+    ]
+  },
+  {
+    "id": 884,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "怀念这张照片的时候吗?",
+    "similar": [
+      3,
+      925,
+      926
+    ]
+  },
+  {
+    "id": 885,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你们当天有聊了什么特别的事情吗?",
+    "similar": []
+  },
+  {
+    "id": 886,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你们除了这次见面, 以前也常聚会吗?",
+    "similar": [
+      893
+    ]
+  },
+  {
+    "id": 887,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "这什么时候拍的啊?",
+    "similar": [
+      559,
+      566,
+      889,
+      906,
+      926
+    ]
+  },
+  {
+    "id": 888,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "这张照片对你有什么特殊意义吗?",
+    "similar": [
+      917
+    ]
+  },
+  {
+    "id": 889,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "这是出去玩的时候拍的吗?",
+    "similar": [
+      564,
+      566,
+      887
+    ]
+  },
+  {
+    "id": 890,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "这是你什么时候的照片呀?",
+    "similar": [
+      3,
+      722,
+      908,
+      926
+    ]
+  },
+  {
+    "id": 891,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "大合照喔? 拍照技术不错欸",
+    "similar": []
+  },
+  {
+    "id": 892,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "里面有你喜欢的人吗?",
+    "similar": [
+      449
+    ]
+  },
+  {
+    "id": 893,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你常常参加人很多的聚会吗?",
+    "similar": [
+      886
+    ]
+  },
+  {
+    "id": 894,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "这次聚会有没有发生一些有趣的事呢?",
+    "similar": []
+  },
+  {
+    "id": 895,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你们这趟旅行有发生什么有趣的事情?",
+    "similar": []
+  },
+  {
+    "id": 896,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你可以和我分享关于这张照片有趣的事情吗?",
+    "similar": [
+      873,
+      897
+    ]
+  },
+  {
+    "id": 897,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "可以跟我说一下这张照片的故事吗?",
+    "similar": [
+      863,
+      873,
+      896
+    ]
+  },
+  {
+    "id": 898,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "这是什么类型的聚会啊?",
+    "similar": []
+  },
+  {
+    "id": 899,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "这是什么活动呀?",
+    "similar": []
+  },
+  {
+    "id": 900,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你是照片里的哪一个?",
+    "similar": [
+      42,
+      722,
+      879
+    ]
+  },
+  {
+    "id": 901,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "这是活动的团体照吗?",
+    "similar": []
+  },
+  {
+    "id": 902,
+    "category": "relationship",
+    "label": "general_relationship",
+    "question": "你们很常一起旅行吗?",
+    "similar": []
+  },
+  {
+    "id": 903,
+    "category": "relationship",
+    "label": "solo",
+    "question": "照片是你的独照呢!那时候还有谁跟你一起吗?",
+    "similar": [
+      579,
+      876
+    ]
+  },
+  {
+    "id": 904,
+    "category": "relationship",
+    "label": "solo",
+    "question": "这张照片是沙龙照吗! 是朋友帮你拍的吗?",
+    "similar": [
+      567
+    ]
+  },
+  {
+    "id": 905,
+    "category": "relationship",
+    "label": "solo",
+    "question": "为什么在这里拍独照呢?",
+    "similar": [
+      551,
+      562,
+      569,
+      668,
+      672
+    ]
+  },
+  {
+    "id": 906,
+    "category": "relationship",
+    "label": "solo",
+    "question": "这是在哪里拍的啊?感觉好特别喔",
+    "similar": [
+      166,
+      292,
+      559,
+      564,
+      566,
+      572,
+      887
+    ]
+  },
+  {
+    "id": 907,
+    "category": "relationship",
+    "label": "solo",
+    "question": "帮你拍照的是谁呢?他的拍照技术不错",
+    "similar": []
+  },
+  {
+    "id": 908,
+    "category": "relationship",
+    "label": "solo",
+    "question": "这是你几岁时拍的照片?",
+    "similar": [
+      85,
+      722,
+      812,
+      890
+    ]
+  },
+  {
+    "id": 909,
+    "category": "relationship",
+    "label": "solo",
+    "question": "有遇到有趣的人吗?",
+    "similar": []
+  },
+  {
+    "id": 910,
+    "category": "relationship",
+    "label": "solo",
+    "question": "是去哪里玩呀?",
+    "similar": []
+  },
+  {
+    "id": 911,
+    "category": "relationship",
+    "label": "solo",
+    "question": "你最喜欢照片的哪里?",
+    "similar": []
+  },
+  {
+    "id": 912,
+    "category": "relationship",
+    "label": "solo",
+    "question": "当天有发生什么好笑的事吗?",
+    "similar": [
+      411
+    ]
+  },
+  {
+    "id": 913,
+    "category": "relationship",
+    "label": "solo",
+    "question": "这是你最喜欢的衣服吗?",
+    "similar": []
+  },
+  {
+    "id": 914,
+    "category": "relationship",
+    "label": "solo",
+    "question": "你拍照的时候很会摆姿势吗",
+    "similar": [
+      674,
+      916
+    ]
+  },
+  {
+    "id": 915,
+    "category": "relationship",
+    "label": "solo",
+    "question": "你会怕面对镜头吗?我每次拍照都好尴尬, 都会笑得怪怪的哈哈!",
+    "similar": []
+  },
+  {
+    "id": 916,
+    "category": "relationship",
+    "label": "solo",
+    "question": "你有习惯的拍照角度或姿势吗?",
+    "similar": [
+      914
+    ]
+  },
+  {
+    "id": 917,
+    "category": "relationship",
+    "label": "solo",
+    "question": "这张独照对你有什么特殊的意义吗?",
+    "similar": [
+      888
+    ]
+  },
+  {
+    "id": 918,
+    "category": "relationship",
+    "label": "solo",
+    "question": "你喜欢这张照片里自己的表情跟姿势吗?",
+    "similar": []
+  },
+  {
+    "id": 919,
+    "category": "relationship",
+    "label": "solo",
+    "question": "看到这张照片时你会想到哪些事情?",
+    "similar": [
+      4,
+      840,
+      869,
+      883,
+      927
+    ]
+  },
+  {
+    "id": 920,
+    "category": "relationship",
+    "label": "one",
+    "question": "是你帮他照的吗?",
+    "similar": []
+  },
+  {
+    "id": 921,
+    "category": "relationship",
+    "label": "one",
+    "question": "你跟他现在还有联络吗?",
+    "similar": [
+      846,
+      952
+    ]
+  },
+  {
+    "id": 922,
+    "category": "relationship",
+    "label": "one",
+    "question": "你们是怎么变熟的呢?",
+    "similar": [
+      968
+    ]
+  },
+  {
+    "id": 923,
+    "category": "relationship",
+    "label": "one",
+    "question": "他是个怎么样的人啊?",
+    "similar": []
+  },
+  {
+    "id": 924,
+    "category": "relationship",
+    "label": "one",
+    "question": "为什么你留着他的照片呢?",
+    "similar": []
+  },
+  {
+    "id": 925,
+    "category": "relationship",
+    "label": "one",
+    "question": "他在拍这张照片的时候开心吗?",
+    "similar": [
+      884
+    ]
+  },
+  {
+    "id": 926,
+    "category": "relationship",
+    "label": "one",
+    "question": "这是什么时候的照片啊?",
+    "similar": [
+      3,
+      559,
+      566,
+      722,
+      884,
+      887,
+      890
+    ]
+  },
+  {
+    "id": 927,
+    "category": "relationship",
+    "label": "one",
+    "question": "看到这张照片时你想到哪些事情?",
+    "similar": [
+      4,
+      840,
+      869,
+      883,
+      919
+    ]
+  },
+  {
+    "id": 928,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "这位名人是以什么著名的呢？",
+    "similar": []
+  },
+  {
+    "id": 929,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "你是从哪里认识他的呢?",
+    "similar": [
+      950
+    ]
+  },
+  {
+    "id": 930,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "他有什么令你欣赏的特质吗?",
+    "similar": []
+  },
+  {
+    "id": 931,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "你有定期在关注他的消息吗?",
+    "similar": []
+  },
+  {
+    "id": 932,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "他对社会有什么伟大的贡献吗?",
+    "similar": []
+  },
+  {
+    "id": 933,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "这位名人给你的印象怎么样",
+    "similar": [
+      935
+    ]
+  },
+  {
+    "id": 934,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "这个人为什么会有名啊？",
+    "similar": []
+  },
+  {
+    "id": 935,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "你有实际见过这位名人吗?",
+    "similar": [
+      933,
+      936,
+      938
+    ]
+  },
+  {
+    "id": 936,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "你有跟这位名人说过话吗?",
+    "similar": [
+      935,
+      938
+    ]
+  },
+  {
+    "id": 937,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "你对这位名人的负面新闻有什么看法?",
+    "similar": []
+  },
+  {
+    "id": 938,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "你周遭的人也都认识这位名人吗?",
+    "similar": [
+      935,
+      936
+    ]
+  },
+  {
+    "id": 939,
+    "category": "relationship",
+    "label": "celebrity",
+    "question": "这位名人活跃的年代大概是什么时候呀?",
+    "similar": []
+  },
+  {
+    "id": 940,
+    "category": "relationship",
+    "label": "teacher",
+    "question": "你是什么时候遇见这位老师的?",
+    "similar": []
+  },
+  {
+    "id": 941,
+    "category": "relationship",
+    "label": "teacher",
+    "question": "这位老师教了你什么知识吗?",
+    "similar": []
+  },
+  {
+    "id": 942,
+    "category": "relationship",
+    "label": "teacher",
+    "question": "这位老师还继续在任教吗?还是已经退休了呢?",
+    "similar": []
+  },
+  {
+    "id": 943,
+    "category": "relationship",
+    "label": "teacher",
+    "question": "你平常还会去探望这位老师吗?",
+    "similar": []
+  },
+  {
+    "id": 944,
+    "category": "relationship",
+    "label": "teacher",
+    "question": "他让你记忆最深刻的是什么事?",
+    "similar": [
+      6,
+      957
+    ]
+  },
+  {
+    "id": 945,
+    "category": "relationship",
+    "label": "teacher",
+    "question": "他对你来说是一位好老师吗?",
+    "similar": []
+  },
+  {
+    "id": 946,
+    "category": "relationship",
+    "label": "teacher",
+    "question": "你有什么感谢这位老师的地方吗？",
+    "similar": []
+  },
+  {
+    "id": 947,
+    "category": "relationship",
+    "label": "teacher",
+    "question": "你是因为什么原因一直记得这位老师的？",
+    "similar": [
+      55
+    ]
+  },
+  {
+    "id": 948,
+    "category": "relationship",
+    "label": "teacher",
+    "question": "这位老师曾帮/教你做什么?",
+    "similar": []
+  },
+  {
+    "id": 949,
+    "category": "relationship",
+    "label": "student",
+    "question": "你还记得这位学生吗?他做过什么让你印象深刻的事吗?",
+    "similar": [
+      957
+    ]
+  },
+  {
+    "id": 950,
+    "category": "relationship",
+    "label": "student",
+    "question": "你是什么时候认识他的呢?",
+    "similar": [
+      808,
+      852,
+      929
+    ]
+  },
+  {
+    "id": 951,
+    "category": "relationship",
+    "label": "student",
+    "question": "这位学生有什么突出的才能吗?",
+    "similar": []
+  },
+  {
+    "id": 952,
+    "category": "relationship",
+    "label": "student",
+    "question": "你跟这位学生还有在联络吗?你知道他近况如何吗？",
+    "similar": [
+      28,
+      921
+    ]
+  },
+  {
+    "id": 953,
+    "category": "relationship",
+    "label": "student",
+    "question": "你跟这个学生的关系好吗？",
+    "similar": []
+  },
+  {
+    "id": 954,
+    "category": "relationship",
+    "label": "student",
+    "question": "这位学生是什么样的性格呢?",
+    "similar": []
+  },
+  {
+    "id": 955,
+    "category": "relationship",
+    "label": "student",
+    "question": "你觉得身为一个学生最重要的能力是什么?",
+    "similar": [
+      50,
+      956
+    ]
+  },
+  {
+    "id": 956,
+    "category": "relationship",
+    "label": "student",
+    "question": "你最欣赏这位学生的什么特质?",
+    "similar": [
+      50,
+      955
+    ]
+  },
+  {
+    "id": 957,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "他做过什么让你印象深刻的事吗?",
+    "similar": [
+      799,
+      944,
+      949
+    ]
+  },
+  {
+    "id": 958,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你们当年在军中的日子是怎么度过的呢?",
+    "similar": []
+  },
+  {
+    "id": 959,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你们放假会一起出游吗?有去过哪里呢?",
+    "similar": [
+      196
+    ]
+  },
+  {
+    "id": 960,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你们之中谁打靶最准呢?",
+    "similar": []
+  },
+  {
+    "id": 961,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你们当年谁最常被班长骂啊?",
+    "similar": []
+  },
+  {
+    "id": 962,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你跟他的关系好吗？",
+    "similar": [
+      795
+    ]
+  },
+  {
+    "id": 963,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你跟他在军中有发生过什么好笑的事吗？",
+    "similar": []
+  },
+  {
+    "id": 964,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你们的班长很机车吗?",
+    "similar": []
+  },
+  {
+    "id": 965,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你们当初有考虑签志愿役吗?",
+    "similar": []
+  },
+  {
+    "id": 966,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你们有放过荣誉假吗?",
+    "similar": []
+  },
+  {
+    "id": 967,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你们退伍之后还有保持联络吗?",
+    "similar": []
+  },
+  {
+    "id": 968,
+    "category": "relationship",
+    "label": "comrade",
+    "question": "你跟他是怎么变熟的呢?",
+    "similar": [
+      922
+    ]
+  },
+  {
+    "id": 969,
+    "category": "relationship",
+    "label": "junior",
+    "question": "你有最喜欢的晚辈吗?",
+    "similar": [
+      971
+    ]
+  },
+  {
+    "id": 970,
+    "category": "relationship",
+    "label": "junior",
+    "question": "你希望晚辈可以为你做什么?",
+    "similar": []
+  },
+  {
+    "id": 971,
+    "category": "relationship",
+    "label": "junior",
+    "question": "你的晚辈常来看望你吗?",
+    "similar": [
+      969
+    ]
+  },
+  {
+    "id": 972,
+    "category": "relationship",
+    "label": "junior",
+    "question": "你的晚辈在哪里工作/读书?",
+    "similar": []
+  },
+  {
+    "id": 973,
+    "category": "relationship",
+    "label": "junior",
+    "question": "你对于晚辈初印象及现印象分别是什么?",
+    "similar": []
+  },
+  {
+    "id": 974,
+    "category": "relationship",
+    "label": "junior",
+    "question": "你跟这位晚辈的关系是什么?",
+    "similar": []
+  }
+]

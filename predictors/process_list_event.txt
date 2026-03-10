@@ -1,0 +1,2 @@
+test.jpg;{"label": "graduation", "confidence": 1.0}
+001_20230424_111023.jpg;{"label": "ski_holiday", "confidence": 1.0}

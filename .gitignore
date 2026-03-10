@@ -1,0 +1,83 @@
+# ============================================================
+# 白名單策略：預設忽略所有東西，再明確允許需要的程式碼檔案
+# ============================================================
+
+# 忽略所有
+*
+
+# -------- 明確允許的檔案類型 --------
+!*.py
+!*.sh
+!*.md
+!*.json
+!*.txt
+!*.yaml
+!*.yml
+!*.cfg
+!*.ini
+!*.toml
+!.gitignore
+!config.example.py
+
+# 真實設定檔（含 API key）不上傳
+config.py
+
+# -------- 明確允許的目錄（需要逐層開放）--------
+!predictors/
+!predictors/clip_iu/
+!predictors/iu/
+!ParlAI/
+!ParlAI/projects/
+!ParlAI/projects/image_chat/
+!VQA_enhancement/
+!run/
+!fairseq/
+
+# -------- 子目錄也要開放（否則 git 不會遞迴進去）--------
+!predictors/clip_iu/*/
+!predictors/iu/*/
+!ParlAI/projects/image_chat/*/
+!VQA_enhancement/*/
+!VQA_enhancement/v3/
+!fairseq/*/
+
+# -------- 明確排除的大型/敏感目錄 --------
+# 虛擬環境
+rem_env/
+predictors/clip_iu/clip_iu/
+predictors/clip_iu/clip_env/
+predictors/rem_iu/
+VQA_enhancement/sim_py3/
+VQA_enhancement/sim_env/
+
+# 模型權重、二進位大檔
+predictors/clip_iu/models/
+predictors/clip_iu/emotion/
+predictors/iu/weights/
+predictors/iu/dlib/
+
+# 圖片/音訊/二進位資料
+*.ckpt
+*.h5
+*.npy
+*.wav
+*.mp3
+*.png
+*.jpg
+*.jpeg
+*.dat
+*.nii
+
+# 上傳暫存
+ParlAI/projects/image_chat/uploads/
+
+# 對話/session 記錄
+predictors/clip_iu/storage/
+VQA_enhancement/sessions/
+
+# Python 快取
+__pycache__/
+*.pyc
+
+# VSCode
+.vscode/

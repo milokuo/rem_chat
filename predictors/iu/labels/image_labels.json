@@ -1,0 +1,36 @@
+{
+    "event":{
+        "general_event":"活動",
+        "graduation":"畢業典禮",
+        "mountaintrip":"爬山",
+        "picnic":"野餐",
+        "sea_holiday":"海邊",
+        "ski_holiday":"滑雪",
+        "wedding":"婚禮"
+    },
+    "place":{
+        "beach_coast":"海灘",
+        "building_indoor":"室內建築",
+        "building_outdoor":"室外建築",
+        "garden":"花園",
+        "general_place":"這裡",
+        "house_room":"房間",
+        "kids_park":"公園",
+        "mall_store":"商店",
+        "mountain":"山",
+        "restaurant_table":"餐廳",
+        "river_lake":"河",
+        "snow":"雪",
+        "sport_arena":"體育館",
+        "streetview":"街上",
+        "temple":"寺"
+    },
+    "relationship":{
+        "couple":"一對",
+        "family":"家人",
+        "friends":"朋友",
+        "general_relationship":"熟人",
+        "none":"無",
+        "solo":"一個人"
+    }
+}

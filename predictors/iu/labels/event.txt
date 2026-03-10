@@ -1,0 +1,7 @@
+general_event
+graduation
+mountaintrip
+picnic
+sea_holiday
+ski_holiday
+wedding

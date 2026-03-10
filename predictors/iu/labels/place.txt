@@ -1,0 +1,15 @@
+beach_coast
+building_indoor
+building_outdoor
+garden
+general_place
+house_room
+kids_park
+mall_store
+mountain
+restaurant_table
+river_lake
+snow
+sport_arena
+streetview
+temple

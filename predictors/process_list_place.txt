@@ -1,0 +1,1 @@
+test.jpg;{"label": "mall_store", "confidence": 0.5}

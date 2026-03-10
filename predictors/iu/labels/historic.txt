@@ -1,0 +1,5 @@
+time
+historic_place
+festival
+transport
+entertainment

@@ -1,0 +1,22 @@
+{
+    "gender":{
+        "male":"男人",
+        "female":"女人"
+    },
+    "age":{
+        "young":"年輕",
+        "adult":"成人",
+        "elder":"長老"
+    },
+    "size":{
+        "big":"",
+        "small":""
+    },
+    "location":{
+        "leftmost":"",
+        "left":"",
+        "center":"",
+        "right":"",
+        "rightmost":""
+    }
+}
