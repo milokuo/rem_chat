@@ -142,7 +142,7 @@ class SocialREMChat(object):
         return full_prompt
 
     def postprocess_response(self, response):
-        top_response = response['choices'][0]['message']['content']
+        top_response = response.choices[0].message.content
 
         pattern = r'\b\d+\..+?(?=\n\d+\.|\Z)'
         cot_response = re.findall(pattern, top_response, re.DOTALL)
@@ -182,18 +182,12 @@ class SocialREMChat(object):
     def chatting(self, context):
         processed_context = self.preprocess_conversation(context, args.max_turn)
 
-        flag = False
-        while flag == False:
-            try:
-                response = openai.ChatCompletion.create(
-                    model=args.model_name, 
-                    messages=processed_context, 
-                    **self.generate_kwargs
-                )
-
-                flag = True
-            except openai.OpenAIError as e:
-                flag = False
+        client = openai.OpenAI(api_key=args.openai_key)
+        response = client.chat.completions.create(
+            model=args.model_name,
+            messages=processed_context,
+            **self.generate_kwargs
+        )
 
         assistant_response, cot_response = self.postprocess_response(response)
 
@@ -262,6 +256,6 @@ if __name__ == "__main__":
     else:
         end_trigger = 'conversation over'
         # reset the context
-        _socialREMChat.contextcontext = [{'Assistant': 'Hello, Is there anything you want to talk to me about this photograph?'}]
+        _socialREMChat.context = [{'Assistant': 'Hello, Is there anything you want to talk to me about this photograph?'}]
 
     app.run(host="0.0.0.0", port=8087)
