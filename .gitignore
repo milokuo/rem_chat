@@ -22,6 +22,9 @@
 # 真實設定檔（含 API key）不上傳
 config.py
 
+# Claude Code 專用，本地使用
+CLAUDE.md
+
 # -------- 明確允許的目錄（需要逐層開放）--------
 !predictors/
 !predictors/clip_iu/
