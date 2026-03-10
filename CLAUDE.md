@@ -30,7 +30,7 @@ Microservice-based architecture with HTTP/JSON communication:
 - `predictors/clip_iu/config.py` - Configuration with language selection, GPT parameters
 - `VQA_enhancement/GptGenerator.py` - OpenAI API wrapper for response generation
 - `VQA_enhancement/QuestionItem.py` - Question corpus loading with pre-computed embeddings
-- `ParlAI/projects/image_chat/server_updated_xiaobei.py` - BlenderBot dialogue server (production; `server_updated_blenderbot_dev.py` is the dev variant, currently disabled)
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py` - Active web server (ParlAI-free, port 8082); delegates all AI responses to chat_engine (port 8087)
 
 ## Development Setup
 
@@ -80,13 +80,11 @@ cd predictors/iu
 python run_iu_server_handler.py 9209
 ```
 
-Start BlenderBot (social_rem):
+Start web server (port 8082, ParlAI-free):
 ```bash
 source rem_env/bin/activate
 cd ParlAI
-python projects/image_chat/server_updated_xiaobei.py \
-  -mf zoo:blenderbot2/blenderbot2_400M/model \
-  --knowledge-access-method classify --search-server 0.0.0.0
+python projects/image_chat/server_updated_zhengxuan.py
 ```
 
 Start question similarity service:
@@ -125,9 +123,28 @@ parlai train_model -t personachat -m transformer/ranker \
 - `VQA_enhancement/v3/sim_mat.npy` - Similarity matrix
 - `predictors/iu/labels/` - Label definitions (events, places, relationships)
 
+## Git (run in WSL, project is at /mnt/e/rem_chat equivalent via Windows path)
+
+ParlAI and fairseq are git submodules. Commit order matters:
+
+```bash
+# 1. Commit changes inside a submodule first (e.g. ParlAI)
+cd "E:/rem_chat/ParlAI"
+git add <file>
+git commit -m "..."
+
+# 2. Then commit root repo (which records the updated submodule pointer)
+cd "E:/rem_chat"
+git add <submodule_dir> <other_files>
+git commit -m "..."
+git push origin main
+```
+
 ## Notes
 
 - Bilingual support: English and Traditional Chinese
 - GPU required for inference
 - Services communicate via HTTP POST with JSON payloads
 - Pre-computed embeddings used for fast similarity matching
+- OpenAI API key is hardcoded in `config.py` (intentional, excluded via .gitignore)
+- Uses OpenAI SDK v1+ (`openai.OpenAI()` client style, not legacy `openai.ChatCompletion`)
