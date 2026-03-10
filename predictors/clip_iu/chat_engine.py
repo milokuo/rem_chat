@@ -21,6 +21,7 @@ class SocialREMChat(object):
     def __init__(self, lang) -> None:
         self.caption_str = ""
         self.obj_str = ""
+        self.retrieved_context = ""
         if lang == 'zh':
             self.system_task = "\n你是一個陪伴機器人，引導User完成以照片為中心的回憶任務。\
                                     在這裡，以照片為中心的回憶是一種常見的療法，可以幫助患有維度障礙的患者增強認知能力\
@@ -35,7 +36,8 @@ class SocialREMChat(object):
                                     \n 提出這些問題的順序可以隨意，並使用更生動的詞語。 \
                                     同時，您需要向User提供同理心的響應，\
                                     這意味著，如果User試圖講述故事，它應該積極響應User的表達。 \
-                                    但需要注意的是，回覆應該是一兩句話，以使對話流暢。" + '\n\n'
+                                    但需要注意的是，回覆應該是一兩句話，以使對話流暢。\
+                                    \n 此外，如果User提及了相冊中其他照片的回憶，請簡短認同並串聯那段記憶（例如：『對，那張照片也很有紀念性！』），再溫和地引導User繼續回憶當前照片的要點。" + '\n\n'
             self.system_strategies = "\n根據User的最後一句話，首先推斷其中是否有要點的答案。 \
                                     \n 如果答案存在，\
                                         更新哪些要點仍有待回答。 \
@@ -80,7 +82,8 @@ class SocialREMChat(object):
                                         \n The order of proposing these questions can be random, and use more vivid words. \
                                         And the same time, you need to provide empathetic response to User, \
                                         which means, it should actively response to User's expressions if they try to tell the story. \
-                                        But it need to be memtioned that the reponse should be one or two sentences to make the conversation fluent." + '\n\n'
+                                        But it need to be memtioned that the reponse should be one or two sentences to make the conversation fluent. \
+                                        \n Additionally, if the User mentions a memory related to another photo in their album, briefly acknowledge and affirm that connection (e.g. 'That sounds like another wonderful memory!'), then gently guide the conversation back to the current photograph's essentials." + '\n\n'
             self.system_strategies = "\n Accoriding to User's last utterance, you should first infer if there are answers of essentials in it. \
                                         \n If the answer exist,\
                                                 update which essentials are remained to be answered. \
@@ -112,19 +115,40 @@ class SocialREMChat(object):
                                    "8. The reason for choosing the Support Strategy: " + '\n' + \
                                    "9. Reply === User's last sentence === (up to 2 sentences): "
         
-        self.generate_kwargs = {
-            'temperature': args.temparature, 
-            'top_p': args.top_p, 
-            'frequency_penalty': args.frequency_penalty, 
-            'presence_penalty': args.presence_penalty
-        }
+        # gpt-5-mini (and similar reasoning models) do not support sampling parameters.
+        _sampling_unsupported = args.model_name.startswith('gpt-5')
+        if _sampling_unsupported:
+            self.generate_kwargs = {}
+        else:
+            self.generate_kwargs = {
+                'temperature': args.temparature,
+                'top_p': args.top_p,
+                'frequency_penalty': args.frequency_penalty,
+                'presence_penalty': args.presence_penalty,
+            }
     
     def preprocess_conversation(self, context, max_turn):
         _context = list()
 
-        self.observation_prompt = self.system_observations + self.caption_str + self.system_observations_obj + self.obj_str
-        self.system_prompt = self.system_task + self.system_strategies + self.observation_prompt
-        
+        self.observation_prompt = self.system_observations + self.caption_str + "\n" + self.system_observations_obj + self.obj_str
+
+        if self.retrieved_context:
+            retrieved_block = (
+                "\n[Related memories from the album — these are OTHER past photos, NOT the current photograph]\n"
+                "Rule 1: Do NOT project these details onto the current photograph's essentials. "
+                "The current photo may have completely different answers for when/where/who/what.\n"
+                "Rule 2: If the User explicitly asks whether you remember something they mentioned before "
+                "(e.g., 'Do you remember which school?' or '你還記得哪間學校嗎'), "
+                "you SHOULD reference the past conversation below to confirm the specific fact "
+                "(e.g., 'Yes! You mentioned it was National Taiwan University!'), "
+                "then gently return to exploring the current photo's own essentials.\n"
+                + self.retrieved_context
+                + "\n[End of related memories. The above are different photos from the current one.]\n"
+            )
+        else:
+            retrieved_block = ""
+        self.system_prompt = self.system_task + self.system_strategies + self.observation_prompt + retrieved_block
+
         for idx in range(len(context)):
             for k, v in context[idx].items():
                 _context.append('{}：{}'.format(k, v))
@@ -139,58 +163,79 @@ class SocialREMChat(object):
         
         full_prompt = [{'role': 'system', 'content': _context}]
 
+        print('\n' + '='*60)
+        print('[FULL PROMPT TO GPT]')
+        print(_context)
+        print('='*60 + '\n')
+
         return full_prompt
 
     def postprocess_response(self, response):
         top_response = response.choices[0].message.content
 
-        pattern = r'\b\d+\..+?(?=\n\d+\.|\Z)'
-        cot_response = re.findall(pattern, top_response, re.DOTALL)
-        if len(cot_response) > 9:
-            cot_response[8] = '\n'.join(cot_response[8: ])
-            cot_response = cot_response[: 9]
-    
-        assistant_response = cot_response[-1]
+        # Primary: find step 9 directly in the raw output,
+        # robust to missing newlines between steps (e.g. gpt-5-mini merging steps).
+        step9_match = re.search(r'(?<!\d)9\.[^:：\n]*[:：](.*)', top_response, re.DOTALL)
+        if step9_match:
+            assistant_response = step9_match.group(1).strip()
+            cot_response = [top_response]
+        else:
+            # Fallback: split by numbered steps (original logic, works for gpt-3.5/4).
+            pattern = r'\b\d+\..+?(?=\n\d+\.|\Z)'
+            cot_response = re.findall(pattern, top_response, re.DOTALL)
+            if len(cot_response) > 9:
+                cot_response[8] = '\n'.join(cot_response[8:])
+                cot_response = cot_response[:9]
+            assistant_response = cot_response[-1]
+            if ':' in assistant_response or '：' in assistant_response:
+                assistant_response = re.split(r':|：', assistant_response, 1)[-1].strip()
 
-        if ':' in assistant_response or '：' in assistant_response:
-            assistant_response = re.split(r':|：', assistant_response, 1)[-1].strip()
-
-        if assistant_response.startswith('9. '): 
-            assistant_response = assistant_response[3: ].strip()
-
+        # Shared cleanup
+        if assistant_response.startswith('9. '):
+            assistant_response = assistant_response[3:].strip()
         if assistant_response.startswith('回覆'):
-            assistant_response = assistant_response[2: ].strip()
-
+            assistant_response = assistant_response[2:].strip()
         if 'Assistant：' in assistant_response:
             assistant_response = re.sub('Assistant：', '', assistant_response)
-
-        if assistant_response[0] == '\"' or assistant_response[0] == '「' or assistant_response[0] == '[':
-            assistant_response = assistant_response[1: ]
-
-        if assistant_response[-1] == '\"' or assistant_response[-1] == '」' or assistant_response[-1] == ']':
-            assistant_response = assistant_response[: -1]
-
-        if assistant_response.startswith('9. '): 
-            assistant_response = assistant_response[3: ]
-        if assistant_response[0] == '\"' or assistant_response[0] == '「' or assistant_response[0] == '[':
-            assistant_response = assistant_response[1: ]
-        if assistant_response[-1] == '\"' or assistant_response[-1] == '」' or assistant_response[-1] == ']':
-            assistant_response = assistant_response[: -1]
+        if assistant_response and assistant_response[0] in ('"', '「', '['):
+            assistant_response = assistant_response[1:]
+        if assistant_response and assistant_response[-1] in ('"', '」', ']'):
+            assistant_response = assistant_response[:-1]
 
         return assistant_response, cot_response
     
     def generate_opening(self, user_message=''):
-        self.observation_prompt = self.system_observations + self.caption_str + self.system_observations_obj + self.obj_str
-        system_content = self.system_task + self.system_strategies + self.observation_prompt
+        # Always reset context when a new image is uploaded.
+        self.context = []
+
+        self.observation_prompt = self.system_observations + self.caption_str + "\n" + self.system_observations_obj + self.obj_str
+
+        if self.retrieved_context:
+            retrieved_block = (
+                "\n[Related memories from the album — these are OTHER past photos, NOT the current photograph]\n"
+                "Rule 1: Do NOT project these details onto the current photograph's essentials. "
+                "The current photo may have completely different answers for when/where/who/what.\n"
+                "Rule 2: If the User explicitly asks whether you remember something they mentioned before "
+                "(e.g., 'Do you remember which school?' or '你還記得哪間學校嗎'), "
+                "you SHOULD reference the past conversation below to confirm the specific fact "
+                "(e.g., 'Yes! You mentioned it was National Taiwan University!'), "
+                "then gently return to exploring the current photo's own essentials.\n"
+                + self.retrieved_context
+                + "\n[End of related memories. The above are different photos from the current one.]\n"
+            )
+        else:
+            retrieved_block = ""
+        system_content = self.system_task + self.system_strategies + self.observation_prompt + retrieved_block
 
         if user_message:
-            first_turn = user_message
+            first_turn = user_message + '\n\n' + self.instruct_prompt
             self.context = [{'User': user_message}]
         else:
             if args.lang == 'zh':
-                first_turn = "請根據照片內容，用親切的方式開啟對話，提出第一個能引導User回憶的問題。（最多兩句）"
+                opening_instruction = "這是對話的開場，尚未有User的發言。根據照片內容選擇一個合適的支援策略，並生成一個溫暖親切的開場問題（只問一個）。"
             else:
-                first_turn = "Based on the photo content, warmly open the conversation and ask the first question to help the User recall their memories. (at most 2 sentences)"
+                opening_instruction = "This is the opening of the conversation with no prior user utterance. Based on the photo content, choose one Support Strategy and generate a warm opening with exactly ONE question."
+            first_turn = opening_instruction + '\n\n' + self.instruct_prompt
             self.context = []
 
         messages = [
@@ -203,7 +248,7 @@ class SocialREMChat(object):
             messages=messages,
             **self.generate_kwargs
         )
-        opening = response.choices[0].message.content.strip()
+        opening, _ = self.postprocess_response(response)
         self.context.append({'Assistant': opening})
         return opening
 
@@ -232,6 +277,9 @@ def post_method():
 
         if 'obj_str' in data:
             _socialREMChat.obj_str = data['obj_str']
+
+        if 'retrieved_context' in data:
+            _socialREMChat.retrieved_context = data['retrieved_context']
 
         # New image: reset context and generate GPT opening based on image content.
         if data.get('reset'):
