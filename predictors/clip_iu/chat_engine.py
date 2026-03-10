@@ -179,6 +179,29 @@ class SocialREMChat(object):
 
         return assistant_response, cot_response
     
+    def generate_opening(self):
+        self.observation_prompt = self.system_observations + self.caption_str + self.system_observations_obj + self.obj_str
+        system_content = self.system_task + self.system_strategies + self.observation_prompt
+
+        if args.lang == 'zh':
+            trigger = "請根據照片內容，用親切的方式開啟對話，提出第一個能引導User回憶的問題。（最多兩句）"
+        else:
+            trigger = "Based on the photo content, warmly open the conversation and ask the first question to help the User recall their memories. (at most 2 sentences)"
+
+        messages = [
+            {'role': 'system', 'content': system_content},
+            {'role': 'user', 'content': trigger},
+        ]
+        client = openai.OpenAI(api_key=args.openai_key)
+        response = client.chat.completions.create(
+            model=args.model_name,
+            messages=messages,
+            **self.generate_kwargs
+        )
+        opening = response.choices[0].message.content.strip()
+        self.context = [{'Assistant': opening}]
+        return opening
+
     def chatting(self, context):
         processed_context = self.preprocess_conversation(context, args.max_turn)
 
@@ -195,16 +218,23 @@ class SocialREMChat(object):
 
 
 @app.route("/", methods=["POST"])
-def post_method():    
+def post_method():
     if request.method == "POST":
-        if 'caption_str' in json.loads(request.data):
-            _socialREMChat.caption_str = json.loads(request.data)['caption_str']
+        data = json.loads(request.data)
 
-        if 'obj_str' in json.loads(request.data):
-            _socialREMChat.obj_str = json.loads(request.data)['obj_str']
-        
-        if 'user_message' in json.loads(request.data):
-            user_message = json.loads(request.data)['user_message']
+        if 'caption_str' in data:
+            _socialREMChat.caption_str = data['caption_str']
+
+        if 'obj_str' in data:
+            _socialREMChat.obj_str = data['obj_str']
+
+        # New image: reset context and generate GPT opening based on image content.
+        if data.get('reset'):
+            opening = _socialREMChat.generate_opening()
+            return json.dumps({"return_message": opening, "last": False})
+
+        if 'user_message' in data:
+            user_message = data['user_message']
             _socialREMChat.context.append({'User': user_message})
 
         if end_trigger in _socialREMChat.context[-1]['User'].lower():
