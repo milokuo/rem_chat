@@ -59,8 +59,11 @@ class web_server_detr_obj:
         receive = json.loads(str(web.data(), encoding='utf-8'))
 
         if 'img_id' in receive and receive['img_id']:
-            # url = os.path.join(img_dir, 'test.jpg') # for DEBUG
-            url = os.path.join(img_dir, receive['img_id']) # for test
+            # Support full_path override (used by album_indexer for batch processing)
+            if receive.get('full_path') and os.path.isfile(receive['full_path']):
+                url = receive['full_path']
+            else:
+                url = os.path.join(img_dir, receive['img_id'])
 
             obj_string = _model.predict(url)
 

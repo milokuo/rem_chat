@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from PIL import Image
 import requests
+import torch
 import web
 import json
 import datetime
@@ -76,8 +77,11 @@ class web_server_clip_iu:
         receive = json.loads(str(web.data(), encoding='utf-8'))
 
         if 'img_id' in receive and receive['img_id']:
-            # url = os.path.join(img_dir, 'test.jpg') # for DEBUG
-            url = os.path.join(img_dir, receive['img_id']) # for test
+            # Support full_path override (used by album_indexer for batch processing)
+            if receive.get('full_path') and os.path.isfile(receive['full_path']):
+                url = receive['full_path']
+            else:
+                url = os.path.join(img_dir, receive['img_id'])
 
             _, event_pred, event_prob = cp.predict(url, cp.event_candidates, cp.event_labels)
             _, place_pred, place_prob = cp.predict(url, cp.place_candidates, cp.place_labels)
@@ -89,12 +93,21 @@ class web_server_clip_iu:
             place_prob = f"{place_prob:.3f}"
             relation_prob = f"{relation_prob:.3f}"
 
+            # Extract 512-dim image embedding for RAG retrieval
+            pil_image = Image.open(url)
+            pixel_values = cp.processor(images=pil_image, return_tensors="pt")["pixel_values"]
+            with torch.no_grad():
+                vision_output = cp.model.vision_model(pixel_values=pixel_values)
+                image_embedding = vision_output.pooler_output  # (1, 512) tensor
+            image_embedding = image_embedding.squeeze(0).tolist()  # (512,) → list
+
             metadata = {}
             # metadata['filename'] = receive['img_id']
             metadata['event'] = {'label': event_pred, 'confidence': event_prob}
             metadata['place'] = {'label': place_pred, 'confidence': place_prob}
             metadata['relationship'] = {'label': relation_pred, 'confidence': relation_prob}
-            print(f'>>> METADATA: {metadata}\n\n\n')
+            metadata['embedding'] = image_embedding
+            print(f'>>> METADATA (embedding omitted): event={metadata["event"]}, place={metadata["place"]}, relationship={metadata["relationship"]}\n')
 
             return_data = json.dumps(metadata)
             # return_data = json.dumps(return_json, sort_keys=True, separators=(',', ':'), ensure_ascii=False)
