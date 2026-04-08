@@ -131,20 +131,21 @@ class SocialREMChat(object):
             }
     
     def _build_retrieved_block(self):
-        if self.retrieved_context:
-            return (
-                "\n[Related memories from the album — these are OTHER past photos, NOT the current photograph]\n"
-                "Rule 1: Do NOT project these details onto the current photograph's essentials. "
-                "The current photo may have completely different answers for when/where/who/what.\n"
-                "Rule 2: If the User explicitly asks whether you remember something they mentioned before "
-                "(e.g., 'Do you remember which school?' or '你還記得哪間學校嗎'), "
-                "you SHOULD reference the past conversation below to confirm the specific fact "
-                "(e.g., 'Yes! You mentioned it was National Taiwan University!'), "
-                "then gently return to exploring the current photo's own essentials.\n"
-                + self.retrieved_context
-                + "\n[End of related memories. The above are different photos from the current one.]\n"
-            )
-        return ""
+        if not self.retrieved_context:
+            return ""
+        return (
+            "\n[Related memories from the album — these are OTHER past photos, NOT the current photograph]\n"
+            "Rule 1: Do NOT project these details onto the current photograph's essentials. "
+            "The current photo may have completely different answers for when/where/who/what.\n"
+            "Rule 2: If the User explicitly asks whether you remember something they mentioned before, "
+            "you SHOULD reference the past conversation below to confirm the specific fact, "
+            "then gently return to exploring the current photo's own essentials.\n"
+            "Rule 3: You MAY proactively say 'This reminds me of [brief description from memory]...' "
+            "ONLY when the connection is strong and you can cite a specific verifiable detail. "
+            "If uncertain, ask: 'Did you also talk about...?' instead of asserting.\n"
+            + self.retrieved_context
+            + "\n[End of related memories. The above are different photos from the current one.]\n"
+        )
 
     def preprocess_conversation(self, context, max_turn):
         _context = list()
@@ -256,6 +257,36 @@ class SocialREMChat(object):
         self.context.append({'Assistant': opening})
         return opening, gpt_ms
 
+    def _check_response_grounding(self, response: str, client: openai.OpenAI) -> str:
+        """Lightweight evidence check: verify the response only cites verifiable memory details.
+
+        Called only when retrieved_context is non-empty. Returns the original response
+        if it passes, or a hedged rewrite if it cites unverifiable specifics.
+        Skip if args.evidence_check is False (default off to avoid added latency).
+        """
+        if not getattr(args, 'evidence_check', False):
+            return response
+        if not self.retrieved_context:
+            return response
+        prompt = (
+            f"Memory block available:\n{self.retrieved_context}\n\n"
+            f"Assistant reply:\n{response}\n\n"
+            "Does the reply cite only details present in the memory block above? "
+            "If yes, respond with EXACTLY the original reply unchanged. "
+            "If no, rewrite it so uncertain claims use hedged language "
+            "('I think...', 'It looks like...', 'Did you mention...?'). "
+            "Respond with the final reply text only."
+        )
+        try:
+            result = client.chat.completions.create(
+                model=args.model_name,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            return result.choices[0].message.content.strip() or response
+        except Exception as exc:
+            logging.warning("evidence check failed: %s", exc)
+            return response
+
     def chatting(self, context):
         processed_context = self.preprocess_conversation(context, args.max_turn)
 
@@ -269,6 +300,7 @@ class SocialREMChat(object):
         gpt_ms = round((time.perf_counter() - t0) * 1000)
 
         assistant_response, cot_response = self.postprocess_response(response)
+        assistant_response = self._check_response_grounding(assistant_response, client)
 
         return assistant_response, cot_response, gpt_ms
 

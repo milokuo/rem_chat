@@ -4,6 +4,56 @@
 
 ---
 
+## 2026-04-09 — Photo-Anchored Autobiographical Memory 實作
+**檔案：** `2026-04-09_autobiographical-memory-impl.md`
+
+**狀態：** 已實作
+
+**核心變更：** 三路記憶檢索（visual + theme + entity + recency rerank）、換圖時背景 finalize、上傳時背景 GPT enrichment、輕量 evidence check（預設關閉）
+
+| 類別 | 內容 |
+|------|------|
+| 新增 | `memory_extractor.py`（GPT theme/entity 抽取 + session summary） |
+| 新增 | `memory_retriever.py`（三路檢索 + rerank + lazy fallback + 結構化 prompt） |
+| 修改 | `photo_db.py`（update_metadata / query_by_theme / 擴充 query_by_patient） |
+| 修改 | `album_indexer.py`（兩段式：基礎 + `--enrich` GPT 補充） |
+| 修改 | `server_updated_zhengxuan.py`（換圖 finalize、上傳 enrich、換三路 retriever） |
+| 修改 | `chat_engine.py`（Rule 3 主動引用、evidence check 方法） |
+
+**影響的檔案：**
+- `predictors/clip_iu/photo_db.py`
+- `predictors/clip_iu/memory_extractor.py` ← NEW
+- `predictors/clip_iu/memory_retriever.py` ← NEW
+- `predictors/clip_iu/album_indexer.py`
+- `predictors/clip_iu/chat_engine.py`
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`
+
+---
+
+## 2026-04-09 — [PLAN] Photo-Anchored Autobiographical Memory 設計計畫
+**檔案：** `2026-04-09_photo-anchored-memory-plan.md`
+
+**狀態：** 計畫中，尚未實作
+
+**核心設計：** 將 Jung-Min 論文的 Hierarchical Autobiographical Memory 以照片為錨點移植進系統。4 層記憶結構（Theme/Lifetime Period/General Event/Episodic）、三路檢索（visual+theme+entity）、recency rerank、主動引用 prompt。
+
+| 類別 | 內容 |
+|------|------|
+| 新增 | `memory_extractor.py`（theme/entity 抽取）、`memory_retriever.py`（三路檢索 + rerank）|
+| 修改 | `photo_db.py`（schema 擴充）、`album_indexer.py`（上傳豐富化）|
+| 修改 | `server_updated_zhengxuan.py`（write-back + 換 retriever）、`chat_engine.py`（新 prompt）|
+| 不做 | 臉部 clustering、EXIF 時間軸、情緒驅動選圖 |
+
+**影響的檔案（預期）：**
+- `predictors/clip_iu/photo_db.py`
+- `predictors/clip_iu/memory_extractor.py` ← NEW
+- `predictors/clip_iu/memory_retriever.py` ← NEW
+- `predictors/clip_iu/album_indexer.py`
+- `predictors/clip_iu/chat_engine.py`
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`
+
+---
+
 ## 2026-04-08 — 部件時間消耗分析
 **檔案：** `2026-04-08_timing-analysis.md`
 
