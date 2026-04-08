@@ -4,6 +4,26 @@
 
 ---
 
+## 2026-04-09 — 三路記憶系統 Bug 修正（Codex 驗證）
+**檔案：** `2026-04-09_memory-bugfix-codex.md`
+
+**狀態：** 已修正並提交
+
+**核心變更：** 修正三路檢索退化、evidence_check 無法啟用、re-upload 記憶覆蓋、背景 thread 無上限等四項問題
+
+| 類別 | 內容 |
+|------|------|
+| P1 修正 | 上傳前先 fetch existing_meta，revisit 時使用已有 theme/entities 做三路檢索 |
+| P2a 修正 | `config.py` 新增 `--evidence_check` flag，evidence check 現在可以啟用 |
+| P2b 修正 | add_photo 前 merge 已有豐富化欄位，re-upload 不再覆蓋 theme/entities/conv_summary |
+| P3 修正 | 新增 `_bg_semaphore = Semaphore(4)`，限制同時執行的背景 thread 上限 |
+
+**影響的檔案：**
+- `predictors/clip_iu/config.py`
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`
+
+---
+
 ## 2026-04-09 — Photo-Anchored Autobiographical Memory 實作
 **檔案：** `2026-04-09_autobiographical-memory-impl.md`
 
