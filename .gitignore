@@ -26,6 +26,7 @@ config.py
 CLAUDE.md
 
 # -------- 明確允許的目錄（需要逐層開放）--------
+!changelogs/
 !predictors/
 !predictors/clip_iu/
 !predictors/iu/
