@@ -3,6 +3,7 @@ import re
 import json
 import logging
 import datetime
+import time
 from flask import Flask, request
 from deep_translator import GoogleTranslator
 
@@ -67,7 +68,8 @@ class SocialREMChat(object):
                                     "6. ===User最後一句話的完整內容是什麼===: " + '\n' \
                                     "7. 根據 === User最後的陳述選擇支持策略 ===: " + '\n' \
                                     "8. 選擇支持策略的原因：" + '\n' + \
-                                    "9. 回覆===User最後一句===（最多2句）："
+                                    "9. 回覆===User最後一句===（最多2句）：\n" \
+                                    'JSON_OUTPUT: {"reply": "<回覆內容>", "strategy": "<所選策略>"}'
         elif lang == 'en':
             self.system_task = "\n You are a companion robot that guide User to complete the task of photo-centered reminiscence. \
                                         Here, photo-centered reminiscence is a common therapy that help patients suffering from Dimensia enhance their cognitive capability \
@@ -113,7 +115,8 @@ class SocialREMChat(object):
                                    "6. What is the full statement in the === User's last utterance ===: " + '\n' \
                                    "7. Select Support Strategy based on === User's last statement ===: " + '\n' \
                                    "8. The reason for choosing the Support Strategy: " + '\n' + \
-                                   "9. Reply === User's last sentence === (up to 2 sentences): "
+                                   "9. Reply === User's last sentence === (up to 2 sentences): \n" \
+                                   'JSON_OUTPUT: {"reply": "<reply text>", "strategy": "<chosen strategy>"}'
         
         # gpt-5-mini (and similar reasoning models) do not support sampling parameters.
         _sampling_unsupported = args.model_name.startswith('gpt-5')
@@ -127,13 +130,9 @@ class SocialREMChat(object):
                 'presence_penalty': args.presence_penalty,
             }
     
-    def preprocess_conversation(self, context, max_turn):
-        _context = list()
-
-        self.observation_prompt = self.system_observations + self.caption_str + "\n" + self.system_observations_obj + self.obj_str
-
+    def _build_retrieved_block(self):
         if self.retrieved_context:
-            retrieved_block = (
+            return (
                 "\n[Related memories from the album — these are OTHER past photos, NOT the current photograph]\n"
                 "Rule 1: Do NOT project these details onto the current photograph's essentials. "
                 "The current photo may have completely different answers for when/where/who/what.\n"
@@ -145,9 +144,13 @@ class SocialREMChat(object):
                 + self.retrieved_context
                 + "\n[End of related memories. The above are different photos from the current one.]\n"
             )
-        else:
-            retrieved_block = ""
-        self.system_prompt = self.system_task + self.system_strategies + self.observation_prompt + retrieved_block
+        return ""
+
+    def preprocess_conversation(self, context, max_turn):
+        _context = list()
+
+        self.observation_prompt = self.system_observations + self.caption_str + "\n" + self.system_observations_obj + self.obj_str
+        self.system_prompt = self.system_task + self.system_strategies + self.observation_prompt + self._build_retrieved_block()
 
         for idx in range(len(context)):
             for k, v in context[idx].items():
@@ -173,16 +176,31 @@ class SocialREMChat(object):
     def postprocess_response(self, response):
         top_response = response.choices[0].message.content
 
-        # Primary: find step 9 directly in the raw output,
+        # Primary: parse JSON_OUTPUT tag produced by the instruct_prompt.
+        # Use [^\n]+ (not [^}]+) so reply text containing } doesn't truncate early.
+        json_match = re.search(r'JSON_OUTPUT:\s*(\{[^\n]+\})', top_response)
+        if json_match:
+            try:
+                parsed = json.loads(json_match.group(1))
+                assistant_response = parsed.get('reply', '').strip()
+                if assistant_response:
+                    return assistant_response, [top_response]
+            except (json.JSONDecodeError, KeyError):
+                pass
+
+        # Strip JSON_OUTPUT line before regex fallbacks to prevent noise leaking to user.
+        response_for_regex = re.sub(r'\nJSON_OUTPUT:[^\n]*', '', top_response)
+
+        # Secondary: find step 9 directly in the raw output,
         # robust to missing newlines between steps (e.g. gpt-5-mini merging steps).
-        step9_match = re.search(r'(?<!\d)9\.[^:：\n]*[:：](.*)', top_response, re.DOTALL)
+        step9_match = re.search(r'(?<!\d)9\.[^:：\n]*[:：](.*)', response_for_regex, re.DOTALL)
         if step9_match:
             assistant_response = step9_match.group(1).strip()
             cot_response = [top_response]
         else:
             # Fallback: split by numbered steps (original logic, works for gpt-3.5/4).
             pattern = r'\b\d+\..+?(?=\n\d+\.|\Z)'
-            cot_response = re.findall(pattern, top_response, re.DOTALL)
+            cot_response = re.findall(pattern, response_for_regex, re.DOTALL)
             if len(cot_response) > 9:
                 cot_response[8] = '\n'.join(cot_response[8:])
                 cot_response = cot_response[:9]
@@ -209,23 +227,7 @@ class SocialREMChat(object):
         self.context = []
 
         self.observation_prompt = self.system_observations + self.caption_str + "\n" + self.system_observations_obj + self.obj_str
-
-        if self.retrieved_context:
-            retrieved_block = (
-                "\n[Related memories from the album — these are OTHER past photos, NOT the current photograph]\n"
-                "Rule 1: Do NOT project these details onto the current photograph's essentials. "
-                "The current photo may have completely different answers for when/where/who/what.\n"
-                "Rule 2: If the User explicitly asks whether you remember something they mentioned before "
-                "(e.g., 'Do you remember which school?' or '你還記得哪間學校嗎'), "
-                "you SHOULD reference the past conversation below to confirm the specific fact "
-                "(e.g., 'Yes! You mentioned it was National Taiwan University!'), "
-                "then gently return to exploring the current photo's own essentials.\n"
-                + self.retrieved_context
-                + "\n[End of related memories. The above are different photos from the current one.]\n"
-            )
-        else:
-            retrieved_block = ""
-        system_content = self.system_task + self.system_strategies + self.observation_prompt + retrieved_block
+        system_content = self.system_task + self.system_strategies + self.observation_prompt + self._build_retrieved_block()
 
         if user_message:
             first_turn = user_message + '\n\n' + self.instruct_prompt
@@ -243,28 +245,32 @@ class SocialREMChat(object):
             {'role': 'user', 'content': first_turn},
         ]
         client = openai.OpenAI(api_key=args.openai_key)
+        t0 = time.perf_counter()
         response = client.chat.completions.create(
             model=args.model_name,
             messages=messages,
             **self.generate_kwargs
         )
+        gpt_ms = round((time.perf_counter() - t0) * 1000)
         opening, _ = self.postprocess_response(response)
         self.context.append({'Assistant': opening})
-        return opening
+        return opening, gpt_ms
 
     def chatting(self, context):
         processed_context = self.preprocess_conversation(context, args.max_turn)
 
         client = openai.OpenAI(api_key=args.openai_key)
+        t0 = time.perf_counter()
         response = client.chat.completions.create(
             model=args.model_name,
             messages=processed_context,
             **self.generate_kwargs
         )
+        gpt_ms = round((time.perf_counter() - t0) * 1000)
 
         assistant_response, cot_response = self.postprocess_response(response)
 
-        return assistant_response, cot_response
+        return assistant_response, cot_response, gpt_ms
 
 
 @app.route("/", methods=["POST"])
@@ -283,8 +289,8 @@ def post_method():
 
         # New image: reset context and generate GPT opening based on image content.
         if data.get('reset'):
-            opening = _socialREMChat.generate_opening(user_message=data.get('user_message', ''))
-            return json.dumps({"return_message": opening, "last": False})
+            opening, gpt_ms = _socialREMChat.generate_opening(user_message=data.get('user_message', ''))
+            return json.dumps({"return_message": opening, "last": False, "timing": {"gpt_ms": gpt_ms}})
 
         if 'user_message' in data:
             user_message = data['user_message']
@@ -301,17 +307,18 @@ def post_method():
             #     user_transcripts = GoogleTranslator(source='zh-TW', target='en').translate_batch(user_transcripts)
 
             save_file( _socialREMChat.context)
+            return json.dumps({"return_message": response, "last": last, "timing": {}})
 
         else:
             last = False
-            response, cot_response = _socialREMChat.chatting(context=_socialREMChat.context)
+            response, cot_response, gpt_ms = _socialREMChat.chatting(context=_socialREMChat.context)
             _socialREMChat.context.append({'Assistant': response})
 
             print('[Chain-of-Thought]: ')
             for output_step in cot_response:
                 print(output_step)
 
-        return json.dumps({"return_message": response, "last": last})
+        return json.dumps({"return_message": response, "last": last, "timing": {"gpt_ms": gpt_ms}})
     else:
         return json.dumps({"return_message": 'Invalid request method'})
 

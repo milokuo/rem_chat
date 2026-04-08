@@ -4,6 +4,39 @@
 
 ---
 
+## 2026-04-08 — 部件時間消耗分析
+**檔案：** `2026-04-08_timing-analysis.md`
+
+**核心變更：** 在 server (8082) 與 chat_engine (8087) 加入全路徑計時儀器，記錄至 `timing_log.jsonl`
+
+| 類別 | 內容 |
+|------|------|
+| 新增 | `_timed_worker()`、`_log_timing()` helpers；`_TIMING_LOG` 絕對路徑 |
+| 計時 | 新圖流程：sim_reset / CLIP / DETR / BLIP（各別）/ RAG / chat_engine / GPT |
+| 計時 | 文字流程：sim_pre / chat_engine / GPT / translate(zh) / sim_post |
+| 傳遞 | chat_engine 回傳 `timing.gpt_ms`，server 整合至同一筆日誌 |
+
+**影響的檔案：**
+- `predictors/clip_iu/chat_engine.py`
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`
+
+---
+
+## 2026-04-08 — chat_engine 重構：消除重複程式碼 + 強化 CoT 解析
+**檔案：** `2026-04-08_chat-engine-refactor.md`
+
+**核心變更：** 抽出 `_build_retrieved_block()`；instruct_prompt 加 JSON_OUTPUT tag，postprocess_response 優先以 JSON 解析取代脆弱正則
+
+| 類別 | 內容 |
+|------|------|
+| 重構 | `_build_retrieved_block()` 消除兩處 ~15 行重複程式碼 |
+| 強化 | JSON_OUTPUT tag 作為解析第一優先，原 step-9 regex / fallback 自動降級保留相容 |
+
+**影響的檔案：**
+- `predictors/clip_iu/chat_engine.py`
+
+---
+
 ## 2026-04-08 — 圖片分析並行化與上傳邏輯重構
 **檔案：** `2026-04-08_parallel-analysis-refactor.md`
 
