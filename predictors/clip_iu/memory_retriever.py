@@ -168,7 +168,7 @@ def retrieve(
     scored = []
     for p in candidates:
         emb = p.get("embedding")
-        visual = _cosine_similarity(query_embedding, emb) if emb else 0.0
+        visual = _cosine_similarity(query_embedding, emb) if emb is not None else 0.0
 
         entity = _entity_score(p, query_entities) if has_entity_signal else 0.0
         theme_match = bool(query_theme and p.get("theme") == query_theme)

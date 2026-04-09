@@ -4,6 +4,25 @@
 
 ---
 
+## 2026-04-09 — RAG 檢索失敗修正：NumPy Embedding Bool 判斷錯誤
+**檔案：** `2026-04-09_numpy-embedding-bugfix.md`
+
+**狀態：** 已修正
+
+**核心變更：** `memory_retriever.py` 的 `if emb` → `if emb is not None`，修正 ChromaDB 回傳 NumPy array 時 RAG 靜默失敗導致跨照片記憶完全消失的 bug
+
+| 類別 | 內容 |
+|------|------|
+| Bug | `ValueError: The truth value of an array with more than one element is ambiguous` |
+| 原因 | ChromaDB embedding 為 NumPy array，`if emb:` 對 array 不合法 |
+| 修正 | `memory_retriever.py` L171 + `photo_db.py` L102 改用 `is not None` |
+
+**影響的檔案：**
+- `predictors/clip_iu/memory_retriever.py`（修正）
+- `predictors/clip_iu/photo_db.py`（修正）
+
+---
+
 ## 2026-04-09 — Debug Dashboard 可觀測性系統（Phases 1–4）
 **檔案：** `2026-04-09_debug-dashboard-observability.md`
 

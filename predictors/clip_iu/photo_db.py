@@ -99,7 +99,7 @@ class PhotoDB:
         for i, photo_id in enumerate(results["ids"]):
             item = {"id": photo_id}
             item.update(results["metadatas"][i])
-            if with_embeddings and results.get("embeddings"):
+            if with_embeddings and results.get("embeddings") is not None:
                 item["embedding"] = results["embeddings"][i]
             items.append(item)
         return items[:n_results]
