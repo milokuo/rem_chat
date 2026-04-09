@@ -4,7 +4,7 @@ import json
 import logging
 import datetime
 import time
-from flask import Flask, request
+from flask import Flask, request, Response
 from deep_translator import GoogleTranslator
 
 from config import parse_args
@@ -150,7 +150,7 @@ class SocialREMChat(object):
             + "\n[End of related memories. The above are different photos from the current one.]\n"
         )
 
-    def preprocess_conversation(self, context, max_turn):
+    def preprocess_conversation(self, context, max_turn, reply_lang=None):
         _context = list()
 
         self.observation_prompt = self.system_observations + self.caption_str + "\n" + self.system_observations_obj + self.obj_str
@@ -162,12 +162,15 @@ class SocialREMChat(object):
 
         if max_turn == -1: pass
         else: _context = _context[-(max_turn * 2): ]
-        
+
         print('[Context]: \n' + '\n'.join(_context))
-        
+
         _context[-1] = _context[-1] + self.last_message_prompt + _context[-1]
-        _context = self.system_prompt + self.conversation_prompt + '\n'.join(_context) + self.seperate_prompt + self.instruct_prompt
-        
+
+        lang_to_use = reply_lang or args.lang
+        lang_suffix = "\n請以繁體中文（台灣用語）回覆使用者。" if lang_to_use == 'zh' else ""
+        _context = self.system_prompt + self.conversation_prompt + '\n'.join(_context) + self.seperate_prompt + self.instruct_prompt + lang_suffix
+
         full_prompt = [{'role': 'system', 'content': _context}]
 
         print('\n' + '='*60)
@@ -176,6 +179,37 @@ class SocialREMChat(object):
         print('='*60 + '\n')
 
         return full_prompt
+
+    def preprocess_conversation_simple(self, context, max_turn, reply_lang=None):
+        """Simplified prompt for streaming mode: no CoT/JSON, direct reply in 1-2 sentences."""
+        _context = list()
+
+        self.observation_prompt = self.system_observations + self.caption_str + "\n" + self.system_observations_obj + self.obj_str
+        self.system_prompt = self.system_task + self.system_strategies + self.observation_prompt + self._build_retrieved_block()
+
+        for idx in range(len(context)):
+            for k, v in context[idx].items():
+                _context.append('{}：{}'.format(k, v))
+
+        if max_turn != -1:
+            _context = _context[-(max_turn * 2):]
+
+        lang_to_use = reply_lang or args.lang
+        lang_suffix = "\n請以繁體中文（台灣用語）回覆使用者。" if lang_to_use == 'zh' else ""
+        if lang_to_use == 'zh':
+            simple_inst = "請直接回覆使用者（最多2句話），並選擇一個合適的支援策略。不需要輸出分析步驟或 JSON。"
+        else:
+            simple_inst = "Reply directly to the User in 1-2 sentences using a suitable support strategy. Do not output analysis steps or JSON."
+
+        full_context = (
+            self.system_prompt
+            + self.conversation_prompt
+            + '\n'.join(_context)
+            + self.seperate_prompt
+            + simple_inst
+            + lang_suffix
+        )
+        return [{'role': 'system', 'content': full_context}]
 
     def postprocess_response(self, response):
         top_response = response.choices[0].message.content
@@ -226,22 +260,25 @@ class SocialREMChat(object):
 
         return assistant_response, cot_response
     
-    def generate_opening(self, user_message=''):
+    def generate_opening(self, user_message='', reply_lang=None):
         # Always reset context when a new image is uploaded.
         self.context = []
 
         self.observation_prompt = self.system_observations + self.caption_str + "\n" + self.system_observations_obj + self.obj_str
         system_content = self.system_task + self.system_strategies + self.observation_prompt + self._build_retrieved_block()
 
+        lang_to_use = reply_lang or args.lang
+        lang_suffix = "\n請以繁體中文（台灣用語）回覆使用者。" if lang_to_use == 'zh' else ""
+
         if user_message:
-            first_turn = user_message + '\n\n' + self.instruct_prompt
+            first_turn = user_message + '\n\n' + self.instruct_prompt + lang_suffix
             self.context = [{'User': user_message}]
         else:
-            if args.lang == 'zh':
+            if lang_to_use == 'zh':
                 opening_instruction = "這是對話的開場，尚未有User的發言。根據照片內容選擇一個合適的支援策略，並生成一個溫暖親切的開場問題（只問一個）。"
             else:
                 opening_instruction = "This is the opening of the conversation with no prior user utterance. Based on the photo content, choose one Support Strategy and generate a warm opening with exactly ONE question."
-            first_turn = opening_instruction + '\n\n' + self.instruct_prompt
+            first_turn = opening_instruction + '\n\n' + self.instruct_prompt + lang_suffix
             self.context = []
 
         messages = [
@@ -292,8 +329,8 @@ class SocialREMChat(object):
             logging.warning("evidence check failed: %s", exc)
             return response
 
-    def chatting(self, context):
-        processed_context = self.preprocess_conversation(context, args.max_turn)
+    def chatting(self, context, reply_lang=None):
+        processed_context = self.preprocess_conversation(context, args.max_turn, reply_lang=reply_lang)
         self._last_full_prompt = processed_context
 
         client = openai.OpenAI(api_key=args.openai_key)
@@ -326,9 +363,11 @@ def post_method():
         if 'retrieved_context' in data:
             _socialREMChat.retrieved_context = data['retrieved_context']
 
+        req_lang = data.get('lang', args.lang)
+
         # New image: reset context and generate GPT opening based on image content.
         if data.get('reset'):
-            opening, gpt_ms = _socialREMChat.generate_opening(user_message=data.get('user_message', ''))
+            opening, gpt_ms = _socialREMChat.generate_opening(user_message=data.get('user_message', ''), reply_lang=req_lang)
             return json.dumps({
                 "return_message": opening,
                 "last": False,
@@ -345,19 +384,12 @@ def post_method():
         if end_trigger in _socialREMChat.context[-1]['User'].lower():
             last = True
             response = "Closing this conversation"
-            # user_transcripts = list()
-            # for utter in context:
-            #     if 'User' in utter.keys(): user_transcripts.append(utter['User'])
-
-            # if args.lang == 'zh':
-            #     user_transcripts = GoogleTranslator(source='zh-TW', target='en').translate_batch(user_transcripts)
-
-            save_file( _socialREMChat.context)
+            save_file(_socialREMChat.context)
             return json.dumps({"return_message": response, "last": last, "timing": {}})
 
         else:
             last = False
-            response, cot_response, gpt_ms = _socialREMChat.chatting(context=_socialREMChat.context)
+            response, cot_response, gpt_ms = _socialREMChat.chatting(context=_socialREMChat.context, reply_lang=req_lang)
             _socialREMChat.context.append({'Assistant': response})
 
             print('[Chain-of-Thought]: ')
@@ -374,6 +406,62 @@ def post_method():
         })
     else:
         return json.dumps({"return_message": 'Invalid request method'})
+
+
+@app.route("/stream", methods=["POST"])
+def post_stream():
+    """Streaming endpoint: no CoT/JSON, returns tokens via SSE."""
+    data = json.loads(request.data)
+
+    if 'caption_str' in data:
+        _socialREMChat.caption_str = data['caption_str']
+    if 'obj_str' in data:
+        _socialREMChat.obj_str = data['obj_str']
+    if 'retrieved_context' in data:
+        _socialREMChat.retrieved_context = data['retrieved_context']
+
+    req_lang = data.get('lang', args.lang)
+    user_message = data.get('user_message', '')
+    _socialREMChat.context.append({'User': user_message})
+
+    # End trigger: emit a single token and close.
+    if end_trigger in user_message.lower():
+        save_file(_socialREMChat.context)
+        closing = 'Closing this conversation'
+        def _end_gen():
+            yield f"data: {json.dumps({'token': closing})}\n\n"
+            yield f"data: {json.dumps({'done': True, 'full': closing})}\n\n"
+        return Response(_end_gen(), mimetype='text/event-stream')
+
+    processed_context = _socialREMChat.preprocess_conversation_simple(
+        _socialREMChat.context, args.max_turn, reply_lang=req_lang
+    )
+
+    client = openai.OpenAI(api_key=args.openai_key)
+
+    def generate():
+        full_text = ""
+        try:
+            response = client.chat.completions.create(
+                model=args.model_name,
+                messages=processed_context,
+                stream=True,
+                **_socialREMChat.generate_kwargs
+            )
+            for chunk in response:
+                delta = chunk.choices[0].delta
+                token = (delta.content or "") if delta else ""
+                if token:
+                    full_text += token
+                    yield f"data: {json.dumps({'token': token}, ensure_ascii=False)}\n\n"
+        except Exception as exc:
+            yield f"data: {json.dumps({'error': str(exc)})}\n\n"
+
+        if full_text:
+            _socialREMChat.context.append({'Assistant': full_text})
+        yield f"data: {json.dumps({'done': True, 'full': full_text}, ensure_ascii=False)}\n\n"
+
+    return Response(generate(), mimetype='text/event-stream')
 
 
 def save_file(context):

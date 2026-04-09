@@ -4,6 +4,28 @@
 
 ---
 
+## 2026-04-09 — Frontend UX 改善 + GPT Streaming（Phases 1–7）
+**檔案：** `2026-04-09_frontend-ux-streaming.md`
+
+**狀態：** 已實作
+
+**核心變更：** 使用者訊息即時顯示；Bot thinking indicator；ThreadingHTTPServer；GPT 直接輸出中文；chat_engine `/stream` SSE 端點；server `/interact_stream` proxy；精確模式 toggle；新增使用者 bug 修正（快取 + 錯誤處理）
+
+| 類別 | 內容 |
+|------|------|
+| Phase 1–2 | 使用者訊息即時顯示 + typing indicator（純前端） |
+| Phase 3–4 | ThreadingHTTPServer + HTTP/1.1；GPT 直接輸出繁體中文 |
+| Phase 5 | `chat_engine.py` 新增 `preprocess_conversation_simple()` + `/stream` SSE 端點 |
+| Phase 6 | `server_updated_zhengxuan.py` 新增 `_stream_interact()` + `/interact_stream` 路由 |
+| Phase 7 | 前端 streaming 接收（SSE reader + TextDecoder flush + error 顯示）+ 精確模式 toggle |
+| Bug fix | `GET /users` Cache-Control + addUserBtn 錯誤處理 + `list_patients` 保護 |
+
+**影響的檔案：**
+- `predictors/clip_iu/chat_engine.py`（修改）
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`（修改）
+
+---
+
 ## 2026-04-09 — RAG 檢索失敗修正：NumPy Embedding Bool 判斷錯誤
 **檔案：** `2026-04-09_numpy-embedding-bugfix.md`
 
