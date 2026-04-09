@@ -4,6 +4,33 @@
 
 ---
 
+## 2026-04-09 — Debug Dashboard 可觀測性系統（Phases 1–4）
+**檔案：** `2026-04-09_debug-dashboard-observability.md`
+
+**狀態：** 已實作，41 tests 全部通過
+
+**核心變更：** port 8090 debug dashboard；RAG score breakdown（visual/entity/theme/recency）；chat_engine 暴露 full_prompt + raw_response；server fire-and-forget trace
+
+| 類別 | 內容 |
+|------|------|
+| Phase 1 | `memory_retriever.py` 加 `_entity_score`、`_theme_match`、`_recency_score` |
+| Phase 2 | `debug_dashboard.py` Flask app + `debug_dashboard.html` 雙欄 UI（16+17 tests）|
+| Phase 3 | `chat_engine.py` response 加 `full_prompt`、`raw_response`、`model_name`（13 tests）|
+| Phase 4 | `server_updated_zhengxuan.py` 加 `_post_trace()` daemon thread + 兩個 call sites（11 tests）|
+
+**影響的檔案：**
+- `predictors/clip_iu/memory_retriever.py`（修改）
+- `predictors/clip_iu/test_memory_retriever.py` ← NEW
+- `ParlAI/projects/image_chat/debug_dashboard.py` ← NEW
+- `ParlAI/projects/image_chat/templates/debug_dashboard.html` ← NEW
+- `ParlAI/projects/image_chat/test_debug_dashboard.py` ← NEW
+- `predictors/clip_iu/chat_engine.py`（修改）
+- `predictors/clip_iu/test_chat_engine_trace_fields.py` ← NEW
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`（修改）
+- `ParlAI/projects/image_chat/test_server_trace.py` ← NEW
+
+---
+
 ## 2026-04-09 — cgi 移除 + Server 模組拆分（H2/H3 品質修正）
 **檔案：** `2026-04-09_cgi-replacement-module-split.md`
 

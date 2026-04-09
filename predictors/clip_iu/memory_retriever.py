@@ -183,8 +183,11 @@ def retrieve(
             has_theme=has_theme_signal,
             has_recency=has_recency_signal,
         )
-        p["_rank_score"]   = score
-        p["_visual_score"] = visual
+        p["_rank_score"]    = score
+        p["_visual_score"]  = visual
+        p["_entity_score"]  = entity
+        p["_theme_match"]   = theme_match
+        p["_recency_score"] = recency
         scored.append(p)
 
     scored.sort(key=lambda x: x["_rank_score"], reverse=True)

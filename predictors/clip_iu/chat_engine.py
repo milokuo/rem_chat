@@ -118,6 +118,9 @@ class SocialREMChat(object):
                                    "9. Reply === User's last sentence === (up to 2 sentences): \n" \
                                    'JSON_OUTPUT: {"reply": "<reply text>", "strategy": "<chosen strategy>"}'
         
+        self._last_full_prompt: list = []
+        self._last_raw_response: str = ""
+
         # gpt-5-mini (and similar reasoning models) do not support sampling parameters.
         _sampling_unsupported = args.model_name.startswith('gpt-5')
         if _sampling_unsupported:
@@ -245,6 +248,7 @@ class SocialREMChat(object):
             {'role': 'system', 'content': system_content},
             {'role': 'user', 'content': first_turn},
         ]
+        self._last_full_prompt = messages
         client = openai.OpenAI(api_key=args.openai_key)
         t0 = time.perf_counter()
         response = client.chat.completions.create(
@@ -253,6 +257,7 @@ class SocialREMChat(object):
             **self.generate_kwargs
         )
         gpt_ms = round((time.perf_counter() - t0) * 1000)
+        self._last_raw_response = response.choices[0].message.content
         opening, _ = self.postprocess_response(response)
         self.context.append({'Assistant': opening})
         return opening, gpt_ms
@@ -289,6 +294,7 @@ class SocialREMChat(object):
 
     def chatting(self, context):
         processed_context = self.preprocess_conversation(context, args.max_turn)
+        self._last_full_prompt = processed_context
 
         client = openai.OpenAI(api_key=args.openai_key)
         t0 = time.perf_counter()
@@ -298,6 +304,7 @@ class SocialREMChat(object):
             **self.generate_kwargs
         )
         gpt_ms = round((time.perf_counter() - t0) * 1000)
+        self._last_raw_response = response.choices[0].message.content
 
         assistant_response, cot_response = self.postprocess_response(response)
         assistant_response = self._check_response_grounding(assistant_response, client)
@@ -322,7 +329,14 @@ def post_method():
         # New image: reset context and generate GPT opening based on image content.
         if data.get('reset'):
             opening, gpt_ms = _socialREMChat.generate_opening(user_message=data.get('user_message', ''))
-            return json.dumps({"return_message": opening, "last": False, "timing": {"gpt_ms": gpt_ms}})
+            return json.dumps({
+                "return_message": opening,
+                "last": False,
+                "timing": {"gpt_ms": gpt_ms},
+                "full_prompt": _socialREMChat._last_full_prompt,
+                "raw_response": _socialREMChat._last_raw_response,
+                "model_name": args.model_name,
+            })
 
         if 'user_message' in data:
             user_message = data['user_message']
@@ -350,7 +364,14 @@ def post_method():
             for output_step in cot_response:
                 print(output_step)
 
-        return json.dumps({"return_message": response, "last": last, "timing": {"gpt_ms": gpt_ms}})
+        return json.dumps({
+            "return_message": response,
+            "last": last,
+            "timing": {"gpt_ms": gpt_ms},
+            "full_prompt": _socialREMChat._last_full_prompt,
+            "raw_response": _socialREMChat._last_raw_response,
+            "model_name": args.model_name,
+        })
     else:
         return json.dumps({"return_message": 'Invalid request method'})
 
