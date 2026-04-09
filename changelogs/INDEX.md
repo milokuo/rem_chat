@@ -4,6 +4,31 @@
 
 ---
 
+## 2026-04-09 — cgi 移除 + Server 模組拆分（H2/H3 品質修正）
+**檔案：** `2026-04-09_cgi-replacement-module-split.md`
+
+**狀態：** 已修正並提交
+
+**核心變更：** 移除棄用的 `import cgi`，以 `email.parser` stdlib 替換；將 929 行主檔拆為 5 個獨立模組（782 行）；28/28 tests 通過
+
+| 類別 | 內容 |
+|------|------|
+| H3 修正 | 新增 `server_multipart.py`，`_parse_multipart` 取代 `cgi.FieldStorage` |
+| H2 修正 | 拆出 `server_timing/users/conv_store/memory.py` 四個模組 |
+| 測試 | `test_parse_multipart.py`（7）+ `test_server_modules.py`（21）|
+
+**影響的檔案：**
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`（修改）
+- `ParlAI/projects/image_chat/server_multipart.py` ← NEW
+- `ParlAI/projects/image_chat/server_timing.py` ← NEW
+- `ParlAI/projects/image_chat/server_users.py` ← NEW
+- `ParlAI/projects/image_chat/server_conv_store.py` ← NEW
+- `ParlAI/projects/image_chat/server_memory.py` ← NEW
+- `ParlAI/projects/image_chat/test_parse_multipart.py` ← NEW
+- `ParlAI/projects/image_chat/test_server_modules.py` ← NEW
+
+---
+
 ## 2026-04-09 — 三路記憶系統 Bug 修正（Codex 驗證）
 **檔案：** `2026-04-09_memory-bugfix-codex.md`
 
