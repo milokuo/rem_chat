@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-05-06 — Debug Dashboard 修正與 Memory Browser
+**檔案：** `2026-05-06_dashboard-fixes.md`
+
+**狀態：** 已實作
+
+**核心變更：** 修正 streaming 模式 full_prompt 為空陣列；新增 Memory Browser 分頁，直接查詢 ChromaDB（不需 8082）
+
+| 類別 | 內容 |
+|------|------|
+| Bug fix | `chat_engine.py /stream` 現在儲存 `_last_full_prompt` 並在 done event 攜帶 `full_prompt` |
+| Bug fix | `server_updated_zhengxuan.py` streaming trace 改從 SSE done payload 讀 `full_prompt`，不再寫死 `[]` |
+| 新功能 | `debug_dashboard.py` 新增 `/api/memory/patients`、`/api/memory/<patient_id>` 路由 |
+| 新功能 | Dashboard HTML 新增 Memory Browser 分頁（病患清單 + 照片卡片 + conv_summary 顯示）|
+
+**影響的檔案：**
+- `predictors/clip_iu/chat_engine.py`（修正）
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`（修正）
+- `ParlAI/projects/image_chat/debug_dashboard.py`（修改）
+- `ParlAI/projects/image_chat/templates/debug_dashboard.html`（修改）
+- `CLAUDE.md`（文件更新）
+
+---
+
 ## 2026-04-09 — Frontend UX 改善 + GPT Streaming（Phases 1–7）
 **檔案：** `2026-04-09_frontend-ux-streaming.md`
 

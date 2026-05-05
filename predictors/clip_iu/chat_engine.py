@@ -436,6 +436,7 @@ def post_stream():
     processed_context = _socialREMChat.preprocess_conversation_simple(
         _socialREMChat.context, args.max_turn, reply_lang=req_lang
     )
+    _socialREMChat._last_full_prompt = processed_context
 
     client = openai.OpenAI(api_key=args.openai_key)
 
@@ -459,7 +460,7 @@ def post_stream():
 
         if full_text:
             _socialREMChat.context.append({'Assistant': full_text})
-        yield f"data: {json.dumps({'done': True, 'full': full_text}, ensure_ascii=False)}\n\n"
+        yield f"data: {json.dumps({'done': True, 'full': full_text, 'full_prompt': processed_context}, ensure_ascii=False)}\n\n"
 
     return Response(generate(), mimetype='text/event-stream')
 
