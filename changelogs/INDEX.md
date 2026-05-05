@@ -4,6 +4,26 @@
 
 ---
 
+## 2026-05-06 — Streaming 與 Accurate 路徑 Prompt 對齊
+**檔案：** `2026-05-06_streaming-demand-format-alignment.md`
+
+**狀態：** 已實作
+
+**核心變更：** 修正 `/stream` 使用了不同 prompt 的行為差異，讓 streaming 與非 streaming 路徑都使用 Demand Format + `JSON_OUTPUT`
+
+| 類別 | 內容 |
+|------|------|
+| Bug fix | `chat_engine.py /stream` 改走 `preprocess_conversation()`，不再使用 simple direct-reply prompt |
+| Bug fix | `chat_engine.py` 新增 `postprocess_response_text()`，streaming 與非 streaming 共用同一回覆解析邏輯 |
+| Test | `test_chat_engine_trace_fields.py` 新增 streaming 對齊測試（prompt 內容與回覆欄位） |
+
+**影響的檔案：**
+- `predictors/clip_iu/chat_engine.py`
+- `predictors/clip_iu/test_chat_engine_trace_fields.py`
+- `changelogs/2026-05-06_streaming-demand-format-alignment.md`（新增）
+
+---
+
 ## 2026-05-06 — Debug Dashboard 修正與 Memory Browser
 **檔案：** `2026-05-06_dashboard-fixes.md`
 

@@ -211,9 +211,7 @@ class SocialREMChat(object):
         )
         return [{'role': 'system', 'content': full_context}]
 
-    def postprocess_response(self, response):
-        top_response = response.choices[0].message.content
-
+    def postprocess_response_text(self, top_response):
         # Primary: parse JSON_OUTPUT tag produced by the instruct_prompt.
         # Use [^\n]+ (not [^}]+) so reply text containing } doesn't truncate early.
         json_match = re.search(r'JSON_OUTPUT:\s*(\{[^\n]+\})', top_response)
@@ -259,6 +257,9 @@ class SocialREMChat(object):
             assistant_response = assistant_response[:-1]
 
         return assistant_response, cot_response
+
+    def postprocess_response(self, response):
+        return self.postprocess_response_text(response.choices[0].message.content)
     
     def generate_opening(self, user_message='', reply_lang=None):
         # Always reset context when a new image is uploaded.
@@ -410,7 +411,12 @@ def post_method():
 
 @app.route("/stream", methods=["POST"])
 def post_stream():
-    """Streaming endpoint: no CoT/JSON, returns tokens via SSE."""
+    """Streaming endpoint that preserves the same Demand Format prompt as /.
+
+    The model still produces the full structured CoT/JSON_OUTPUT internally so
+    debug traces match the accurate path. We buffer the raw stream, parse the
+    final reply, and send only the clean reply to the browser.
+    """
     data = json.loads(request.data)
 
     if 'caption_str' in data:
@@ -433,7 +439,7 @@ def post_stream():
             yield f"data: {json.dumps({'done': True, 'full': closing})}\n\n"
         return Response(_end_gen(), mimetype='text/event-stream')
 
-    processed_context = _socialREMChat.preprocess_conversation_simple(
+    processed_context = _socialREMChat.preprocess_conversation(
         _socialREMChat.context, args.max_turn, reply_lang=req_lang
     )
     _socialREMChat._last_full_prompt = processed_context
@@ -441,8 +447,11 @@ def post_stream():
     client = openai.OpenAI(api_key=args.openai_key)
 
     def generate():
-        full_text = ""
+        raw_text = ""
+        final_reply = ""
+        gpt_ms = None
         try:
+            t0 = time.perf_counter()
             response = client.chat.completions.create(
                 model=args.model_name,
                 messages=processed_context,
@@ -453,14 +462,26 @@ def post_stream():
                 delta = chunk.choices[0].delta
                 token = (delta.content or "") if delta else ""
                 if token:
-                    full_text += token
-                    yield f"data: {json.dumps({'token': token}, ensure_ascii=False)}\n\n"
+                    raw_text += token
+            gpt_ms = round((time.perf_counter() - t0) * 1000)
+            _socialREMChat._last_raw_response = raw_text
+            final_reply, _ = _socialREMChat.postprocess_response_text(raw_text)
+            final_reply = _socialREMChat._check_response_grounding(final_reply, client)
+            if final_reply:
+                _socialREMChat.context.append({'Assistant': final_reply})
+                yield f"data: {json.dumps({'token': final_reply}, ensure_ascii=False)}\n\n"
         except Exception as exc:
             yield f"data: {json.dumps({'error': str(exc)})}\n\n"
 
-        if full_text:
-            _socialREMChat.context.append({'Assistant': full_text})
-        yield f"data: {json.dumps({'done': True, 'full': full_text, 'full_prompt': processed_context}, ensure_ascii=False)}\n\n"
+        done_payload = {
+            'done': True,
+            'full': final_reply,
+            'full_prompt': processed_context,
+            'raw_response': raw_text,
+            'model_name': args.model_name,
+            'timing': {'gpt_ms': gpt_ms} if gpt_ms is not None else {},
+        }
+        yield f"data: {json.dumps(done_payload, ensure_ascii=False)}\n\n"
 
     return Response(generate(), mimetype='text/event-stream')
 

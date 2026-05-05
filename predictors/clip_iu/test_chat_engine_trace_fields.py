@@ -28,6 +28,25 @@ def _fake_gpt_response(text: str) -> MagicMock:
     return resp
 
 
+def _fake_stream_chunk(text: str) -> MagicMock:
+    """Minimal streamed OpenAI chunk stub."""
+    delta = MagicMock()
+    delta.content = text
+    choice = MagicMock()
+    choice.delta = delta
+    chunk = MagicMock()
+    chunk.choices = [choice]
+    return chunk
+
+
+def _fake_stream_response(text: str):
+    midpoint = max(1, len(text) // 2)
+    return [
+        _fake_stream_chunk(text[:midpoint]),
+        _fake_stream_chunk(text[midpoint:]),
+    ]
+
+
 RAW_REPLY = '9. Sure!\nJSON_OUTPUT: {"reply": "Sure!", "strategy": "[Others]"}'
 
 
@@ -70,6 +89,18 @@ class TestChatEngineTraceFields(unittest.TestCase):
             content_type='application/json',
         )
         return json.loads(resp.data)
+
+    def _post_stream(self, payload: dict) -> list:
+        resp = self.flask_client.post(
+            '/stream',
+            data=json.dumps(payload),
+            content_type='application/json',
+        )
+        events = []
+        for block in resp.data.decode('utf-8').strip().split('\n\n'):
+            if block.startswith('data: '):
+                events.append(json.loads(block[6:]))
+        return events
 
     # ── full_prompt ──────────────────────────────────────────────────────
 
@@ -140,6 +171,32 @@ class TestChatEngineTraceFields(unittest.TestCase):
         """return_message must be the parsed/clean reply, not the raw GPT output."""
         body = self._post({'user_message': 'Hello'})
         self.assertEqual(body['return_message'], 'Sure!')
+
+    # ---- streaming path must use the same structured prompt internally ----
+
+    def test_stream_prompt_uses_demand_format(self):
+        """Streaming mode should not switch to the old simple direct-reply prompt."""
+        self.mock_client.chat.completions.create.return_value = _fake_stream_response(RAW_REPLY)
+        events = self._post_stream({'user_message': 'Hi there'})
+        done = events[-1]
+        prompt = done['full_prompt'][0]['content']
+
+        self.assertIn('Demand Format', prompt)
+        self.assertIn('JSON_OUTPUT', prompt)
+        self.assertNotIn('Do not output analysis steps or JSON', prompt)
+
+    def test_stream_returns_parsed_reply_but_keeps_raw_response(self):
+        """Browser receives the clean reply; dashboard still receives raw CoT/JSON."""
+        self.mock_client.chat.completions.create.return_value = _fake_stream_response(RAW_REPLY)
+        events = self._post_stream({'user_message': 'Hi there'})
+        token_text = ''.join(event.get('token', '') for event in events)
+        done = events[-1]
+
+        self.assertEqual(token_text, 'Sure!')
+        self.assertEqual(done['full'], 'Sure!')
+        self.assertEqual(done['raw_response'], RAW_REPLY)
+        self.assertIn('model_name', done)
+        self.assertIn('gpt_ms', done['timing'])
 
 
 if __name__ == '__main__':
