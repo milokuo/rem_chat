@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>rem_chat Debug Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <style>
+    body { background: #0f1117; color: #e2e8f0; font-family: 'Segoe UI', sans-serif; }
+    .sidebar { width: 280px; min-width: 280px; border-right: 1px solid #2d3748; overflow-y: auto; height: 100vh; position: sticky; top: 0; }
+    .main-panel { flex: 1; overflow-y: auto; padding: 1.5rem; max-height: 100vh; }
+    .turn-item { cursor: pointer; padding: 0.6rem 1rem; border-bottom: 1px solid #2d3748; transition: background 0.15s; }
+    .turn-item:hover, .turn-item.is-active { background: #1e2a3a; }
+    .turn-item .ts { font-size: 0.7rem; color: #718096; }
+    .turn-item .preview { font-size: 0.82rem; color: #a0aec0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; color: #718096; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .score-bar-wrap { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; }
+    .score-bar-label { width: 70px; font-size: 0.75rem; color: #a0aec0; flex-shrink: 0; }
+    .score-bar-track { flex: 1; height: 8px; background: #2d3748; border-radius: 4px; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 4px; }
+    .score-bar-value { width: 38px; text-align: right; font-size: 0.75rem; color: #e2e8f0; }
+    .rag-table th { font-size: 0.72rem; color: #718096; white-space: nowrap; }
+    .rag-table td { font-size: 0.8rem; vertical-align: middle; }
+    .rank-1 td { border-left: 3px solid #48bb78 !important; }
+    .thumb { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; background: #2d3748; }
+    .tag.is-match { background: #276749; color: #c6f6d5; }
+    .tag.is-nomatch { background: #2d3748; color: #718096; }
+    .collapsible-header { cursor: pointer; user-select: none; }
+    .collapsible-header:hover { color: #90cdf4; }
+    pre.prompt-pre { background: #1a202c; padding: 1rem; border-radius: 6px; font-size: 0.75rem; white-space: pre-wrap; word-break: break-word; max-height: 380px; overflow-y: auto; color: #a0aec0; }
+    .timing-bar-group { display: flex; height: 24px; border-radius: 4px; overflow: hidden; gap: 1px; }
+    .timing-seg { display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; min-width: 0; padding: 0 2px; }
+    .nav-header { padding: 1rem; border-bottom: 1px solid #2d3748; display: flex; align-items: center; justify-content: space-between; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #48bb78; display: inline-block; animation: blink 1.2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .panel-box { background: #1a202c; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; }
+    .tab-btn { background: none; border: none; color: #718096; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 4px; }
+    .tab-btn.is-active { background: #2d3748; color: #e2e8f0; }
+    .mem-patient-item { cursor: pointer; padding: 0.5rem 1rem; border-bottom: 1px solid #2d3748; font-size: 0.82rem; }
+    .mem-patient-item:hover, .mem-patient-item.is-active { background: #1e2a3a; }
+    .mem-badge { background: #2d3748; color: #a0aec0; border-radius: 10px; padding: 0 6px; font-size: 0.7rem; margin-left: 6px; }
+    .mem-photo-card { background: #1a202c; border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .mem-photo-card.has-summary { border-left: 3px solid #48bb78; }
+    .mem-photo-card.no-summary { border-left: 3px solid #2d3748; opacity: 0.7; }
+    .mem-meta-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.3rem 1rem; font-size: 0.75rem; margin-top: 0.4rem; }
+    .mem-meta-key { color: #718096; }
+    .mem-meta-val { color: #e2e8f0; }
+  </style>
+</head>
+<body>
+<div style="display:flex; height:100vh; overflow:hidden;">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="nav-header">
+      <span style="font-weight:700; font-size:0.9rem;">rem_chat Debug</span>
+      <div style="display:flex;gap:4px;align-items:center;">
+        <button class="tab-btn is-active" id="tab-traces" onclick="switchTab('traces')">Traces</button>
+        <button class="tab-btn" id="tab-memory" onclick="switchTab('memory')">Memory</button>
+        <span id="live-dot" class="dot" title="Auto-refresh active" style="margin-left:4px;"></span>
+      </div>
+    </div>
+    <div id="turn-list"></div>
+    <div id="patient-list" style="display:none;"></div>
+  </aside>
+
+  <!-- Detail Panel -->
+  <main class="main-panel" id="detail-panel">
+    <div style="color:#4a5568; margin-top:5rem; text-align:center;">
+      Select a turn from the sidebar →
+    </div>
+  </main>
+</div>
+
+<script>
+// ---- State ------------------------------------------------------------------
+let turns = [];
+let selected = null;
+let currentTab = "traces";
+let patients = [];
+let selectedPatient = null;
+
+// ---- Tab switching ----------------------------------------------------------
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById("tab-traces").classList.toggle("is-active", tab === "traces");
+  document.getElementById("tab-memory").classList.toggle("is-active", tab === "memory");
+  document.getElementById("turn-list").style.display   = tab === "traces" ? "" : "none";
+  document.getElementById("patient-list").style.display = tab === "memory" ? "" : "none";
+  if (tab === "memory") {
+    fetchPatients();
+    document.getElementById("detail-panel").innerHTML =
+      '<div style="color:#4a5568;margin-top:5rem;text-align:center;">Select a patient →</div>';
+  } else {
+    renderSidebar();
+    document.getElementById("detail-panel").innerHTML =
+      '<div style="color:#4a5568;margin-top:5rem;text-align:center;">Select a turn from the sidebar →</div>';
+  }
+}
+
+const TIMING_COLORS = {
+  clip_ms:  "#4299e1",
+  detr_ms:  "#9f7aea",
+  blip_ms:  "#ed8936",
+  rag_ms:   "#48bb78",
+  chat_ms:  "#f56565",
+};
+const SCORE_COLORS = {
+  visual:     "#4299e1",
+  entity:     "#48bb78",
+  recency:    "#ed8936",
+};
+
+// ---- API --------------------------------------------------------------------
+async function fetchTurns() {
+  try {
+    const resp = await fetch("/api/turns");
+    turns = await resp.json();
+    if (currentTab === "traces") renderSidebar();
+  } catch(e) { /* dashboard may not be up yet */ }
+}
+
+async function fetchPatients() {
+  try {
+    const resp = await fetch("/api/memory/patients");
+    patients = await resp.json();
+    renderPatientList();
+  } catch(e) {
+    document.getElementById("patient-list").innerHTML =
+      '<div style="padding:1rem;color:#e53e3e;font-size:0.8rem;">ChromaDB unavailable</div>';
+  }
+}
+
+async function fetchMemory(patientId) {
+  const panel = document.getElementById("detail-panel");
+  panel.innerHTML = '<div style="padding:2rem;color:#718096;">Loading…</div>';
+  try {
+    const resp = await fetch(`/api/memory/${encodeURIComponent(patientId)}`);
+    const photos = await resp.json();
+    renderMemoryDetail(patientId, photos);
+  } catch(e) {
+    panel.innerHTML = `<div style="padding:2rem;color:#e53e3e;">Error: ${escHtml(String(e))}</div>`;
+  }
+}
+
+// ---- Sidebar ----------------------------------------------------------------
+function renderSidebar() {
+  const list = document.getElementById("turn-list");
+  if (turns.length === 0) {
+    list.innerHTML = '<div style="padding:1rem;color:#4a5568;font-size:0.82rem;">No turns yet.</div>';
+    return;
+  }
+  list.innerHTML = turns.map((t, i) => {
+    const ts = t.ts || "";
+    const preview = (t.user_input || t.user_message || "(no input)").slice(0, 60);
+    const active = selected === i ? "is-active" : "";
+    return `<div class="turn-item ${active}" onclick="selectTurn(${i})">
+      <div class="ts">${escHtml(ts)} — ${escHtml(t.patient_id || "")} — <em>${escHtml(t.model_name || "")}</em></div>
+      <div class="preview">${escHtml(preview)}</div>
+    </div>`;
+  }).join("");
+}
+
+// ---- Turn Detail ------------------------------------------------------------
+function selectTurn(i) {
+  selected = i;
+  renderSidebar();
+  renderDetail(turns[i]);
+}
+
+function renderDetail(t) {
+  const panel = document.getElementById("detail-panel");
+  const timing = t.timing || {};
+  const candidates = t.rag_candidates || [];
+  const photoId = t.photo_id || "";
+
+  panel.innerHTML = `
+    ${renderPhotoAndTiming(photoId, timing)}
+    ${renderRagTable(candidates)}
+    ${renderCollapsible("Full GPT Prompt", renderPrompt(t.full_prompt), "prompt-section")}
+    ${renderCollapsible("Raw GPT Response", `<pre class="prompt-pre">${escHtml(t.raw_response || "(none)")}</pre>`, "raw-section")}
+    ${renderFinalResponse(t.final_response)}
+    ${renderCollapsible("Retrieved Context (injected into prompt)", `<pre class="prompt-pre">${escHtml(t.retrieved_context || "(none)")}</pre>`, "ctx-section")}
+  `;
+  // Collapsible toggle logic
+  panel.querySelectorAll(".collapsible-header").forEach(h => {
+    h.addEventListener("click", () => {
+      const body = h.nextElementSibling;
+      const hidden = body.style.display === "none";
+      body.style.display = hidden ? "" : "none";
+      h.querySelector(".toggle-icon").textContent = hidden ? "▾" : "▸";
+    });
+  });
+}
+
+function renderPhotoAndTiming(photoId, timing) {
+  const imgTag = photoId
+    ? `<img class="thumb" src="/api/photo/${encodeURIPath(photoId)}" alt="photo" style="width:80px;height:80px;" />`
+    : `<div class="thumb" style="width:80px;height:80px;display:flex;align-items:center;justify-content:center;color:#4a5568;">No photo</div>`;
+
+  const keys = Object.keys(timing).filter(k => k.endsWith("_ms"));
+  const total = keys.reduce((s, k) => s + (timing[k] || 0), 0) || 1;
+  const timingBar = `<div class="timing-bar-group">
+    ${keys.map(k => {
+      const pct = ((timing[k] || 0) / total * 100).toFixed(1);
+      const color = TIMING_COLORS[k] || "#718096";
+      return `<div class="timing-seg" style="background:${color};width:${pct}%;" title="${k}: ${timing[k]}ms">${k.replace("_ms","")} ${timing[k]}ms</div>`;
+    }).join("")}
+  </div>
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.4rem;">
+    ${keys.map(k => `<span style="font-size:0.72rem;color:${TIMING_COLORS[k]||'#718096'};">■ ${k.replace("_ms","")}: ${timing[k]}ms</span>`).join("")}
+    <span style="font-size:0.72rem;color:#a0aec0;">Total: ${total}ms</span>
+  </div>`;
+
+  return `<div class="panel-box" style="display:flex;gap:1.25rem;align-items:flex-start;">
+    ${imgTag}
+    <div style="flex:1;">
+      <div class="section-label">Timing</div>
+      ${timingBar}
+    </div>
+  </div>`;
+}
+
+function renderRagTable(candidates) {
+  if (!candidates || candidates.length === 0) {
+    return `<div class="panel-box"><div class="section-label">RAG Candidates</div><span style="color:#4a5568;font-size:0.82rem;">No candidates.</span></div>`;
+  }
+  const rows = candidates.map((c, i) => {
+    const rankClass = i === 0 ? "rank-1" : "";
+    const thumb = `<img class="thumb" src="/api/photo/${encodeURIPath(c.id)}" onerror="this.style.display='none'" />`;
+    const caption = escHtml((c.caption || "").slice(0, 50));
+    const theme = escHtml(c.theme || "—");
+    const matchTag = c.theme_match
+      ? `<span class="tag is-match">✓</span>`
+      : `<span class="tag is-nomatch">✗</span>`;
+    return `<tr class="${rankClass}">
+      <td>${i+1}</td>
+      <td>${thumb}</td>
+      <td style="max-width:180px;">${caption}<br><small style="color:#718096;">${escHtml(c.id)}</small></td>
+      <td>${theme}<br>${matchTag}</td>
+      <td>${scoreBar(c.visual, SCORE_COLORS.visual)}</td>
+      <td>${scoreBar(c.entity, SCORE_COLORS.entity)}</td>
+      <td>${scoreBar(c.recency, SCORE_COLORS.recency)}</td>
+      <td><strong style="font-size:1rem;">${(c.rank_score||0).toFixed(3)}</strong></td>
+    </tr>`;
+  }).join("");
+  return `<div class="panel-box">
+    <div class="section-label">RAG Candidates (Top-K with score breakdown)</div>
+    <table class="table rag-table is-fullwidth is-narrow" style="background:transparent;color:#e2e8f0;">
+      <thead><tr>
+        <th>#</th><th>Photo</th><th>Caption / ID</th>
+        <th>Theme / Match</th>
+        <th>Visual (${(0.50*100).toFixed(0)}%)</th>
+        <th>Entity (${(0.25*100).toFixed(0)}%)</th>
+        <th>Recency (${(0.10*100).toFixed(0)}%)</th>
+        <th>Final Rank</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <p style="font-size:0.7rem;color:#4a5568;">Weights: Visual 50% · Entity 25% · Theme 15% · Recency 10% (redistributed if signal absent)</p>
+  </div>`;
+}
+
+function scoreBar(val, color) {
+  const v = Math.max(0, Math.min(1, val || 0));
+  const pct = (v * 100).toFixed(0);
+  return `<div class="score-bar-wrap">
+    <div class="score-bar-track"><div class="score-bar-fill" style="width:${pct}%;background:${color};"></div></div>
+    <span class="score-bar-value">${v.toFixed(3)}</span>
+  </div>`;
+}
+
+function renderPrompt(fullPrompt) {
+  if (!fullPrompt) return `<pre class="prompt-pre">(none)</pre>`;
+  const text = typeof fullPrompt === "string" ? fullPrompt : JSON.stringify(fullPrompt, null, 2);
+  return `<pre class="prompt-pre">${escHtml(text)}</pre>`;
+}
+
+function renderFinalResponse(resp) {
+  if (!resp) return "";
+  return `<div class="panel-box">
+    <div class="section-label">Final Response</div>
+    <p style="font-size:0.9rem;line-height:1.7;">${escHtml(resp)}</p>
+  </div>`;
+}
+
+function renderCollapsible(title, body, id) {
+  return `<div class="panel-box">
+    <div class="collapsible-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+      <span class="section-label" style="margin:0;">${title}</span>
+      <span class="toggle-icon" style="color:#718096;">▾</span>
+    </div>
+    <div id="${id}">${body}</div>
+  </div>`;
+}
+
+// ---- Utilities --------------------------------------------------------------
+function escHtml(s) {
+  return String(s||"")
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;");
+}
+function encodeURIPath(p) {
+  return p.split("/").map(encodeURIComponent).join("/");
+}
+
+// ---- Patient sidebar --------------------------------------------------------
+function renderPatientList() {
+  const list = document.getElementById("patient-list");
+  if (patients.length === 0) {
+    list.innerHTML = '<div style="padding:1rem;color:#4a5568;font-size:0.82rem;">No patients in ChromaDB.</div>';
+    return;
+  }
+  list.innerHTML = patients.map(p => {
+    const active = selectedPatient === p.patient_id ? "is-active" : "";
+    return `<div class="mem-patient-item ${active}" onclick="selectPatient('${escHtml(p.patient_id)}')">
+      ${escHtml(p.patient_id)} <span class="mem-badge">${p.count}</span>
+    </div>`;
+  }).join("");
+}
+
+function selectPatient(pid) {
+  selectedPatient = pid;
+  renderPatientList();
+  fetchMemory(pid);
+}
+
+// ---- Memory detail ----------------------------------------------------------
+function renderMemoryDetail(patientId, photos) {
+  const panel = document.getElementById("detail-panel");
+  if (photos.length === 0) {
+    panel.innerHTML = `<div style="padding:2rem;color:#4a5568;">No memories stored for ${escHtml(patientId)}.</div>`;
+    return;
+  }
+  const discussed = photos.filter(p => p.conv_summary);
+  const header = `<div class="panel-box">
+    <div class="section-label">Memory Browser — ${escHtml(patientId)}</div>
+    <p style="font-size:0.8rem;color:#a0aec0;">
+      ${photos.length} photos indexed &nbsp;·&nbsp;
+      <span style="color:#48bb78;">${discussed.length} discussed</span> &nbsp;·&nbsp;
+      ${photos.length - discussed.length} pending
+    </p>
+  </div>`;
+
+  const cards = photos.map(p => {
+    const hasSummary = !!p.conv_summary;
+    const cls = hasSummary ? "has-summary" : "no-summary";
+    const thumb = `<img class="thumb" style="width:64px;height:64px;flex-shrink:0;"
+      src="/api/photo/${encodeURIPath(p.id)}"
+      onerror="this.style.display='none'" />`;
+
+    const metaFields = [
+      ["Theme",       p.theme],
+      ["Caption",     p.caption],
+      ["Event",       p.event],
+      ["Place",       p.place],
+      ["Relationship",p.relationship],
+      ["Last chatted",p.last_chatted ? p.last_chatted.slice(0,10) : ""],
+      ["Uploaded",    p.upload_timestamp ? p.upload_timestamp.slice(0,10) : ""],
+      ["People",      tryParseList(p.entities_people)],
+      ["Activities",  tryParseList(p.entities_activities)],
+      ["Locations",   tryParseList(p.entities_locations)],
+    ].filter(([, v]) => v);
+
+    const metaGrid = metaFields.map(([k, v]) =>
+      `<div><span class="mem-meta-key">${escHtml(k)}: </span><span class="mem-meta-val">${escHtml(String(v))}</span></div>`
+    ).join("");
+
+    const summaryBlock = p.conv_summary
+      ? `<div style="margin-top:0.6rem;padding:0.5rem 0.75rem;background:#0f1117;border-radius:4px;font-size:0.78rem;color:#c6f6d5;">
+           <span style="color:#48bb78;font-weight:600;">Summary: </span>${escHtml(p.conv_summary)}
+         </div>`
+      : `<div style="margin-top:0.4rem;font-size:0.75rem;color:#4a5568;font-style:italic;">Not yet discussed</div>`;
+
+    return `<div class="mem-photo-card ${cls}">
+      ${thumb}
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:0.75rem;color:#718096;margin-bottom:0.3rem;">${escHtml(p.id)}</div>
+        <div class="mem-meta-grid">${metaGrid}</div>
+        ${summaryBlock}
+      </div>
+    </div>`;
+  }).join("");
+
+  panel.innerHTML = header + cards;
+}
+
+function tryParseList(raw) {
+  if (!raw) return "";
+  try { return JSON.parse(raw).join(", "); } catch(e) { return raw; }
+}
+
+// ---- Init -------------------------------------------------------------------
+fetchTurns();
+setInterval(fetchTurns, 3000);
+</script>
+</body>
+</html>

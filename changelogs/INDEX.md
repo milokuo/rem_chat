@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-05-06 — Fast Streaming 恢復 Direct-Reply Prompt
+**檔案：** `2026-05-06_fast-streaming-direct-prompt.md`
+
+**狀態：** 已實作
+
+**核心變更：** 未勾精確模式時的 streaming 路徑重新使用 simple direct-reply prompt，跳過 CoT / `JSON_OUTPUT`，讓 token 可即時送到前端
+
+| 類別 | 內容 |
+|------|------|
+| Behavior | `chat_engine.py /stream` 改回 `preprocess_conversation_simple()`，fast streaming 不再走 Demand Format |
+| Prompt | fast streaming 移除舊的策略解釋段落，明確禁止輸出 `選用策略` / reason / analysis，只回傳使用者可見文字 |
+| Streaming | OpenAI chunk 一收到 token 就立刻 SSE forward，不再等完整 raw response postprocess 後才送 |
+| UX | streaming 分支先顯示 thinking placeholder，第一個 token / error / done 到達時替換成 bot row |
+| Test | `test_chat_engine_trace_fields.py` 更新 streaming 測試，確認 prompt 無 `Demand Format` / `JSON_OUTPUT` 且 token 分段輸出 |
+
+**影響的檔案：**
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`
+- `predictors/clip_iu/chat_engine.py`
+- `predictors/clip_iu/test_chat_engine_trace_fields.py`
+- `changelogs/2026-05-06_fast-streaming-direct-prompt.md`（新增）
+
+---
+
 ## 2026-05-06 — Streaming 與 Accurate 路徑 Prompt 對齊
 **檔案：** `2026-05-06_streaming-demand-format-alignment.md`
 

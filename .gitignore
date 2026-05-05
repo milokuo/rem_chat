@@ -85,3 +85,26 @@ __pycache__/
 
 # VSCode
 .vscode/
+
+# -------- ParlAI image_chat allowlist --------
+ParlAI/*
+!ParlAI/projects/
+ParlAI/projects/*
+!ParlAI/projects/image_chat/
+ParlAI/projects/image_chat/*
+!ParlAI/projects/image_chat/__init__.py
+!ParlAI/projects/image_chat/README.md
+!ParlAI/projects/image_chat/server_updated_zhengxuan.py
+!ParlAI/projects/image_chat/server_multipart.py
+!ParlAI/projects/image_chat/server_timing.py
+!ParlAI/projects/image_chat/server_users.py
+!ParlAI/projects/image_chat/server_conv_store.py
+!ParlAI/projects/image_chat/server_memory.py
+!ParlAI/projects/image_chat/debug_dashboard.py
+!ParlAI/projects/image_chat/test_debug_dashboard.py
+!ParlAI/projects/image_chat/test_parse_multipart.py
+!ParlAI/projects/image_chat/test_server_modules.py
+!ParlAI/projects/image_chat/test_server_trace.py
+!ParlAI/projects/image_chat/templates/
+ParlAI/projects/image_chat/templates/*
+!ParlAI/projects/image_chat/templates/debug_dashboard.html

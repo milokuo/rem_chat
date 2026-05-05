@@ -185,7 +185,6 @@ class SocialREMChat(object):
         _context = list()
 
         self.observation_prompt = self.system_observations + self.caption_str + "\n" + self.system_observations_obj + self.obj_str
-        self.system_prompt = self.system_task + self.system_strategies + self.observation_prompt + self._build_retrieved_block()
 
         for idx in range(len(context)):
             for k, v in context[idx].items():
@@ -197,9 +196,25 @@ class SocialREMChat(object):
         lang_to_use = reply_lang or args.lang
         lang_suffix = "\n請以繁體中文（台灣用語）回覆使用者。" if lang_to_use == 'zh' else ""
         if lang_to_use == 'zh':
-            simple_inst = "請直接回覆使用者（最多2句話），並選擇一個合適的支援策略。不需要輸出分析步驟或 JSON。"
+            simple_strategy = (
+                "\n支援策略只作為內部回覆風格使用，不要說出策略名稱或選擇原因。"
+                "輸出只能是要直接顯示給使用者的一到兩句自然回覆。"
+                "禁止輸出『選用策略』、『支援策略』、『原因』、『分析』、條列、格式模板或 JSON。"
+                "如果使用者已經回答了時間、地點或人物，先簡短肯定，再只追問一個尚未回答或最自然的細節問題。\n"
+            )
+            simple_inst = "請直接回覆使用者（最多2句話）。不要輸出分析步驟、策略說明或 JSON。"
         else:
-            simple_inst = "Reply directly to the User in 1-2 sentences using a suitable support strategy. Do not output analysis steps or JSON."
+            simple_strategy = (
+                "\nUse a support strategy silently as an internal style guide only. "
+                "Never mention the strategy name, selected strategy, or reason. "
+                "Output only the exact assistant message that should be shown to the user, in 1-2 natural sentences. "
+                "Do not output labels, bullets, analysis, structured templates, or JSON. "
+                "Reply in the same language as the user's latest utterance; if the user writes Chinese, reply in Traditional Chinese (Taiwan usage). "
+                "If the user has already answered when, where, or who, briefly affirm that information, then ask only one remaining or natural detail question.\n"
+            )
+            simple_inst = "Reply directly to the User in 1-2 sentences. Do not output analysis steps, strategy explanations, or JSON."
+
+        self.system_prompt = self.system_task + self.observation_prompt + self._build_retrieved_block() + simple_strategy
 
         full_context = (
             self.system_prompt
@@ -411,11 +426,11 @@ def post_method():
 
 @app.route("/stream", methods=["POST"])
 def post_stream():
-    """Streaming endpoint that preserves the same Demand Format prompt as /.
+    """Fast streaming endpoint for the unchecked precise-mode UI path.
 
-    The model still produces the full structured CoT/JSON_OUTPUT internally so
-    debug traces match the accurate path. We buffer the raw stream, parse the
-    final reply, and send only the clean reply to the browser.
+    This intentionally uses the simplified direct-reply prompt instead of the
+    Demand Format/JSON_OUTPUT prompt used by /. That lets us forward model
+    tokens to the browser as they arrive without leaking CoT/debug text.
     """
     data = json.loads(request.data)
 
@@ -439,7 +454,7 @@ def post_stream():
             yield f"data: {json.dumps({'done': True, 'full': closing})}\n\n"
         return Response(_end_gen(), mimetype='text/event-stream')
 
-    processed_context = _socialREMChat.preprocess_conversation(
+    processed_context = _socialREMChat.preprocess_conversation_simple(
         _socialREMChat.context, args.max_turn, reply_lang=req_lang
     )
     _socialREMChat._last_full_prompt = processed_context
@@ -450,6 +465,7 @@ def post_stream():
         raw_text = ""
         final_reply = ""
         gpt_ms = None
+        success = False
         try:
             t0 = time.perf_counter()
             response = client.chat.completions.create(
@@ -463,19 +479,19 @@ def post_stream():
                 token = (delta.content or "") if delta else ""
                 if token:
                     raw_text += token
+                    yield f"data: {json.dumps({'token': token}, ensure_ascii=False)}\n\n"
             gpt_ms = round((time.perf_counter() - t0) * 1000)
             _socialREMChat._last_raw_response = raw_text
-            final_reply, _ = _socialREMChat.postprocess_response_text(raw_text)
-            final_reply = _socialREMChat._check_response_grounding(final_reply, client)
+            final_reply = raw_text.strip()
+            success = True
             if final_reply:
                 _socialREMChat.context.append({'Assistant': final_reply})
-                yield f"data: {json.dumps({'token': final_reply}, ensure_ascii=False)}\n\n"
         except Exception as exc:
             yield f"data: {json.dumps({'error': str(exc)})}\n\n"
 
         done_payload = {
             'done': True,
-            'full': final_reply,
+            'full': final_reply if success else raw_text.strip(),
             'full_prompt': processed_context,
             'raw_response': raw_text,
             'model_name': args.model_name,

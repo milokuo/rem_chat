@@ -48,6 +48,7 @@ def _fake_stream_response(text: str):
 
 
 RAW_REPLY = '9. Sure!\nJSON_OUTPUT: {"reply": "Sure!", "strategy": "[Others]"}'
+STREAM_REPLY = 'Sure thing!'
 
 
 class TestChatEngineTraceFields(unittest.TestCase):
@@ -172,29 +173,37 @@ class TestChatEngineTraceFields(unittest.TestCase):
         body = self._post({'user_message': 'Hello'})
         self.assertEqual(body['return_message'], 'Sure!')
 
-    # ---- streaming path must use the same structured prompt internally ----
+    # ---- streaming path intentionally uses the fast direct-reply prompt ----
 
-    def test_stream_prompt_uses_demand_format(self):
-        """Streaming mode should not switch to the old simple direct-reply prompt."""
-        self.mock_client.chat.completions.create.return_value = _fake_stream_response(RAW_REPLY)
+    def test_stream_prompt_uses_direct_reply_prompt(self):
+        """Unchecked precise-mode streaming should skip CoT/JSON so tokens can stream."""
+        self.mock_client.chat.completions.create.return_value = _fake_stream_response(STREAM_REPLY)
         events = self._post_stream({'user_message': 'Hi there'})
         done = events[-1]
         prompt = done['full_prompt'][0]['content']
 
-        self.assertIn('Demand Format', prompt)
-        self.assertIn('JSON_OUTPUT', prompt)
-        self.assertNotIn('Do not output analysis steps or JSON', prompt)
+        self.assertIn('Do not output labels, bullets, analysis, structured templates, or JSON', prompt)
+        self.assertIn('strategy explanations', prompt)
+        self.assertIn('Never mention the strategy name', prompt)
+        self.assertIn("same language as the user's latest utterance", prompt)
+        self.assertNotIn('Then select a Support Strategy', prompt)
+        self.assertNotIn('Support Strategies Definitions', prompt)
+        self.assertNotIn('explains why', prompt)
+        self.assertNotIn('Demand Format', prompt)
+        self.assertNotIn('JSON_OUTPUT', prompt)
 
-    def test_stream_returns_parsed_reply_but_keeps_raw_response(self):
-        """Browser receives the clean reply; dashboard still receives raw CoT/JSON."""
-        self.mock_client.chat.completions.create.return_value = _fake_stream_response(RAW_REPLY)
+    def test_stream_forwards_token_chunks_and_keeps_raw_response(self):
+        """Browser receives model chunks as they arrive; dashboard keeps raw text."""
+        self.mock_client.chat.completions.create.return_value = _fake_stream_response(STREAM_REPLY)
         events = self._post_stream({'user_message': 'Hi there'})
-        token_text = ''.join(event.get('token', '') for event in events)
+        token_events = [event for event in events if 'token' in event]
+        token_text = ''.join(event.get('token', '') for event in token_events)
         done = events[-1]
 
-        self.assertEqual(token_text, 'Sure!')
-        self.assertEqual(done['full'], 'Sure!')
-        self.assertEqual(done['raw_response'], RAW_REPLY)
+        self.assertGreater(len(token_events), 1)
+        self.assertEqual(token_text, STREAM_REPLY)
+        self.assertEqual(done['full'], STREAM_REPLY)
+        self.assertEqual(done['raw_response'], STREAM_REPLY)
         self.assertIn('model_name', done)
         self.assertIn('gpt_ms', done['timing'])
 
