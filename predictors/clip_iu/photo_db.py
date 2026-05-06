@@ -13,6 +13,9 @@ Schema per document:
   metadata   : caption, objects, event, place, relationship, patient_id
                theme, entities_people, entities_activities, entities_locations,
                entities_objects, upload_timestamp, conv_summary, last_chatted
+  episode metadata additionally encodes Jung-Min hierarchy fields:
+               theme_node_id, lifetime_node_id, general_event_nodes,
+               general_event_names, virtual_event_node_id, episodic_node_id
 """
 
 import chromadb

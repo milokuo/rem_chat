@@ -22,6 +22,8 @@ import datetime
 import logging
 from typing import Optional, TYPE_CHECKING
 
+from memory_hierarchy import event_names_from_entities
+
 if TYPE_CHECKING:
     from photo_db import PhotoDB
 
@@ -82,6 +84,56 @@ def _entity_score(candidate: dict, query_entities: dict) -> float:
             total += _jaccard(cand_set, query_set)
             count += 1
     return total / count if count > 0 else 0.0
+
+
+def _candidate_event_name_set(candidate: dict) -> set[str]:
+    """Return typed general-event names stored on a candidate.
+
+    New episodic memories store the paper's general-event layer explicitly in
+    ``general_event_names``. Older records only have the entity JSON fields, so
+    we reconstruct typed names from those fields as a fallback.
+    """
+    raw = candidate.get("general_event_names", "")
+    if raw:
+        try:
+            names = {
+                str(name)
+                for name in json.loads(raw)
+                if name and not str(name).startswith("virtual:")
+            }
+            if names:
+                return names
+        except Exception:
+            pass
+
+    names = set()
+    for field, key in [
+        ("entities_people", "people"),
+        ("entities_activities", "activities"),
+        ("entities_locations", "locations"),
+        ("entities_objects", "objects"),
+    ]:
+        raw = candidate.get(field, "")
+        if not raw:
+            continue
+        try:
+            values = json.loads(raw)
+        except Exception:
+            values = []
+        for value in values:
+            text = str(value or "").strip()
+            if text:
+                names.add(f"{key}:{text}")
+    return names
+
+
+def _event_score(candidate: dict, query_entities: dict) -> float:
+    """Jaccard score over the general-event layer, with legacy fallback."""
+    query_names = set(event_names_from_entities(query_entities))
+    candidate_names = _candidate_event_name_set(candidate)
+    if query_names or candidate_names:
+        return _jaccard(candidate_names, query_names)
+    return _entity_score(candidate, query_entities)
 
 
 def _has_query_entities(query_entities: dict) -> bool:
@@ -227,13 +279,13 @@ def retrieve(
             for p in sorted(
                 candidates,
                 key=lambda p: (
-                    _entity_score(p, query_entities),
+                    _event_score(p, query_entities),
                     _cosine_similarity(query_embedding, p.get("embedding"))
                     if query_embedding and p.get("embedding") is not None else 0.0,
                 ),
                 reverse=True,
             )
-            if _entity_score(p, query_entities) > 0.0
+            if _event_score(p, query_entities) > 0.0
         ][:matching_top_k]
     candidates = _merge_matching_sets(semantic_matches, entity_matches, theme_matches)
 
@@ -241,7 +293,8 @@ def retrieve(
     has_theme_signal   = query_theme and any(p.get("theme") for p in candidates)
     has_entity_signal  = any(
         p.get(f) for p in candidates
-        for f in ("entities_people", "entities_activities", "entities_locations", "entities_objects")
+        for f in ("general_event_names", "entities_people", "entities_activities",
+                  "entities_locations", "entities_objects")
     )
     has_recency_signal = any(p.get("last_chatted") for p in candidates)
 
@@ -250,7 +303,7 @@ def retrieve(
         emb = p.get("embedding")
         visual = _cosine_similarity(query_embedding, emb) if emb is not None else 0.0
 
-        entity = _entity_score(p, query_entities) if has_entity_signal else 0.0
+        entity = _event_score(p, query_entities) if has_entity_signal else 0.0
         theme_match = bool(query_theme and p.get("theme") == query_theme)
         recency = _recency_score(p.get("last_chatted")) if has_recency_signal else 0.0
 
@@ -347,13 +400,13 @@ def retrieve_episodes(
             for e in sorted(
                 candidates,
                 key=lambda e: (
-                    _entity_score(e, query_entities),
+                    _event_score(e, query_entities),
                     _cosine_similarity(query_embedding, e.get("embedding"))
                     if query_embedding and e.get("embedding") is not None else 0.0,
                 ),
                 reverse=True,
             )
-            if _entity_score(e, query_entities) > 0.0
+            if _event_score(e, query_entities) > 0.0
         ][:matching_top_k]
 
     candidates = _merge_matching_sets(semantic_matches, entity_matches, theme_matches)
@@ -363,7 +416,8 @@ def retrieve_episodes(
     has_theme_signal = query_theme and any(e.get("theme") for e in candidates)
     has_entity_signal = any(
         e.get(f) for e in candidates
-        for f in ("entities_people", "entities_activities", "entities_locations", "entities_objects")
+        for f in ("general_event_names", "entities_people", "entities_activities",
+                  "entities_locations", "entities_objects")
     )
     has_recency_signal = any(e.get("timestamp") for e in candidates)
 
@@ -371,7 +425,7 @@ def retrieve_episodes(
     for e in candidates:
         emb = e.get("embedding")
         semantic = _cosine_similarity(query_embedding, emb) if query_embedding and emb is not None else 0.0
-        entity = _entity_score(e, query_entities) if has_entity_signal else 0.0
+        entity = _event_score(e, query_entities) if has_entity_signal else 0.0
         theme_match = bool(query_theme and e.get("theme") == query_theme)
         recency = _recency_score(e.get("timestamp")) if has_recency_signal else 0.0
         score = _rank_score(
@@ -489,6 +543,19 @@ def format_episode_block(candidates: list[dict]) -> str:
             lines.append(f"  Photo: {c.get('photo_id')}")
         if c.get("theme"):
             lines.append(f"  Theme: {c.get('theme')}")
+        if c.get("lifetime_period"):
+            lines.append(f"  Lifetime period: {c.get('lifetime_period')}")
+        raw_events = c.get("general_event_names", "")
+        if raw_events:
+            try:
+                event_names = [
+                    str(name) for name in json.loads(raw_events)
+                    if name and not str(name).startswith("virtual:")
+                ]
+            except Exception:
+                event_names = []
+            if event_names:
+                lines.append(f"  General events: {', '.join(event_names)}")
         for label, field in [
             ("People", "entities_people"),
             ("Activities", "entities_activities"),

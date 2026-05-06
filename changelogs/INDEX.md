@@ -4,6 +4,30 @@
 
 ---
 
+## 2026-05-06 — Jung-Min 四層 Episodic Memory Metadata
+**檔案：** `2026-05-06_hierarchical-episode-memory.md`
+
+**狀態：** 已實作
+
+**核心變更：** text-turn episodic memory 寫入論文式 theme / lifetime period / general event / episodic 四層 metadata；event matching 優先使用 `general_event_names`，舊資料 fallback 到 `entities_*`
+
+| 類別 | 內容 |
+|------|------|
+| Storage | 新增 `memory_hierarchy.py`，產生 theme node、lifetime node、general event nodes、episodic node |
+| Storage | 無 people/activity/location/object 時建立 virtual event node，對齊論文 general event layer |
+| Retrieval | episode event matching 改用 `general_event_names` Jaccard overlap，舊資料保持相容 |
+| Prompt | episodic memory block 顯示 `Lifetime period` 與 `General events` |
+
+**影響的檔案：**
+- `predictors/clip_iu/memory_hierarchy.py`（新增）
+- `predictors/clip_iu/memory_retriever.py`
+- `predictors/clip_iu/photo_db.py`
+- `predictors/clip_iu/test_memory_retriever.py`
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`
+- `changelogs/2026-05-06_hierarchical-episode-memory.md`（新增）
+
+---
+
 ## 2026-05-06 — Jung-Min Feature Matching 對齊
 **檔案：** `2026-05-06_jungmin-memory-matching.md`
 

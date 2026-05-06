@@ -18,6 +18,7 @@ from unittest.mock import MagicMock
 sys.path.insert(0, os.path.dirname(__file__))
 
 import memory_retriever
+import memory_hierarchy
 
 
 # ---------------------------------------------------------------------------
@@ -70,6 +71,8 @@ def _make_episode(
     locations: list = None,
     objects: list = None,
     timestamp: str = "",
+    lifetime_period: str = "",
+    general_events: list = None,
     user_utterance: str = "hello",
     assistant_reply: str = "hi",
 ) -> dict:
@@ -78,7 +81,9 @@ def _make_episode(
         "patient_id": "P001",
         "photo_id": "P001/photo.jpg",
         "timestamp": timestamp,
+        "lifetime_period": lifetime_period,
         "theme": theme,
+        "general_event_names": json.dumps(general_events or []),
         "entities_people": json.dumps(people or []),
         "entities_activities": json.dumps(activities or []),
         "entities_locations": json.dumps(locations or []),
@@ -359,6 +364,73 @@ class TestRetrieveEpisodes(unittest.TestCase):
         self.assertIn("P001/episode/alice", ids)
         self.assertNotIn("P001/episode/bob", ids)
         self.assertEqual(results[0]["_match_paths"], ["event"])
+
+    def test_event_matching_uses_general_event_names(self):
+        db = _make_episode_db([
+            _make_episode("P001/episode/alice", general_events=["people:Alice"]),
+            _make_episode("P001/episode/bob", general_events=["people:Bob"]),
+        ])
+        results = memory_retriever.retrieve_episodes(
+            photo_db=db,
+            query_embedding=[],
+            query_theme="",
+            query_entities={"people": ["Alice"], "activities": [], "locations": [], "objects": []},
+            patient_id="P001",
+            n_results=10,
+        )
+        ids = [r["id"] for r in results]
+        self.assertIn("P001/episode/alice", ids)
+        self.assertNotIn("P001/episode/bob", ids)
+        self.assertEqual(results[0]["_entity_score"], 1.0)
+
+    def test_format_episode_block_shows_hierarchy_fields(self):
+        episodes = [_make_episode(
+            "P001/episode/1",
+            theme="family",
+            lifetime_period="2026-05-06",
+            general_events=["people:Alice", "activities:travel"],
+        )]
+        block = memory_retriever.format_episode_block(episodes)
+        self.assertIn("Lifetime period: 2026-05-06", block)
+        self.assertIn("General events: people:Alice, activities:travel", block)
+
+
+class TestMemoryHierarchyMetadata(unittest.TestCase):
+
+    def test_build_episode_hierarchy_metadata_with_entities(self):
+        meta = memory_hierarchy.build_episode_hierarchy_metadata(
+            episode_id="P001/episode/123",
+            patient_id="P001",
+            timestamp="2026-05-06T12:34:56",
+            theme="family",
+            entities={
+                "people": ["Alice", "Alice"],
+                "activities": ["travel"],
+                "locations": [],
+                "objects": [],
+            },
+        )
+        self.assertEqual(meta["lifetime_period"], "2026-05-06")
+        self.assertEqual(meta["theme_node_id"], "theme::family")
+        self.assertEqual(meta["lifetime_node_id"], "lifetime::P001::2026-05-06::family")
+        self.assertTrue(meta["has_event_entities"])
+        self.assertEqual(json.loads(meta["general_event_names"]), ["people:Alice", "activities:travel"])
+        self.assertEqual(meta["virtual_event_node_id"], "")
+
+    def test_build_episode_hierarchy_metadata_uses_virtual_event_when_empty(self):
+        meta = memory_hierarchy.build_episode_hierarchy_metadata(
+            episode_id="P001/episode/empty",
+            patient_id="P001",
+            timestamp="2026-05-06T12:34:56",
+            theme="",
+            entities={"people": [], "activities": [], "locations": [], "objects": []},
+        )
+        nodes = json.loads(meta["general_event_nodes"])
+        self.assertFalse(meta["has_event_entities"])
+        self.assertEqual(json.loads(meta["general_event_names"]), [])
+        self.assertTrue(meta["virtual_event_node_id"])
+        self.assertEqual(nodes[0]["type"], "virtual")
+        self.assertEqual(meta["theme_node_id"], "theme::other")
 
 
 if __name__ == "__main__":

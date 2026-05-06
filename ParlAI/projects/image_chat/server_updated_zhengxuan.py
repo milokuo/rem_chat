@@ -44,6 +44,7 @@ from memory_extractor import (
     classify_utterance_memory,
     embed_memory_text,
 )
+from memory_hierarchy import build_episode_hierarchy_metadata
 from memory_retriever import (
     retrieve as _memory_retrieve,
     retrieve_episodes as _memory_retrieve_episodes,
@@ -239,23 +240,25 @@ def _save_text_episode_memory(
     if not user_utterance or not assistant_reply or not text_embedding:
         return
     ts = datetime.datetime.now().isoformat()
-    lifetime_period = ts[:10]
     photo_id = current_photo_id or ""
     episode_id = f"{patient_id}/episode/{time.time_ns()}"
-    has_event_entities = any(
-        features.get(k) for k in ("people", "activities", "locations", "objects")
+    hierarchy_meta = build_episode_hierarchy_metadata(
+        episode_id=episode_id,
+        patient_id=patient_id,
+        timestamp=ts,
+        theme=features.get("theme", ""),
+        entities=_episode_query_entities(features),
     )
     metadata = {
         "patient_id": patient_id,
         "photo_id": photo_id,
         "timestamp": ts,
-        "lifetime_period": lifetime_period,
         "theme": features.get("theme", ""),
-        "has_event_entities": has_event_entities,
         "user_utterance": user_utterance,
         "assistant_reply": assistant_reply,
         "content": f"User: {user_utterance}\nAssistant: {assistant_reply}",
     }
+    metadata.update(hierarchy_meta)
     metadata.update(_entity_updates(features))
     _photo_db.add_episode(episode_id, text_embedding, metadata)
     print(f"[EpisodeMemory] Saved {episode_id} theme={metadata['theme']}")
