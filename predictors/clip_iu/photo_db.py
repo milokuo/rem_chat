@@ -142,6 +142,78 @@ class PhotoDB:
             items.append(item)
         return items[:n_results]
 
+    def query_episodes(self, query_embedding: list, n_results: int = 3,
+                       patient_id: str = None, with_embeddings: bool = False) -> list[dict]:
+        """Return Top-K semantically similar text-turn episodic memories."""
+        if self.episode_collection.count() == 0 or not query_embedding:
+            return []
+
+        where = {"patient_id": patient_id} if patient_id else None
+        if patient_id:
+            patient_docs = self.episode_collection.get(where=where)
+            available = len(patient_docs["ids"])
+            if available == 0:
+                return []
+            n = min(n_results, available)
+        else:
+            n = min(n_results, self.episode_collection.count())
+
+        include = ["metadatas", "documents", "distances"]
+        if with_embeddings:
+            include.append("embeddings")
+        kwargs = {
+            "query_embeddings": [query_embedding],
+            "n_results": n,
+            "include": include,
+        }
+        if where:
+            kwargs["where"] = where
+        results = self.episode_collection.query(**kwargs)
+
+        items = []
+        distances = results.get("distances") or [[]]
+        for i, episode_id in enumerate(results["ids"][0]):
+            item = {"id": episode_id}
+            if distances and distances[0] and i < len(distances[0]):
+                item["distance"] = distances[0][i]
+            item.update(results["metadatas"][0][i])
+            docs = results.get("documents") or [[]]
+            if docs and i < len(docs[0]) and docs[0][i]:
+                item.setdefault("content", docs[0][i])
+            if with_embeddings and results.get("embeddings") is not None:
+                item["embedding"] = results["embeddings"][0][i]
+            items.append(item)
+        return items
+
+    def query_episodes_by_theme(self, theme: str, patient_id: str,
+                                n_results: int = 5,
+                                with_embeddings: bool = False) -> list[dict]:
+        """Return text-turn episodic memories matching a theme for a patient."""
+        if not theme or self.episode_collection.count() == 0:
+            return []
+        include = ["metadatas", "documents"]
+        if with_embeddings:
+            include.append("embeddings")
+        try:
+            results = self.episode_collection.get(
+                where={"$and": [{"patient_id": patient_id}, {"theme": theme}]},
+                include=include,
+            )
+        except Exception:
+            return []
+
+        items = []
+        for i, episode_id in enumerate(results["ids"]):
+            item = {"id": episode_id}
+            item.update(results["metadatas"][i])
+            docs = results.get("documents") or []
+            if i < len(docs) and docs[i]:
+                item.setdefault("content", docs[i])
+            if with_embeddings and results.get("embeddings") is not None:
+                item["embedding"] = results["embeddings"][i]
+            items.append(item)
+        return items[:n_results]
+
     def update_metadata(self, photo_id: str, updates: dict):
         """Partially update metadata fields for a single photo.
 

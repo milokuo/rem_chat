@@ -92,6 +92,10 @@ def _make_episode(
 def _make_episode_db(episodes: list) -> MagicMock:
     db = MagicMock()
     db.query_episodes_by_patient.return_value = episodes
+    db.query_episodes.return_value = episodes
+    db.query_episodes_by_theme.side_effect = lambda theme, *_args, **_kwargs: [
+        e for e in episodes if e.get("theme") == theme
+    ]
     return db
 
 
@@ -306,6 +310,55 @@ class TestRetrieveEpisodes(unittest.TestCase):
         self.assertIn("People: Alice", block)
         self.assertIn("User said: I went with Alice.", block)
         self.assertIn("Assistant replied: That sounds meaningful.", block)
+
+    def test_episode_records_matching_paths(self):
+        ts = datetime.datetime.now().isoformat()
+        episodes = [_make_episode("P001/episode/1", theme="family", people=["Alice"], timestamp=ts)]
+        results = self._run_retrieve(
+            episodes,
+            query_theme="family",
+            query_entities={"people": ["Alice"], "activities": [], "locations": [], "objects": []},
+        )
+        self.assertIn("_match_paths", results[0])
+        self.assertIn("semantic", results[0]["_match_paths"])
+        self.assertIn("theme", results[0]["_match_paths"])
+        self.assertIn("event", results[0]["_match_paths"])
+
+    def test_theme_matching_recovers_episode_without_semantic_query(self):
+        db = _make_episode_db([
+            _make_episode("P001/episode/family", theme="family"),
+            _make_episode("P001/episode/travel", theme="travel"),
+        ])
+        results = memory_retriever.retrieve_episodes(
+            photo_db=db,
+            query_embedding=[],
+            query_theme="family",
+            query_entities={"people": [], "activities": [], "locations": [], "objects": []},
+            patient_id="P001",
+            n_results=10,
+        )
+        ids = [r["id"] for r in results]
+        self.assertIn("P001/episode/family", ids)
+        self.assertNotIn("P001/episode/travel", ids)
+        self.assertEqual(results[0]["_match_paths"], ["theme"])
+
+    def test_event_matching_recovers_episode_without_semantic_query(self):
+        db = _make_episode_db([
+            _make_episode("P001/episode/alice", people=["Alice"]),
+            _make_episode("P001/episode/bob", people=["Bob"]),
+        ])
+        results = memory_retriever.retrieve_episodes(
+            photo_db=db,
+            query_embedding=[],
+            query_theme="",
+            query_entities={"people": ["Alice"], "activities": [], "locations": [], "objects": []},
+            patient_id="P001",
+            n_results=10,
+        )
+        ids = [r["id"] for r in results]
+        self.assertIn("P001/episode/alice", ids)
+        self.assertNotIn("P001/episode/bob", ids)
+        self.assertEqual(results[0]["_match_paths"], ["event"])
 
 
 if __name__ == "__main__":

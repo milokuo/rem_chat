@@ -4,6 +4,28 @@
 
 ---
 
+## 2026-05-06 — Jung-Min Feature Matching 對齊
+**檔案：** `2026-05-06_jungmin-memory-matching.md`
+
+**狀態：** 已實作
+
+**核心變更：** `retrieve_episodes()` 改為論文式 semantic/theme/event 三路 matching → union → rerank；PhotoDB 補 episode semantic/theme query helper；episode metadata 補 `lifetime_period` 與 `has_event_entities`
+
+| 類別 | 內容 |
+|------|------|
+| Retrieval | text episodic memory 先做 semantic/theme/event matching，再 union 去重與 weighted rerank |
+| Trace | 候選記憶新增 `_match_paths`，可觀察每筆 memory 是由哪些 matching path 找到 |
+| Storage | episode metadata 新增 lifetime/general-event 對齊欄位 |
+
+**影響的檔案：**
+- `predictors/clip_iu/memory_retriever.py`
+- `predictors/clip_iu/photo_db.py`
+- `predictors/clip_iu/test_memory_retriever.py`
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`
+- `changelogs/2026-05-06_jungmin-memory-matching.md`（新增）
+
+---
+
 ## 2026-05-06 — 文字對話回合 Episodic Memory
 **檔案：** `2026-05-06_text-episodic-memory.md`
 

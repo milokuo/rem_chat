@@ -2,9 +2,9 @@
 """
 memory_retriever.py
 
-Three-way retrieval + weighted rerank for the Photo-Anchored Autobiographical Memory system.
+Jung-Min-style retrieval + weighted rerank for the autobiographical memory system.
 
-Retrieval paths (parallel, then merged):
+Retrieval paths (matched separately, unioned, then reranked):
   1. Visual    — CLIP cosine similarity  (weight α = 0.50)
   2. Theme     — same-theme candidates   (weight γ = 0.15, binary)
   3. Entity    — Jaccard entity overlap  (weight β = 0.25)
@@ -35,6 +35,7 @@ _W_RECENCY  = 0.10
 
 # Recency decay: how many days until the score halves
 _RECENCY_HALF_LIFE_DAYS = 30.0
+_MATCHING_TOP_K = 10
 
 def _cosine_similarity(a: list[float], b: list[float]) -> float:
     """Cosine similarity between two vectors (returns 0 on error)."""
@@ -81,6 +82,54 @@ def _entity_score(candidate: dict, query_entities: dict) -> float:
             total += _jaccard(cand_set, query_set)
             count += 1
     return total / count if count > 0 else 0.0
+
+
+def _has_query_entities(query_entities: dict) -> bool:
+    """Return True when the query carries any extracted event entity."""
+    return any(query_entities.get(k) for k in ("people", "activities", "locations", "objects"))
+
+
+def _with_match_path(candidate: dict, path: str) -> dict:
+    """Copy a candidate and remember which Jung-Min matching path found it."""
+    copied = candidate.copy()
+    paths = list(copied.get("_match_paths", []))
+    if path not in paths:
+        paths.append(path)
+    copied["_match_paths"] = paths
+    return copied
+
+
+def _merge_matching_sets(*candidate_sets: list[dict]) -> list[dict]:
+    """Union matching outputs while preserving first-seen order and match paths."""
+    merged = []
+    by_id = {}
+    for candidates in candidate_sets:
+        for candidate in candidates:
+            candidate_id = candidate.get("id")
+            if not candidate_id:
+                continue
+            if candidate_id not in by_id:
+                item = candidate.copy()
+                by_id[candidate_id] = item
+                merged.append(item)
+            else:
+                existing_paths = by_id[candidate_id].setdefault("_match_paths", [])
+                for path in candidate.get("_match_paths", []):
+                    if path not in existing_paths:
+                        existing_paths.append(path)
+    return merged
+
+
+def _sort_by_semantic(candidates: list[dict], query_embedding: list[float]) -> list[dict]:
+    """Sort candidates by cosine similarity to the query embedding."""
+    if not query_embedding:
+        return list(candidates)
+    return sorted(
+        candidates,
+        key=lambda c: _cosine_similarity(query_embedding, c.get("embedding"))
+        if c.get("embedding") is not None else 0.0,
+        reverse=True,
+    )
 
 
 def _recency_score(last_chatted: Optional[str]) -> float:
@@ -150,12 +199,43 @@ def retrieve(
     Returns:
         List of candidate dicts (photo metadata + rank_score), sorted descending.
     """
-    # Fetch all photos for this patient (with embeddings for visual scoring)
+    # Fetch all photos for this patient (with embeddings for visual scoring).
     all_photos = photo_db.query_by_patient(patient_id, n_results=500, with_embeddings=True)
     candidates = [p for p in all_photos if p.get("id") != current_photo_id]
 
     if not candidates:
         return []
+
+    matching_top_k = max(n_results, _MATCHING_TOP_K)
+    semantic_matches = [
+        _with_match_path(p, "semantic")
+        for p in _sort_by_semantic(candidates, query_embedding)[:matching_top_k]
+    ]
+    theme_matches = []
+    if query_theme:
+        theme_matches = [
+            _with_match_path(p, "theme")
+            for p in _sort_by_semantic(
+                [p for p in candidates if p.get("theme") == query_theme],
+                query_embedding,
+            )[:matching_top_k]
+        ]
+    entity_matches = []
+    if _has_query_entities(query_entities):
+        entity_matches = [
+            _with_match_path(p, "event")
+            for p in sorted(
+                candidates,
+                key=lambda p: (
+                    _entity_score(p, query_entities),
+                    _cosine_similarity(query_embedding, p.get("embedding"))
+                    if query_embedding and p.get("embedding") is not None else 0.0,
+                ),
+                reverse=True,
+            )
+            if _entity_score(p, query_entities) > 0.0
+        ][:matching_top_k]
+    candidates = _merge_matching_sets(semantic_matches, entity_matches, theme_matches)
 
     # Determine which signals are globally available (at least one candidate has them)
     has_theme_signal   = query_theme and any(p.get("theme") for p in candidates)
@@ -203,11 +283,80 @@ def retrieve_episodes(
     current_episode_id: str = "",
     n_results: int = 3,
 ) -> list[dict]:
-    """Retrieve text-turn episodic memories for the current dialogue context."""
+    """Retrieve text-turn episodic memories using Jung-Min feature matching.
+
+    The paper first performs theme, event-entity, and semantic matching as
+    independent retrieval paths, then unions those candidates and reranks them.
+    ChromaDB handles the dense semantic path when available; theme/event paths
+    are implemented over episode metadata so we can keep the current lightweight
+    local database.
+    """
     all_episodes = photo_db.query_episodes_by_patient(
         patient_id, n_results=1000, with_embeddings=True
     )
     candidates = [e for e in all_episodes if e.get("id") != current_episode_id]
+    if not candidates:
+        return []
+
+    matching_top_k = max(n_results, _MATCHING_TOP_K)
+    semantic_matches = []
+    if query_embedding:
+        try:
+            semantic_matches = [
+                e for e in photo_db.query_episodes(
+                    query_embedding,
+                    n_results=matching_top_k,
+                    patient_id=patient_id,
+                    with_embeddings=True,
+                )
+                if e.get("id") != current_episode_id
+            ]
+        except Exception:
+            semantic_matches = []
+        if not semantic_matches:
+            semantic_matches = _sort_by_semantic(candidates, query_embedding)[:matching_top_k]
+        semantic_matches = [_with_match_path(e, "semantic") for e in semantic_matches]
+
+    theme_matches = []
+    if query_theme:
+        try:
+            theme_matches = [
+                e for e in photo_db.query_episodes_by_theme(
+                    query_theme,
+                    patient_id,
+                    n_results=matching_top_k,
+                    with_embeddings=True,
+                )
+                if e.get("id") != current_episode_id
+            ]
+        except Exception:
+            theme_matches = []
+        if not theme_matches:
+            theme_matches = [
+                e for e in candidates if e.get("theme") == query_theme
+            ]
+        theme_matches = [
+            _with_match_path(e, "theme")
+            for e in _sort_by_semantic(theme_matches, query_embedding)[:matching_top_k]
+        ]
+
+    entity_matches = []
+    if _has_query_entities(query_entities):
+        entity_matches = [
+            _with_match_path(e, "event")
+            for e in sorted(
+                candidates,
+                key=lambda e: (
+                    _entity_score(e, query_entities),
+                    _cosine_similarity(query_embedding, e.get("embedding"))
+                    if query_embedding and e.get("embedding") is not None else 0.0,
+                ),
+                reverse=True,
+            )
+            if _entity_score(e, query_entities) > 0.0
+        ][:matching_top_k]
+
+    candidates = _merge_matching_sets(semantic_matches, entity_matches, theme_matches)
     if not candidates:
         return []
 
@@ -329,7 +478,7 @@ def format_episode_block(candidates: list[dict]) -> str:
     lines = ["[Related episodic memories from past conversation turns]"]
     for i, c in enumerate(candidates, 1):
         lines.append(f"[Episodic Memory {i}]")
-        ts = c.get("timestamp", "")
+        ts = c.get("timestamp", "") or c.get("lifetime_period", "")
         if ts:
             try:
                 dt = datetime.datetime.fromisoformat(ts)

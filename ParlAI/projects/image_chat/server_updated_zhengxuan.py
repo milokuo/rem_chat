@@ -239,13 +239,19 @@ def _save_text_episode_memory(
     if not user_utterance or not assistant_reply or not text_embedding:
         return
     ts = datetime.datetime.now().isoformat()
+    lifetime_period = ts[:10]
     photo_id = current_photo_id or ""
     episode_id = f"{patient_id}/episode/{time.time_ns()}"
+    has_event_entities = any(
+        features.get(k) for k in ("people", "activities", "locations", "objects")
+    )
     metadata = {
         "patient_id": patient_id,
         "photo_id": photo_id,
         "timestamp": ts,
+        "lifetime_period": lifetime_period,
         "theme": features.get("theme", ""),
+        "has_event_entities": has_event_entities,
         "user_utterance": user_utterance,
         "assistant_reply": assistant_reply,
         "content": f"User: {user_utterance}\nAssistant: {assistant_reply}",
