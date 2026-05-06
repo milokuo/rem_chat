@@ -4,6 +4,32 @@
 
 ---
 
+## 2026-05-06 — 文字對話回合 Episodic Memory
+**檔案：** `2026-05-06_text-episodic-memory.md`
+
+**狀態：** 已實作
+
+**核心變更：** 每輪文字對話先抽 Jung-Min memory features + text embedding，檢索 `conversation_episodes`，把 episode-level memories 和 photo-level memories 一起注入 `chat_engine`
+
+| 類別 | 內容 |
+|------|------|
+| Memory | 新增 ChromaDB `conversation_episodes` collection，每個 user/assistant turn 存成 episodic memory |
+| Extraction | `memory_extractor.py` 新增 `classify_utterance_memory()` + `embed_memory_text()`，theme taxonomy 對齊論文 Table II |
+| Retrieval | `memory_retriever.py` 新增 `retrieve_episodes()` + `format_episode_block()`，以 semantic/theme/entity/recency rerank |
+| Server | `interactive_running()` 與 `_stream_interact()` 在呼叫 `chat_engine` 前先做 text episodic retrieval，回覆後寫入 episode memory |
+| Trace | text trace 的 `rag_candidates` 現在包含 episode candidates，並輸出 dashboard 友善 score 欄位 |
+
+**影響的檔案：**
+- `predictors/clip_iu/memory_extractor.py`
+- `predictors/clip_iu/memory_retriever.py`
+- `predictors/clip_iu/photo_db.py`
+- `predictors/clip_iu/test_memory_retriever.py`
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`
+- `ParlAI/projects/image_chat/test_server_trace.py`
+- `changelogs/2026-05-06_text-episodic-memory.md`（新增）
+
+---
+
 ## 2026-05-06 — Fast Streaming 恢復 Direct-Reply Prompt
 **檔案：** `2026-05-06_fast-streaming-direct-prompt.md`
 

@@ -62,6 +62,39 @@ def _make_photo_db(photos: list) -> MagicMock:
     return db
 
 
+def _make_episode(
+    episode_id: str,
+    theme: str = "",
+    people: list = None,
+    activities: list = None,
+    locations: list = None,
+    objects: list = None,
+    timestamp: str = "",
+    user_utterance: str = "hello",
+    assistant_reply: str = "hi",
+) -> dict:
+    return {
+        "id": episode_id,
+        "patient_id": "P001",
+        "photo_id": "P001/photo.jpg",
+        "timestamp": timestamp,
+        "theme": theme,
+        "entities_people": json.dumps(people or []),
+        "entities_activities": json.dumps(activities or []),
+        "entities_locations": json.dumps(locations or []),
+        "entities_objects": json.dumps(objects or []),
+        "user_utterance": user_utterance,
+        "assistant_reply": assistant_reply,
+        "embedding": _make_embedding(0.9),
+    }
+
+
+def _make_episode_db(episodes: list) -> MagicMock:
+    db = MagicMock()
+    db.query_episodes_by_patient.return_value = episodes
+    return db
+
+
 # ---------------------------------------------------------------------------
 # Tests
 # ---------------------------------------------------------------------------
@@ -219,6 +252,60 @@ class TestRetrieveScoreFields(unittest.TestCase):
         ids = [r["id"] for r in results]
         self.assertNotIn("P001/current.jpg", ids)
         self.assertIn("P001/other.jpg", ids)
+
+
+class TestRetrieveEpisodes(unittest.TestCase):
+
+    def _run_retrieve(self, episodes, query_theme="", query_entities=None):
+        db = _make_episode_db(episodes)
+        return memory_retriever.retrieve_episodes(
+            photo_db=db,
+            query_embedding=_make_embedding(1.0),
+            query_theme=query_theme,
+            query_entities=query_entities or {"people": [], "activities": [], "locations": [], "objects": []},
+            patient_id="P001",
+            current_episode_id="P001/episode/current",
+            n_results=10,
+        )
+
+    def test_episode_result_has_score_fields(self):
+        ts = datetime.datetime.now().isoformat()
+        episodes = [_make_episode("P001/episode/1", theme="family", people=["Alice"], timestamp=ts)]
+        results = self._run_retrieve(
+            episodes,
+            query_theme="family",
+            query_entities={"people": ["Alice"], "activities": [], "locations": [], "objects": []},
+        )
+        self.assertEqual(len(results), 1)
+        required = {"_semantic_score", "_visual_score", "_entity_score",
+                    "_theme_match", "_recency_score", "_rank_score"}
+        for field in required:
+            self.assertIn(field, results[0])
+
+    def test_current_episode_excluded(self):
+        episodes = [
+            _make_episode("P001/episode/current"),
+            _make_episode("P001/episode/old"),
+        ]
+        results = self._run_retrieve(episodes)
+        ids = [r["id"] for r in results]
+        self.assertNotIn("P001/episode/current", ids)
+        self.assertIn("P001/episode/old", ids)
+
+    def test_format_episode_block_contains_turn_text(self):
+        episodes = [_make_episode(
+            "P001/episode/1",
+            theme="family",
+            people=["Alice"],
+            user_utterance="I went with Alice.",
+            assistant_reply="That sounds meaningful.",
+        )]
+        block = memory_retriever.format_episode_block(episodes)
+        self.assertIn("Related episodic memories", block)
+        self.assertIn("Theme: family", block)
+        self.assertIn("People: Alice", block)
+        self.assertIn("User said: I went with Alice.", block)
+        self.assertIn("Assistant replied: That sounds meaningful.", block)
 
 
 if __name__ == "__main__":

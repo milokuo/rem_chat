@@ -39,8 +39,17 @@ _CLIP_IU_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 if _CLIP_IU_DIR not in sys.path:
     sys.path.insert(0, _CLIP_IU_DIR)
 from photo_db import PhotoDB
-from memory_extractor import classify_theme_and_entities
-from memory_retriever import retrieve as _memory_retrieve, format_retrieved_block
+from memory_extractor import (
+    classify_theme_and_entities,
+    classify_utterance_memory,
+    embed_memory_text,
+)
+from memory_retriever import (
+    retrieve as _memory_retrieve,
+    retrieve_episodes as _memory_retrieve_episodes,
+    format_retrieved_block,
+    format_episode_block,
+)
 
 import openai as _openai
 
@@ -106,6 +115,144 @@ def _post_trace(payload: dict) -> None:
         except Exception:
             pass
     threading.Thread(target=_send, daemon=True).start()
+
+
+def _combine_retrieved_context(photo_context: str, episode_context: str) -> str:
+    """Combine photo-level and turn-level memory blocks without accumulating stale text."""
+    return "\n\n".join(
+        part.strip() for part in (photo_context, episode_context) if part and part.strip()
+    )
+
+
+def _recent_context_text(photo_id: str, patient_id: str, uploads_dir: str, max_turns: int = 3) -> str:
+    turns = _load_conv_turns(photo_id, patient_id, uploads_dir, max_turns=max_turns) if photo_id else []
+    lines = []
+    for turn in turns:
+        lines.append(f"User: {turn.get('user', '')}")
+        lines.append(f"Assistant: {turn.get('assistant', '')}")
+    return "\n".join(lines)
+
+
+def _entity_updates(features: dict) -> dict:
+    return {
+        "entities_people": json.dumps(features.get("people", []), ensure_ascii=False),
+        "entities_activities": json.dumps(features.get("activities", []), ensure_ascii=False),
+        "entities_locations": json.dumps(features.get("locations", []), ensure_ascii=False),
+        "entities_objects": json.dumps(features.get("objects", []), ensure_ascii=False),
+    }
+
+
+def _episode_query_entities(features: dict) -> dict:
+    return {
+        "people": features.get("people", []),
+        "activities": features.get("activities", []),
+        "locations": features.get("locations", []),
+        "objects": features.get("objects", []),
+    }
+
+
+def _strip_candidate_embedding(candidates: list[dict]) -> list[dict]:
+    stripped = []
+    for candidate in candidates:
+        item = {k: v for k, v in candidate.items() if k != "embedding"}
+        if "_visual_score" in candidate:
+            item.setdefault("visual", candidate.get("_visual_score"))
+        if "_semantic_score" in candidate:
+            item.setdefault("semantic", candidate.get("_semantic_score"))
+        if "_entity_score" in candidate:
+            item.setdefault("entity", candidate.get("_entity_score"))
+        if "_recency_score" in candidate:
+            item.setdefault("recency", candidate.get("_recency_score"))
+        if "_rank_score" in candidate:
+            item.setdefault("rank_score", candidate.get("_rank_score"))
+        if "_theme_match" in candidate:
+            item.setdefault("theme_match", candidate.get("_theme_match"))
+        stripped.append(item)
+    return stripped
+
+
+def _prepare_text_memory_context(
+    user_utterance: str,
+    current_photo_id: str,
+    caption: str,
+    objects: str,
+    patient_id: str,
+    uploads_dir: str,
+) -> dict:
+    """Extract features from the current text turn and retrieve episodic memories."""
+    result = {
+        "features": {"theme": "", "people": [], "activities": [], "locations": [], "objects": []},
+        "embedding": [],
+        "context": "",
+        "candidates": [],
+        "timing": {},
+    }
+    if not user_utterance or not _openai_client:
+        return result
+
+    recent_context = _recent_context_text(current_photo_id, patient_id, uploads_dir)
+    t0 = time.perf_counter()
+    features = classify_utterance_memory(
+        user_utterance, recent_context, _openai_client, model=_MEMORY_MODEL
+    )
+    result["timing"]["memory_extract_ms"] = round((time.perf_counter() - t0) * 1000)
+    result["features"] = features
+
+    query_text = (
+        f"Current photo caption: {caption}\n"
+        f"Detected objects: {objects}\n"
+        f"Recent conversation:\n{recent_context}\n"
+        f"Latest user utterance: {user_utterance}"
+    )
+    t0 = time.perf_counter()
+    embedding = embed_memory_text(query_text, _openai_client)
+    result["timing"]["memory_embed_ms"] = round((time.perf_counter() - t0) * 1000)
+    result["embedding"] = embedding
+
+    if not embedding:
+        return result
+
+    t0 = time.perf_counter()
+    candidates = _memory_retrieve_episodes(
+        photo_db=_photo_db,
+        query_embedding=embedding,
+        query_theme=features.get("theme", ""),
+        query_entities=_episode_query_entities(features),
+        patient_id=patient_id,
+        n_results=3,
+    )
+    result["timing"]["episode_rag_ms"] = round((time.perf_counter() - t0) * 1000)
+    result["candidates"] = candidates
+    result["context"] = format_episode_block(candidates)
+    return result
+
+
+def _save_text_episode_memory(
+    user_utterance: str,
+    assistant_reply: str,
+    current_photo_id: str,
+    patient_id: str,
+    features: dict,
+    text_embedding: list,
+) -> None:
+    """Store one user/assistant text turn as an episodic memory node."""
+    if not user_utterance or not assistant_reply or not text_embedding:
+        return
+    ts = datetime.datetime.now().isoformat()
+    photo_id = current_photo_id or ""
+    episode_id = f"{patient_id}/episode/{time.time_ns()}"
+    metadata = {
+        "patient_id": patient_id,
+        "photo_id": photo_id,
+        "timestamp": ts,
+        "theme": features.get("theme", ""),
+        "user_utterance": user_utterance,
+        "assistant_reply": assistant_reply,
+        "content": f"User: {user_utterance}\nAssistant: {assistant_reply}",
+    }
+    metadata.update(_entity_updates(features))
+    _photo_db.add_episode(episode_id, text_embedding, metadata)
+    print(f"[EpisodeMemory] Saved {episode_id} theme={metadata['theme']}")
 
 
 # ---------------------------------------------------------------------------
@@ -656,14 +803,20 @@ class MyHandler(BaseHTTPRequestHandler):
                 _conv_loader = lambda pid, phid, n=5: _load_conv_turns(pid, phid, SERVER_IMAGE_LOCATION, max_turns=n)
                 retrieved_text = format_retrieved_block(candidates, _conv_loader, PATIENT_ID)
                 with _state_lock:
+                    SHARED['photo_retrieved_context'] = retrieved_text
+                    SHARED['turn_retrieved_context'] = ''
                     SHARED['retrieved_context'] = retrieved_text
                 print(f"[Retrieved context]:\n{retrieved_text}")
             except Exception as e:
                 print(f"[RAG] Error: {e}")
                 with _state_lock:
+                    SHARED['photo_retrieved_context'] = ''
+                    SHARED['turn_retrieved_context'] = ''
                     SHARED['retrieved_context'] = ''
         else:
             with _state_lock:
+                SHARED['photo_retrieved_context'] = ''
+                SHARED['turn_retrieved_context'] = ''
                 SHARED['retrieved_context'] = ''
         timing["rag_ms"] = round((time.perf_counter() - t0) * 1000)
 
@@ -730,10 +883,7 @@ class MyHandler(BaseHTTPRequestHandler):
             "timing":           timing,
             "photo_id":         SHARED.get("current_photo_id", ""),
             "retrieved_context": SHARED.get("retrieved_context", ""),
-            "rag_candidates":   [
-                {k: v for k, v in c.items() if k != "embedding"}
-                for c in candidates
-            ],
+            "rag_candidates":   _strip_candidate_embedding(candidates),
         })
         return {"text": reply}
 
@@ -764,7 +914,22 @@ class MyHandler(BaseHTTPRequestHandler):
         with _state_lock:
             snap_caption   = SHARED.get('caption_str', '')
             snap_obj       = SHARED.get('obj_str', '')
-            snap_retrieved = SHARED.get('retrieved_context', '')
+            snap_photo_ctx = SHARED.get('photo_retrieved_context', SHARED.get('retrieved_context', ''))
+            current_photo_id = SHARED.get('current_photo_id', '')
+
+        text_memory = _prepare_text_memory_context(
+            user_utterance,
+            current_photo_id,
+            snap_caption,
+            snap_obj,
+            PATIENT_ID,
+            SERVER_IMAGE_LOCATION,
+        )
+        timing.update(text_memory.get("timing", {}))
+        snap_retrieved = _combine_retrieved_context(snap_photo_ctx, text_memory.get("context", ""))
+        with _state_lock:
+            SHARED['turn_retrieved_context'] = text_memory.get("context", "")
+            SHARED['retrieved_context'] = snap_retrieved
 
         # Call chat_engine (port 8087) — this is GPT under the hood.
         msg_chat = {
@@ -786,12 +951,23 @@ class MyHandler(BaseHTTPRequestHandler):
             f.write(f"Reply: {reply}\n")
 
         # Persist this conversation turn linked to the current photo.
-        current_photo_id = SHARED.get('current_photo_id', '')
         if current_photo_id and reply:
             try:
                 _save_conv_turn(current_photo_id, PATIENT_ID, user_utterance, reply, SERVER_IMAGE_LOCATION)
             except Exception as e:
                 print(f"[ConvStore] Save failed: {e}")
+        if reply:
+            try:
+                _save_text_episode_memory(
+                    user_utterance,
+                    reply,
+                    current_photo_id,
+                    PATIENT_ID,
+                    text_memory.get("features", {}),
+                    text_memory.get("embedding", []),
+                )
+            except Exception as e:
+                print(f"[EpisodeMemory] Save failed: {e}")
 
         # Update sim with robot reply — post.
         t0 = time.perf_counter()
@@ -813,7 +989,7 @@ class MyHandler(BaseHTTPRequestHandler):
             "timing":           timing,
             "photo_id":         SHARED.get("current_photo_id", ""),
             "retrieved_context": SHARED.get("retrieved_context", ""),
-            "rag_candidates":   [],
+            "rag_candidates":   _strip_candidate_embedding(text_memory.get("candidates", [])),
         })
         return {"text": reply}
 
@@ -843,7 +1019,21 @@ class MyHandler(BaseHTTPRequestHandler):
         with _state_lock:
             snap_caption   = SHARED.get('caption_str', '')
             snap_obj       = SHARED.get('obj_str', '')
-            snap_retrieved = SHARED.get('retrieved_context', '')
+            snap_photo_ctx = SHARED.get('photo_retrieved_context', SHARED.get('retrieved_context', ''))
+            current_photo_id = SHARED.get('current_photo_id', '')
+
+        text_memory = _prepare_text_memory_context(
+            user_utterance,
+            current_photo_id,
+            snap_caption,
+            snap_obj,
+            PATIENT_ID,
+            SERVER_IMAGE_LOCATION,
+        )
+        snap_retrieved = _combine_retrieved_context(snap_photo_ctx, text_memory.get("context", ""))
+        with _state_lock:
+            SHARED['turn_retrieved_context'] = text_memory.get("context", "")
+            SHARED['retrieved_context'] = snap_retrieved
 
         msg_chat = {
             'lang':              self.input_language,
@@ -920,18 +1110,30 @@ class MyHandler(BaseHTTPRequestHandler):
             pass
 
         # Post-stream side effects (mirrors interactive_running).
-        current_photo_id = SHARED.get('current_photo_id', '')
         if full_reply and current_photo_id:
             try:
                 _save_conv_turn(current_photo_id, PATIENT_ID, user_utterance, full_reply, SERVER_IMAGE_LOCATION)
             except Exception as exc:
                 print(f"[ConvStore] Save failed: {exc}")
+        if full_reply:
+            try:
+                _save_text_episode_memory(
+                    user_utterance,
+                    full_reply,
+                    current_photo_id,
+                    PATIENT_ID,
+                    text_memory.get("features", {}),
+                    text_memory.get("embedding", []),
+                )
+            except Exception as exc:
+                print(f"[EpisodeMemory] Save failed: {exc}")
 
         # sim_post
         self.send_post_message_to_sim({'robot_reply': full_reply, 'user_utterance': ""})
 
         total_ms = round((time.perf_counter() - t_start) * 1000)
         timing = {"type": "text_stream", "total_ms": total_ms}
+        timing.update(text_memory.get("timing", {}))
         timing.update(stream_timing)
         _log_timing(timing)
         print(f"[Timing] {timing}")
@@ -946,7 +1148,7 @@ class MyHandler(BaseHTTPRequestHandler):
             "timing":            timing,
             "photo_id":          SHARED.get("current_photo_id", ""),
             "retrieved_context": SHARED.get("retrieved_context", ""),
-            "rag_candidates":    [],
+            "rag_candidates":    _strip_candidate_embedding(text_memory.get("candidates", [])),
         })
 
     # ------------------------------------------------------------------
@@ -1171,6 +1373,8 @@ if __name__ == "__main__":
     SHARED['caption_str']        = ""
     SHARED['obj_str']            = ""
     SHARED['image_embedding']    = []
+    SHARED['photo_retrieved_context'] = ""
+    SHARED['turn_retrieved_context'] = ""
     SHARED['retrieved_context']  = ""
     SHARED['dialog_started']     = False
 

@@ -18,13 +18,38 @@ logger = logging.getLogger(__name__)
 
 # 20 themes from Jung-Min paper Table II
 THEMES = [
-    "family", "friends", "romance", "work", "education",
-    "travel", "sports", "hobbies", "food", "celebration",
-    "childhood", "health", "religion", "community", "nature",
-    "pets", "home", "music", "art", "other",
+    "arts & culture",
+    "business & entrepreneurs",
+    "celebrity & pop culture",
+    "diaries & daily life",
+    "family",
+    "fashion & style",
+    "film tv & video",
+    "fitness & health",
+    "food & dining",
+    "gaming",
+    "learning & educational",
+    "music",
+    "news & social concern",
+    "other hobbies",
+    "relationships",
+    "science & technology",
+    "sports",
+    "travel & adventure",
+    "youth & student life",
+    "other",
 ]
 
 _THEME_LIST_STR = ", ".join(THEMES)
+_EMBEDDING_MODEL = "text-embedding-3-small"
+
+
+def normalize_theme(theme: str) -> str:
+    """Return the canonical Jung-Min Table II theme name."""
+    key = str(theme or "").strip().lower()
+    if key in THEMES:
+        return key
+    return "other" if key else ""
 
 
 def classify_theme_and_entities(
@@ -83,9 +108,7 @@ Respond ONLY with JSON (no extra text):
                 raw = raw[4:]
 
         parsed = json.loads(raw)
-        theme = parsed.get("theme", "").strip().lower()
-        if theme not in THEMES:
-            theme = "other"
+        theme = normalize_theme(parsed.get("theme", ""))
         return {
             "theme": theme,
             "people": [str(x) for x in parsed.get("people", [])],
@@ -96,6 +119,86 @@ Respond ONLY with JSON (no extra text):
     except Exception as exc:
         logger.warning("classify_theme_and_entities failed: %s", exc)
         return empty
+
+
+def classify_utterance_memory(
+    utterance: str,
+    recent_context: str,
+    client: openai.OpenAI,
+    model: str = "gpt-5-mini",
+) -> dict:
+    """Extract Jung-Min memory features from the current text turn.
+
+    The output mirrors the paper's feature extraction layer: one theme plus
+    people/activity/location/object entities. The server stores these features
+    with the turn as an episodic memory after the assistant replies.
+    """
+    empty = {"theme": "", "people": [], "activities": [], "locations": [], "objects": []}
+    if not utterance:
+        return empty
+
+    context_block = recent_context.strip() or "(no recent turns)"
+    prompt = f"""Extract autobiographical-memory features from the user's latest utterance.
+
+Use exactly one theme from this list: {_THEME_LIST_STR}
+
+Recent conversation context:
+{context_block}
+
+Latest user utterance:
+{utterance}
+
+Return ONLY JSON:
+{{
+  "theme": "<one theme>",
+  "people": ["<person>", ...],
+  "activities": ["<activity>", ...],
+  "locations": ["<location>", ...],
+  "objects": ["<object>", ...]
+}}"""
+
+    try:
+        t0 = time.perf_counter()
+        response = client.chat.completions.create(
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        elapsed = round((time.perf_counter() - t0) * 1000)
+        raw = response.choices[0].message.content.strip()
+        logger.debug("classify_utterance_memory took %dms", elapsed)
+
+        if raw.startswith("```"):
+            raw = raw.split("```")[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+
+        parsed = json.loads(raw)
+        return {
+            "theme": normalize_theme(parsed.get("theme", "")),
+            "people": [str(x) for x in parsed.get("people", [])],
+            "activities": [str(x) for x in parsed.get("activities", [])],
+            "locations": [str(x) for x in parsed.get("locations", [])],
+            "objects": [str(x) for x in parsed.get("objects", [])],
+        }
+    except Exception as exc:
+        logger.warning("classify_utterance_memory failed: %s", exc)
+        return empty
+
+
+def embed_memory_text(
+    text: str,
+    client: openai.OpenAI,
+    model: str = _EMBEDDING_MODEL,
+) -> list[float]:
+    """Create a text embedding for episodic-memory semantic retrieval."""
+    if not text:
+        return []
+    try:
+        response = client.embeddings.create(model=model, input=text)
+        return list(response.data[0].embedding)
+    except Exception as exc:
+        logger.warning("embed_memory_text failed: %s", exc)
+        return []
 
 
 def extract_session_memory(

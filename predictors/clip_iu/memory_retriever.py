@@ -20,9 +20,10 @@ import json
 import math
 import datetime
 import logging
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
-from photo_db import PhotoDB
+if TYPE_CHECKING:
+    from photo_db import PhotoDB
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +35,6 @@ _W_RECENCY  = 0.10
 
 # Recency decay: how many days until the score halves
 _RECENCY_HALF_LIFE_DAYS = 30.0
-
 
 def _cosine_similarity(a: list[float], b: list[float]) -> float:
     """Cosine similarity between two vectors (returns 0 on error)."""
@@ -128,7 +128,7 @@ def _rank_score(
 
 
 def retrieve(
-    photo_db: PhotoDB,
+    photo_db: "PhotoDB",
     query_embedding: list[float],
     query_theme: str,
     query_entities: dict,
@@ -189,6 +189,58 @@ def retrieve(
         p["_theme_match"]   = theme_match
         p["_recency_score"] = recency
         scored.append(p)
+
+    scored.sort(key=lambda x: x["_rank_score"], reverse=True)
+    return scored[:n_results]
+
+
+def retrieve_episodes(
+    photo_db: "PhotoDB",
+    query_embedding: list[float],
+    query_theme: str,
+    query_entities: dict,
+    patient_id: str,
+    current_episode_id: str = "",
+    n_results: int = 3,
+) -> list[dict]:
+    """Retrieve text-turn episodic memories for the current dialogue context."""
+    all_episodes = photo_db.query_episodes_by_patient(
+        patient_id, n_results=1000, with_embeddings=True
+    )
+    candidates = [e for e in all_episodes if e.get("id") != current_episode_id]
+    if not candidates:
+        return []
+
+    has_theme_signal = query_theme and any(e.get("theme") for e in candidates)
+    has_entity_signal = any(
+        e.get(f) for e in candidates
+        for f in ("entities_people", "entities_activities", "entities_locations", "entities_objects")
+    )
+    has_recency_signal = any(e.get("timestamp") for e in candidates)
+
+    scored = []
+    for e in candidates:
+        emb = e.get("embedding")
+        semantic = _cosine_similarity(query_embedding, emb) if query_embedding and emb is not None else 0.0
+        entity = _entity_score(e, query_entities) if has_entity_signal else 0.0
+        theme_match = bool(query_theme and e.get("theme") == query_theme)
+        recency = _recency_score(e.get("timestamp")) if has_recency_signal else 0.0
+        score = _rank_score(
+            visual=semantic,
+            entity=entity,
+            theme_match=theme_match,
+            recency=recency,
+            has_entities=has_entity_signal,
+            has_theme=has_theme_signal,
+            has_recency=has_recency_signal,
+        )
+        e["_semantic_score"] = semantic
+        e["_visual_score"] = semantic
+        e["_entity_score"] = entity
+        e["_theme_match"] = theme_match
+        e["_recency_score"] = recency
+        e["_rank_score"] = score
+        scored.append(e)
 
     scored.sort(key=lambda x: x["_rank_score"], reverse=True)
     return scored[:n_results]
@@ -266,4 +318,48 @@ def format_retrieved_block(
 
         lines.append("")  # blank line between memories
 
+    return "\n".join(lines)
+
+
+def format_episode_block(candidates: list[dict]) -> str:
+    """Format retrieved text-turn episodic memories for GPT injection."""
+    if not candidates:
+        return ""
+
+    lines = ["[Related episodic memories from past conversation turns]"]
+    for i, c in enumerate(candidates, 1):
+        lines.append(f"[Episodic Memory {i}]")
+        ts = c.get("timestamp", "")
+        if ts:
+            try:
+                dt = datetime.datetime.fromisoformat(ts)
+                lines.append(f"  Time: {dt.strftime('%Y-%m-%d')}")
+            except Exception:
+                pass
+        if c.get("photo_id"):
+            lines.append(f"  Photo: {c.get('photo_id')}")
+        if c.get("theme"):
+            lines.append(f"  Theme: {c.get('theme')}")
+        for label, field in [
+            ("People", "entities_people"),
+            ("Activities", "entities_activities"),
+            ("Locations", "entities_locations"),
+            ("Objects", "entities_objects"),
+        ]:
+            raw = c.get(field, "")
+            if not raw:
+                continue
+            try:
+                items = json.loads(raw)
+            except Exception:
+                items = []
+            if items:
+                lines.append(f"  {label}: {', '.join(items)}")
+        if c.get("user_utterance"):
+            lines.append(f"  User said: {c.get('user_utterance')}")
+        if c.get("assistant_reply"):
+            lines.append(f"  Assistant replied: {c.get('assistant_reply')}")
+        lines.append("")
+
+    lines.append("[End episodic memories]")
     return "\n".join(lines)

@@ -18,7 +18,9 @@ for _mod in ('chromadb', 'deep_translator'):
 
 _mem_ret_stub = MagicMock()
 _mem_ret_stub.retrieve = MagicMock(return_value=[])
+_mem_ret_stub.retrieve_episodes = MagicMock(return_value=[])
 _mem_ret_stub.format_retrieved_block = MagicMock(return_value='')
+_mem_ret_stub.format_episode_block = MagicMock(return_value='')
 sys.modules.setdefault('memory_retriever', _mem_ret_stub)
 
 for _mod in ('photo_db', 'memory_extractor'):
@@ -113,14 +115,16 @@ class TestRagCandidateStripping(unittest.TestCase):
              "embedding": [0.1] * 512, "_rank_score": 0.9,
              "_entity_score": 0.5, "_theme_match": True, "_recency_score": 0.8},
         ]
-        stripped = [{k: v for k, v in c.items() if k != "embedding"} for c in candidates]
+        stripped = srv._strip_candidate_embedding(candidates)
         self.assertNotIn("embedding", stripped[0])
         self.assertIn("id", stripped[0])
         self.assertIn("_rank_score", stripped[0])
+        self.assertEqual(stripped[0]["rank_score"], 0.9)
+        self.assertEqual(stripped[0]["entity"], 0.5)
 
     def test_non_embedding_fields_preserved(self):
         candidates = [{"id": "x", "caption": "y", "embedding": [], "_rank_score": 1.0}]
-        stripped = [{k: v for k, v in c.items() if k != "embedding"} for c in candidates]
+        stripped = srv._strip_candidate_embedding(candidates)
         self.assertEqual(stripped[0]["id"], "x")
         self.assertEqual(stripped[0]["_rank_score"], 1.0)
 

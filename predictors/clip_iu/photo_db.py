@@ -36,6 +36,10 @@ class PhotoDB:
             name="photos",
             metadata={"hnsw:space": "cosine"},
         )
+        self.episode_collection = self.client.get_or_create_collection(
+            name="conversation_episodes",
+            metadata={"hnsw:space": "cosine"},
+        )
 
     def add_photo(self, photo_id: str, image_embedding: list, metadata: dict):
         """Insert or update a photo record."""
@@ -43,6 +47,15 @@ class PhotoDB:
             ids=[photo_id],
             embeddings=[image_embedding],
             metadatas=[metadata],
+        )
+
+    def add_episode(self, episode_id: str, text_embedding: list, metadata: dict):
+        """Insert or update one text-turn episodic memory."""
+        self.episode_collection.upsert(
+            ids=[episode_id],
+            embeddings=[text_embedding],
+            metadatas=[metadata],
+            documents=[metadata.get("content", "")],
         )
 
     def query(self, query_embedding: list, n_results: int = 3, patient_id: str = None) -> list[dict]:
@@ -104,6 +117,31 @@ class PhotoDB:
             items.append(item)
         return items[:n_results]
 
+    def query_episodes_by_patient(self, patient_id: str, n_results: int = 50,
+                                  with_embeddings: bool = False) -> list[dict]:
+        """Return text-turn episodic memories for one patient."""
+        count = self.episode_collection.count()
+        if count == 0:
+            return []
+        include = ["metadatas", "documents"]
+        if with_embeddings:
+            include.append("embeddings")
+        results = self.episode_collection.get(
+            where={"patient_id": patient_id},
+            include=include,
+        )
+        items = []
+        for i, episode_id in enumerate(results["ids"]):
+            item = {"id": episode_id}
+            item.update(results["metadatas"][i])
+            docs = results.get("documents") or []
+            if i < len(docs) and docs[i]:
+                item.setdefault("content", docs[i])
+            if with_embeddings and results.get("embeddings") is not None:
+                item["embedding"] = results["embeddings"][i]
+            items.append(item)
+        return items[:n_results]
+
     def update_metadata(self, photo_id: str, updates: dict):
         """Partially update metadata fields for a single photo.
 
@@ -143,16 +181,24 @@ class PhotoDB:
         for i, photo_id in enumerate(results["ids"]):
             item = {"id": photo_id}
             item.update(results["metadatas"][i])
-            if results.get("embeddings"):
+            if results.get("embeddings") is not None:
                 item["embedding"] = results["embeddings"][i]
             items.append(item)
         return items[:n_results]
 
     def reset(self):
         """Drop and recreate the collection."""
-        self.client.delete_collection("photos")
+        for name in ("photos", "conversation_episodes"):
+            try:
+                self.client.delete_collection(name)
+            except Exception:
+                pass
         self.collection = self.client.get_or_create_collection(
             name="photos",
+            metadata={"hnsw:space": "cosine"},
+        )
+        self.episode_collection = self.client.get_or_create_collection(
+            name="conversation_episodes",
             metadata={"hnsw:space": "cosine"},
         )
 
@@ -166,3 +212,6 @@ class PhotoDB:
 
     def count(self) -> int:
         return self.collection.count()
+
+    def count_episodes(self) -> int:
+        return self.episode_collection.count()
