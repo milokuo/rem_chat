@@ -4,6 +4,31 @@
 
 ---
 
+## 2026-05-07 — Jung-Min Prompt Feature Alignment
+**檔案：** `2026-05-07_jungmin-prompt-feature-alignment.md`
+
+**狀態：** 已實作
+
+**核心變更：** 對照論文與 reference code 後，補上 current dialogue feature block，讓 prompt 同時呈現 retrieved memories 與當前對話的七屬性特徵；並修正 `chat_engine.py` retrieved-context wrapper，不再把 text episodic memories 誤標為「其他照片」。
+
+| 類別 | 內容 |
+|------|------|
+| Prompt | 新增 `format_current_dialogue_feature_block()`，輸出 Content / Time / Photo / Theme / People / Activities / Locations / Objects |
+| Server | `server_updated_zhengxuan.py` 在 episode RAG 有候選時，把 current feature block 與 episodic memory block 一起送進 `chat_engine` |
+| Prompt | `_build_retrieved_block()` 改為 `[Related autobiographical memories]`，支援 past photos、past turns、current feature summary 混合內容 |
+| Test | 補上 formatter 與 retrieved wrapper wording 測試 |
+
+**影響檔案：**
+- `predictors/clip_iu/memory_retriever.py`
+- `predictors/clip_iu/chat_engine.py`
+- `predictors/clip_iu/memory_extractor.py`
+- `predictors/clip_iu/test_memory_retriever.py`
+- `predictors/clip_iu/test_chat_engine_trace_fields.py`
+- `ParlAI/projects/image_chat/server_updated_zhengxuan.py`
+- `changelogs/2026-05-07_jungmin-prompt-feature-alignment.md`
+
+---
+
 ## 2026-05-06 — Jung-Min 四層 Episodic Memory Metadata
 **檔案：** `2026-05-06_hierarchical-episode-memory.md`
 

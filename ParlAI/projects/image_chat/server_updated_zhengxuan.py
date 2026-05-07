@@ -50,6 +50,7 @@ from memory_retriever import (
     retrieve_episodes as _memory_retrieve_episodes,
     format_retrieved_block,
     format_episode_block,
+    format_current_dialogue_feature_block,
 )
 
 import openai as _openai
@@ -224,7 +225,15 @@ def _prepare_text_memory_context(
     )
     result["timing"]["episode_rag_ms"] = round((time.perf_counter() - t0) * 1000)
     result["candidates"] = candidates
-    result["context"] = format_episode_block(candidates)
+    episode_block = format_episode_block(candidates)
+    if episode_block:
+        current_feature_block = format_current_dialogue_feature_block(
+            user_utterance=user_utterance,
+            features=features,
+            timestamp=datetime.datetime.now().isoformat(),
+            photo_id=current_photo_id,
+        )
+        result["context"] = _combine_retrieved_context(current_feature_block, episode_block)
     return result
 
 
@@ -474,8 +483,20 @@ WEB_HTML = """
                 return {{article: article, textSpan: textSpan}};
             }}
 
+            function clearConversationRows() {{
+                var parDiv = document.getElementById("parent");
+                Array.prototype.slice.call(parDiv.children).forEach(function(child) {{
+                    if (child.id !== "photo-info") {{
+                        child.remove();
+                    }}
+                }});
+            }}
+
             function fetchResult(image_data, text) {{
                 var parDiv = document.getElementById("parent");
+                if (image_data !== "") {{
+                    clearConversationRows();
+                }}
                 // Show user message immediately
                 if (text !== "") {{
                     parDiv.append(createChatRow("You", text));
@@ -613,16 +634,7 @@ WEB_HTML = """
             }});
             document.getElementById("newImage").addEventListener("click", function(event){{
                 event.preventDefault()
-                var oldResponse = document.getElementById("model-response1");
-                while (oldResponse) {{
-                    oldResponse.parentNode.remove(oldResponse);
-                    oldResponse = document.getElementById("model-response1");
-                }}
-                var oldResponse = document.getElementById("model-response2");
-                while (oldResponse) {{
-                    oldResponse.parentNode.remove(oldResponse);
-                    oldResponse = document.getElementById("model-response2");
-                }}
+                clearConversationRows();
                 var preview = document.getElementById("preview");
                 preview.setAttribute('src', '');
             }});

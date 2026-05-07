@@ -579,3 +579,42 @@ def format_episode_block(candidates: list[dict]) -> str:
 
     lines.append("[End episodic memories]")
     return "\n".join(lines)
+
+
+def format_current_dialogue_feature_block(
+    user_utterance: str,
+    features: dict,
+    timestamp: str = "",
+    photo_id: str = "",
+) -> str:
+    """Format the current turn with the same seven attributes as memories.
+
+    Jung-Min's memory prompt gives the LLM both retrieved memories and current
+    dialogue features: content, time, theme, people, event/activity, location,
+    and object. The server only includes this block when retrieved episodic
+    memories exist, so normal no-memory turns still use the simpler prompt.
+    """
+    if not user_utterance:
+        return ""
+
+    lines = ["[Current dialogue memory features]"]
+    lines.append(f"  Content: {user_utterance}")
+    if timestamp:
+        lines.append(f"  Time: {timestamp[:10]}")
+    if photo_id:
+        lines.append(f"  Photo: {photo_id}")
+    if features.get("theme"):
+        lines.append(f"  Theme: {features.get('theme')}")
+
+    for label, key in [
+        ("People", "people"),
+        ("Activities", "activities"),
+        ("Locations", "locations"),
+        ("Objects", "objects"),
+    ]:
+        items = [str(x) for x in features.get(key, []) if str(x).strip()]
+        if items:
+            lines.append(f"  {label}: {', '.join(items)}")
+
+    lines.append("[End current dialogue memory features]")
+    return "\n".join(lines)

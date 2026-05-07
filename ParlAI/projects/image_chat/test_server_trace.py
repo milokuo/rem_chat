@@ -169,5 +169,23 @@ class TestTracePayloadSchema(unittest.TestCase):
         self.assertIsInstance(payload["full_prompt"], list)
 
 
+class TestFrontendNewImageReset(unittest.TestCase):
+    """The browser should start a fresh visible chat when a new image is uploaded."""
+
+    def test_web_ui_defines_conversation_clear_helper(self):
+        self.assertIn("function clearConversationRows()", srv.WEB_HTML)
+        self.assertIn('child.id !== "photo-info"', srv.WEB_HTML)
+
+    def test_image_upload_path_clears_old_visible_turns(self):
+        self.assertIn('if (image_data !== "")', srv.WEB_HTML)
+        self.assertIn("clearConversationRows();", srv.WEB_HTML)
+
+    def test_new_image_button_uses_same_clear_helper(self):
+        marker = 'document.getElementById("newImage").addEventListener'
+        self.assertIn(marker, srv.WEB_HTML)
+        button_block = srv.WEB_HTML.split(marker, 1)[1]
+        self.assertIn("clearConversationRows();", button_block)
+
+
 if __name__ == '__main__':
     unittest.main()

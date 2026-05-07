@@ -4,9 +4,11 @@ memory_extractor.py
 
 GPT-based extraction helpers for the autobiographical memory system.
 
-Two responsibilities:
+Main responsibilities:
   1. classify_theme_and_entities()  — called once at upload time to annotate a photo
-  2. extract_session_memory()       — called at end-of-session (换图) to summarise a conversation
+  2. classify_utterance_memory()    — extracts Table-II theme and event entities from a user turn
+  3. embed_memory_text()            — creates semantic embeddings for episodic retrieval
+  4. extract_session_memory()       — called at end-of-session (换图) to summarise a conversation
 """
 
 import json

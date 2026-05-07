@@ -137,9 +137,11 @@ class SocialREMChat(object):
         if not self.retrieved_context:
             return ""
         return (
-            "\n[Related memories from the album — these are OTHER past photos, NOT the current photograph]\n"
-            "Rule 1: Do NOT project these details onto the current photograph's essentials. "
-            "The current photo may have completely different answers for when/where/who/what.\n"
+            "\n[Related autobiographical memories]\n"
+            "The block below may contain related past photos, past conversation turns, "
+            "and a structured feature summary of the user's current turn.\n"
+            "Rule 1: Do NOT project details from past photos or past turns onto the current photograph's essentials. "
+            "Use them only as autobiographical context unless the user explicitly connects them.\n"
             "Rule 2: If the User explicitly asks whether you remember something they mentioned before, "
             "you SHOULD reference the past conversation below to confirm the specific fact, "
             "then gently return to exploring the current photo's own essentials.\n"
@@ -147,7 +149,7 @@ class SocialREMChat(object):
             "ONLY when the connection is strong and you can cite a specific verifiable detail. "
             "If uncertain, ask: 'Did you also talk about...?' instead of asserting.\n"
             + self.retrieved_context
-            + "\n[End of related memories. The above are different photos from the current one.]\n"
+            + "\n[End of related autobiographical memories.]\n"
         )
 
     def preprocess_conversation(self, context, max_turn, reply_lang=None):

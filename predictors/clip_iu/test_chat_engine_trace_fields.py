@@ -207,6 +207,18 @@ class TestChatEngineTraceFields(unittest.TestCase):
         self.assertIn('model_name', done)
         self.assertIn('gpt_ms', done['timing'])
 
+    def test_retrieved_block_allows_episode_memories(self):
+        """Autobiographical memory prompt must not label all memories as other photos."""
+        body = self._post({
+            'user_message': 'Do you remember Alice?',
+            'retrieved_context': '[Related episodic memories from past conversation turns]\nUser said: I met Alice.',
+        })
+        prompt = body['full_prompt'][0]['content']
+        self.assertIn('Related autobiographical memories', prompt)
+        self.assertIn('past conversation turns', prompt)
+        self.assertNotIn('these are OTHER past photos', prompt)
+        self.assertNotIn('The above are different photos from the current one', prompt)
+
 
 if __name__ == '__main__':
     unittest.main()

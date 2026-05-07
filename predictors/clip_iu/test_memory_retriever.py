@@ -394,6 +394,29 @@ class TestRetrieveEpisodes(unittest.TestCase):
         self.assertIn("Lifetime period: 2026-05-06", block)
         self.assertIn("General events: people:Alice, activities:travel", block)
 
+    def test_format_current_dialogue_feature_block_uses_seven_attributes(self):
+        block = memory_retriever.format_current_dialogue_feature_block(
+            user_utterance="I visited Alice at the park.",
+            features={
+                "theme": "relationships",
+                "people": ["Alice"],
+                "activities": ["visited"],
+                "locations": ["park"],
+                "objects": ["photo"],
+            },
+            timestamp="2026-05-07T10:20:30",
+            photo_id="P001/photo.jpg",
+        )
+        self.assertIn("Current dialogue memory features", block)
+        self.assertIn("Content: I visited Alice at the park.", block)
+        self.assertIn("Time: 2026-05-07", block)
+        self.assertIn("Photo: P001/photo.jpg", block)
+        self.assertIn("Theme: relationships", block)
+        self.assertIn("People: Alice", block)
+        self.assertIn("Activities: visited", block)
+        self.assertIn("Locations: park", block)
+        self.assertIn("Objects: photo", block)
+
 
 class TestMemoryHierarchyMetadata(unittest.TestCase):
 
